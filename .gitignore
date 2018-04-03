@@ -200,6 +200,7 @@ cmake-build-debug/
 ### Maven ###
 backend/.idea/**
 android/.idea/**
+backend/target/**
 target/**
 pom.xml.tag
 pom.xml.releaseBackup
