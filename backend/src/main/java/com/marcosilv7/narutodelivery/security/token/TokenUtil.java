@@ -22,6 +22,7 @@ public class TokenUtil {
     public static final String USER_ID = "userId";
     public static final String USER_NAME = "user_name";
     public static final String USER_FULLNAME = "user_fullname";
+    public static final String USER_AVATAR = "user_avatar";
     public static final int EXPIRATION_TIME=36000;
     public static final String TOKEN_ISSUER="rumboalmundial2018";
     public static final String TOKEN_SIGNINGKEY="AQUIVAUNAFIRMA";
@@ -50,6 +51,7 @@ public class TokenUtil {
         claims.put(USER_ID,userContext.getUserId());
         claims.put(USER_NAME,userContext.getUserName());
         claims.put(USER_FULLNAME,userContext.getFullName());
+        claims.put(USER_AVATAR,userContext.getAvatar());
         DateTime currentTime = new DateTime();
         Date fechaVencimiento=currentTime.plusMinutes(EXPIRATION_TIME).toDate();
         String jti=UUID.randomUUID().toString();

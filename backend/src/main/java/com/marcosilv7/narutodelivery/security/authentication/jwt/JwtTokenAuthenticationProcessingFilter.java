@@ -1,8 +1,11 @@
 package com.marcosilv7.narutodelivery.security.authentication.jwt;
 
 import com.marcosilv7.narutodelivery.configuration.security.WebSecurityConfig;
+import com.marcosilv7.narutodelivery.security.entrypoint.RestAuthenticationEntryPoint;
 import com.marcosilv7.narutodelivery.security.token.RawAccessJwtToken;
 import com.marcosilv7.narutodelivery.security.token.TokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
@@ -21,6 +24,7 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
 
     private final AuthenticationFailureHandler failureHandler;
     private final TokenUtil tokenUtil;
+    private static Logger logger = LoggerFactory.getLogger(JwtTokenAuthenticationProcessingFilter.class);
 
     public JwtTokenAuthenticationProcessingFilter(AuthenticationFailureHandler failureHandler,
                                                   RequestMatcher matcher, TokenUtil tokenUtil) {
@@ -34,6 +38,7 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest,
                                                 HttpServletResponse httpServletResponse)
             throws AuthenticationException, IOException, ServletException {
+        logger.info("Entrando...");
         String tokenPayload = httpServletRequest.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM);
         RawAccessJwtToken token = new RawAccessJwtToken(tokenUtil.extractToken(tokenPayload));
         return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
@@ -43,6 +48,7 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
+        logger.info("successfulAuthentication...");
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authResult);
         SecurityContextHolder.setContext(context);
@@ -53,6 +59,7 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException failed) throws IOException, ServletException {
+        logger.info("unsuccessfulAuthentication...");
         SecurityContextHolder.clearContext();
         failureHandler.onAuthenticationFailure(request, response, failed);
     }

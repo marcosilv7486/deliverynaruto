@@ -41,6 +41,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         Map<String,String> data = new HashMap<>();
         data.put("token", accessToken);
         data.put("refreshToken", refreshToken);
+        data.put("email", userContext.getUserName());
+        data.put("fullname", userContext.getFullName());
+        data.put("avatar", userContext.getAvatar());
+        data.put("userId", userContext.getUserId().toString());
         tokenMap.put("data", data);
         httpServletResponse.setStatus(HttpStatus.OK.value());
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);

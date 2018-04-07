@@ -1,6 +1,7 @@
 package com.marcosilv7.narutodelivery.configuration.swagger;
 
 import com.google.common.base.Predicate;
+import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.configuration.security.WebSecurityConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +49,7 @@ public class SwaggerConfig {
     @Bean
     SecurityConfiguration security() {
         return new SecurityConfiguration(null, null, null, null,
-                "AquiVaTOken", ApiKeyVehicle.HEADER, WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, ",");
+                Api.TOKEN_TEST, ApiKeyVehicle.HEADER, WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, ",");
     }
 
     private ApiInfo apiInfoCore() {
@@ -146,7 +147,8 @@ public class SwaggerConfig {
 
     private Predicate<String> pathsCore() {
         return or(
-                regex("/api/v1/pedidos/.*"));
+                regex("/api/v1/pedidos/.*"),
+                regex(Api.PROFILE_PATH+"/.*"));
     }
 
 }

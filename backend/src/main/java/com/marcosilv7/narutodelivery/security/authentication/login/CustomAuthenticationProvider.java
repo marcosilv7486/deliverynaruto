@@ -1,7 +1,8 @@
 package com.marcosilv7.narutodelivery.security.authentication.login;
 
 import com.marcosilv7.narutodelivery.configuration.exceptions.NoSuchUserScopeException;
-import com.marcosilv7.narutodelivery.security.dao.projections.UserSummaryProjection;
+import com.marcosilv7.narutodelivery.security.dao.domain.User;
+import com.marcosilv7.narutodelivery.security.dto.UserDTO;
 import com.marcosilv7.narutodelivery.security.service.interfaces.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -36,7 +37,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        UserSummaryProjection user = securityService.findByUsername(username).orElseThrow(()
+        UserDTO user = securityService.findByUsername(username).orElseThrow(()
                 -> new BadCredentialsException("seguridad.error.credenciales.incorrectos"));
 
         if(!user.isEnabled()){
@@ -52,9 +53,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         List<GrantedAuthority> authorities = user.getScopes().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getScope()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getNameSpring()))
                 .collect(Collectors.toList());
-        UserContext userContext = UserContext.create(user.getId(),user.getUsername(),user.getFullName(),authorities);
+        UserContext userContext = UserContext.create(user.getId(),user.getUsername(),user.getFullName(),user.getAvatar()
+                ,authorities);
         return new UsernamePasswordAuthenticationToken(userContext, null, userContext.getAuthorities());
     }
 

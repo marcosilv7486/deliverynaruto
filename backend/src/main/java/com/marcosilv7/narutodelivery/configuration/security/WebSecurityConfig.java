@@ -1,6 +1,7 @@
 package com.marcosilv7.narutodelivery.configuration.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.security.authentication.jwt.JwtAuthenticationProvider;
 import com.marcosilv7.narutodelivery.security.authentication.jwt.JwtTokenAuthenticationProcessingFilter;
 import com.marcosilv7.narutodelivery.security.authentication.jwt.SkipPathRequestMatcher;
@@ -31,54 +32,36 @@ import java.util.List;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String  JWT_TOKEN_HEADER_PARAM="X-Authorization";
+    public static final String CONTENT_TYPE="application/json";
 
-    private final AuthenticationSuccessHandler successHandler;
-    private final AuthenticationFailureHandler failureHandler;
-    private final CustomAuthenticationProvider customAuthenticationProvider;
-    private final JwtAuthenticationProvider jwtAuthenticationProvider;
+    @Autowired
+    private  AuthenticationSuccessHandler successHandler;
+    @Autowired
+    private  AuthenticationFailureHandler failureHandler;
+    @Autowired
+    private  CustomAuthenticationProvider customAuthenticationProvider;
+    @Autowired
+    private  JwtAuthenticationProvider jwtAuthenticationProvider;
     @Autowired
     private  AuthenticationManager authenticationManager;
-    private final ObjectMapper objectMapper;
-    private final TokenUtil tokenUtil;
-    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    public static final String ROOT_PATH="/api/v1";
-    public static final String LOGIN_PATH=ROOT_PATH+"/security/authenticacion";
-    public static final String REFRESH_TOKEN_PATH=ROOT_PATH+"/security/refreshtoken";
-    public static final String USER_REGISTRATION_PATH=ROOT_PATH+"/users/registration";
-    public static final String SWAGGER_PATH="/swagger-resources/configuration/ui/**";
-    public static final String SWAGGER_RESOURCES_PATH="/configuration/ui/**";
-
     @Autowired
-    public WebSecurityConfig(
-                             AuthenticationSuccessHandler successHandler,
-                             AuthenticationFailureHandler failureHandler,
-                             CustomAuthenticationProvider customAuthenticationProvider,
-                             ObjectMapper objectMapper,
-                             TokenUtil tokenUtil,
-                             RestAuthenticationEntryPoint restAuthenticationEntryPoint,
-                             JwtAuthenticationProvider jwtAuthenticationProvider) {
-        this.successHandler = successHandler;
-        this.failureHandler = failureHandler;
-        this.customAuthenticationProvider = customAuthenticationProvider;
-        this.jwtAuthenticationProvider = jwtAuthenticationProvider;
-        this.objectMapper = objectMapper;
-        this.tokenUtil = tokenUtil;
-        this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
-    }
-
+    private  ObjectMapper objectMapper;
+    @Autowired
+    private  TokenUtil tokenUtil;
+    @Autowired
+    private  RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     private CustomLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
         CustomLoginProcessingFilter filter = new CustomLoginProcessingFilter(
-                LOGIN_PATH, successHandler, failureHandler, objectMapper);
+                Api.LOGIN_PATH, successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(this.authenticationManager);
         return filter;
     }
 
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> pathsToSkip = Arrays.asList(REFRESH_TOKEN_PATH, USER_REGISTRATION_PATH,SWAGGER_PATH,
-                SWAGGER_RESOURCES_PATH);
-        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, USER_REGISTRATION_PATH+"/**");
+        List<String> pathsToSkip = Arrays.asList(Api.REFRESH_TOKEN_PATH,Api.USER_REGISTRATION_PATH,Api.SWAGGER_PATH,
+                Api.SWAGGER_RESOURCES_PATH);
+        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, Api.ROOT_PATH+"/**");
         JwtTokenAuthenticationProcessingFilter filter
                 = new JwtTokenAuthenticationProcessingFilter(failureHandler, matcher, tokenUtil);
         filter.setAuthenticationManager(this.authenticationManager);
@@ -110,13 +93,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers(LOGIN_PATH).permitAll()
-                .antMatchers(SWAGGER_PATH).permitAll()
-                .antMatchers(SWAGGER_RESOURCES_PATH).permitAll()
-                .antMatchers(REFRESH_TOKEN_PATH).permitAll()
+                .antMatchers(Api.LOGIN_PATH).permitAll()
+                .antMatchers(Api.SWAGGER_PATH).permitAll()
+                .antMatchers(Api.SWAGGER_RESOURCES_PATH).permitAll()
+                .antMatchers(Api.REFRESH_TOKEN_PATH).permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers(ROOT_PATH).authenticated()
+                .antMatchers(Api.ROOT_PATH+"/**").authenticated()
                 .and()
                 .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);

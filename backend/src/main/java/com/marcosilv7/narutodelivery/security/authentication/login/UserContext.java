@@ -11,20 +11,22 @@ public class UserContext {
     private final Long userId;
     private final String userName;
     private final String fullName;
+    private final String avatar;
     private final List<GrantedAuthority> authorities;
 
-    private UserContext(Long userId, String userName, String fullName, List<GrantedAuthority> authorities){
+    private UserContext(Long userId, String userName, String fullName, String avatar, List<GrantedAuthority> authorities){
         this.userId = userId;
         this.userName = userName;
         this.fullName = fullName;
+        this.avatar = avatar;
         this.authorities = authorities;
     }
 
-    public static UserContext create(Long userId,String userName, String fullName, List<GrantedAuthority> authorities){
+    public static UserContext create(Long userId,String userName, String fullName,String avatar, List<GrantedAuthority> authorities){
         if(StringUtils.isBlank(userName)){
             throw new IllegalArgumentException("El nombre de usuario no puede estar vacio");
         }
-        return new UserContext(userId, userName, fullName,authorities);
+        return new UserContext(userId, userName, fullName, avatar, authorities);
     }
 
     public Long getUserId() {
@@ -41,5 +43,9 @@ public class UserContext {
 
     public List<GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 }

@@ -1,9 +1,9 @@
 package com.marcosilv7.narutodelivery.security.service.interfaces;
 
-import com.marcosilv7.narutodelivery.security.dao.projections.UserSummaryProjection;
+import com.marcosilv7.narutodelivery.security.dto.UserDTO;
 
 import java.util.Optional;
 
 public interface SecurityService {
-    Optional<UserSummaryProjection> findByUsername(String username);
+    Optional<UserDTO> findByUsername(String username);
 }
