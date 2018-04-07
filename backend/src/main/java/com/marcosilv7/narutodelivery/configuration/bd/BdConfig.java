@@ -21,7 +21,8 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactoryApp",
         transactionManagerRef = "transactionManagerApp",
-        basePackages = "com.marcosilv7.narutodelivery.core.dao.repository")
+        basePackages = {"com.marcosilv7.narutodelivery.core.dao.repository"
+                ,"com.marcosilv7.narutodelivery.security.dao.repository"})
 public class BdConfig {
 
     private final HibernateProperties hibernateProperties;
@@ -48,7 +49,8 @@ public class BdConfig {
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         Properties properties = hibernateProperties.hibernateProperties();
         factoryBean.setJpaProperties(properties);
-        factoryBean.setPackagesToScan("com.marcosilv7.narutodelivery.core.dao.domain");
+        factoryBean.setPackagesToScan("com.marcosilv7.narutodelivery.core.dao.domain"
+                ,"com.marcosilv7.narutodelivery.security.dao.domain");
         factoryBean.setPersistenceUnitName("app");
         return factoryBean;
     }

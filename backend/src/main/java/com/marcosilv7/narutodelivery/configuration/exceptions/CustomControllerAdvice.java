@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -35,7 +36,8 @@ public class CustomControllerAdvice {
         this.messageUtil = messageUtil;
     }
 
-    @ExceptionHandler({ DisabledException.class, AccessDeniedException.class,AuthenticationServiceException.class})
+    @ExceptionHandler({ DisabledException.class, AccessDeniedException.class,AuthenticationServiceException.class,
+            NoSuchUserScopeException.class, BadCredentialsException.class})
     public ResponseEntity<ErrorResponse> errorSeguridad(RuntimeException e, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
