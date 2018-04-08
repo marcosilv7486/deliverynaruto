@@ -11,6 +11,7 @@ public class Api {
             "rNCwqVw54cLALKvayLrLmPRBBgOFHxNe6gWmyGd5PKT1TGA";
 
     public static final String ROOT_PATH="/api/v1";
+    public static final String ROOT_PATH_V2="/api/v2";
     public static final String LOGIN_PATH=ROOT_PATH+"/security/authenticacion";
     public static final String REFRESH_TOKEN_PATH=ROOT_PATH+"/security/refreshtoken";
     public static final String USER_PATH=ROOT_PATH+"/users";

@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
         List<String> pathsToSkip = Arrays.asList(Api.REFRESH_TOKEN_PATH,Api.USER_REGISTRATION_PATH,Api.SWAGGER_PATH,
                 Api.SWAGGER_RESOURCES_PATH);
-        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, Api.ROOT_PATH+"/**");
+        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, Api.ROOT_PATH_V2+"/**");
         JwtTokenAuthenticationProcessingFilter filter
                 = new JwtTokenAuthenticationProcessingFilter(failureHandler, matcher, tokenUtil);
         filter.setAuthenticationManager(this.authenticationManager);
@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(Api.REFRESH_TOKEN_PATH).permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers(Api.ROOT_PATH+"/**").authenticated()
+                .antMatchers(Api.ROOT_PATH_V2+"/**").authenticated()
                 .and()
                 .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
