@@ -27,6 +27,10 @@ public class RegisterUserDTO {
     @NotNull
     private String lastName;
 
+    @ApiModelProperty(notes = "Telefono del Usuario")
+    @Size(min = 7,max = 10)
+    private String phone;
+
     @ApiModelProperty(notes = "Fecha de nacimiento del usuario")
     private Date bithDay;
 
@@ -73,5 +77,13 @@ public class RegisterUserDTO {
 
     public void setBithDay(Date bithDay) {
         this.bithDay = bithDay;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
