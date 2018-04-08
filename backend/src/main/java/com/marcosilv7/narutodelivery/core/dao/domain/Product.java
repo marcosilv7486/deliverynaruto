@@ -29,7 +29,7 @@ public class Product extends GenericEntity{
     private BigDecimal price;
 
     @ManyToOne
-    private CategoryProduct category;
+    private ProductSubFamily subFamily;
 
     @Column
     private String image;
@@ -58,19 +58,19 @@ public class Product extends GenericEntity{
         this.price = price;
     }
 
-    public CategoryProduct getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryProduct category) {
-        this.category = category;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public ProductSubFamily getSubFamily() {
+        return subFamily;
+    }
+
+    public void setSubFamily(ProductSubFamily subFamily) {
+        this.subFamily = subFamily;
     }
 }

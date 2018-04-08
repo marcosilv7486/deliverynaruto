@@ -1,6 +1,6 @@
 package com.marcosilv7.narutodelivery.core.dao.domain;
 
-import org.hibernate.annotations.Where;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "categories_product")
-@Where(clause = "deletedAt is null")
-public class CategoryProduct extends GenericEntity{
+@Table(name = "product_family")
+public class ProductFamily extends GenericEntity {
 
     @Column
     @NotNull
