@@ -6,7 +6,7 @@
 	<groupId>com.marcosilv7</groupId>
 	<artifactId>narutodelivery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>narutodelivery</name>
 	<description>Demo project for Spring Boot</description>
