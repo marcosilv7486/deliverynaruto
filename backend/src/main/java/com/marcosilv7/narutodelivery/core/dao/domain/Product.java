@@ -20,7 +20,6 @@ public class Product extends GenericEntity{
     private String name;
 
     @Column
-    @NotNull
     private String description;
 
     @Column
