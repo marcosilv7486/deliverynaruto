@@ -1,14 +1,23 @@
 package com.marcosilv7.narutodelivery.security.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.time.LocalDate;
 
+@ApiModel("Perfil de Usuario")
 public class ProfileUserDTO {
-
+    @ApiModelProperty(notes = "Identificador del usuario")
     private Long id;
+    @ApiModelProperty(notes = "Correo del usuario")
     private String email;
+    @ApiModelProperty(notes = "Nombre completo del usuario")
     private String fullName;
+    @ApiModelProperty(notes = "Avatar del usuario")
     private String avatar;
+    @ApiModelProperty(notes = "Fecha de Cumpleaños del usuario")
     private LocalDate birthDay;
+    @ApiModelProperty(notes = "Telefono del usuario")
     private String phone;
 
     public ProfileUserDTO(){
