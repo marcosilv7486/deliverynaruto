@@ -26,4 +26,5 @@ public class UserController {
     public void createUser(@Valid RegisterUserDTO data){
         securityService.createUser(data);
     }
+
 }

@@ -54,6 +54,7 @@ public class SecurityServiceImpl implements SecurityService {
         newUser.setUserName(data.getEmail());
         newUser.setPassword(passwordEncoder.encode(data.getPassword()));
         newUser.setPhone(data.getPhone());
+        newUser.setBithDay(data.getBithDay());
         newUser = userRepository.save(newUser);
         //Scopes
         UserScope userScope = new UserScope();

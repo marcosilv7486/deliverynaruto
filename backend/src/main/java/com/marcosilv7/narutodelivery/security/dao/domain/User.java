@@ -29,6 +29,8 @@ public class User extends GenericEntity {
     @NotNull
     private String password;
     @Column
+    private Date bithDay;
+    @Column
     private String phone;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
@@ -96,5 +98,13 @@ public class User extends GenericEntity {
 
     public void setScopes(List<UserScope> scopes) {
         this.scopes = scopes;
+    }
+
+    public Date getBithDay() {
+        return bithDay;
+    }
+
+    public void setBithDay(Date bithDay) {
+        this.bithDay = bithDay;
     }
 }
