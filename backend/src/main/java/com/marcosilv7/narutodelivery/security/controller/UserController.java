@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 
-@io.swagger.annotations.Api(value = Api.USER_PATH,
-        description = "Operaciones sobre los usuarios",
+@io.swagger.annotations.Api(tags = "Usuarios",description = "Operaciones sobre los usuarios",
         consumes="application/json")
 @RestController
 @RequestMapping(Api.USER_PATH)
@@ -31,7 +30,7 @@ public class UserController {
 
     @ApiOperation(value = "Crear nuevo usuario", notes = "Crea un nuevo usuario segun la informacion enviada. " +
             "Asimismo, el email debe ser unico por usuario.",response = ProfileUserDTO.class)
-    @PostMapping("/")
+    @PostMapping()
     public ProfileUserDTO createUser(@Valid @RequestBody RegisterUserDTO data){
         return securityService.createUser(data);
     }

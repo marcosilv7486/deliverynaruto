@@ -88,7 +88,7 @@ public class UserControllerTest {
     @Transactional
     public void createUser_exitoso_y_login_exitoso() throws Exception {
         //Creacion
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH+"/")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
                 .content(objectMapper.writeValueAsString(newUser))
@@ -122,7 +122,7 @@ public class UserControllerTest {
 
     @Test
     public void createUser_error_correo_repetido() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH+"/")
+        mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
                 .content(objectMapper.writeValueAsString(failUserByEmail))

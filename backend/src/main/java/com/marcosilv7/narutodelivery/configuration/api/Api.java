@@ -15,6 +15,9 @@ public class Api {
     public static final String LOGIN_PATH=ROOT_PATH+"/security/authenticacion";
     public static final String REFRESH_TOKEN_PATH=ROOT_PATH+"/security/refreshtoken";
     public static final String USER_PATH=ROOT_PATH+"/users";
+    public static final String PRODUCT_FAMILY_PATH=ROOT_PATH+"/families";
+    public static final String PRODUCT_SUBFAMILY_PATH=ROOT_PATH+"/subfamilies";
+    public static final String PRODUCT_PATH=ROOT_PATH+"/products";
     public static final String USER_REGISTRATION_PATH=ROOT_PATH+USER_PATH+"/";
     public static final String SWAGGER_PATH="/swagger-resources/configuration/ui/**";
     public static final String SWAGGER_RESOURCES_PATH="/configuration/ui/**";

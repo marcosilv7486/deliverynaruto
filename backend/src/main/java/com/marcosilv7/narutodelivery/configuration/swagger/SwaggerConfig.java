@@ -147,9 +147,11 @@ public class SwaggerConfig {
 
     private Predicate<String> pathsCore() {
         return or(
-                regex("/api/v1/pedidos/.*"),
-                regex(Api.PROFILE_PATH+"/.*"),
-                regex(Api.USER_PATH+"/.*"));
+                regex("/api/v1/pedidos.*"),
+                regex(Api.PRODUCT_FAMILY_PATH+".*"),
+                regex(Api.PRODUCT_SUBFAMILY_PATH+".*"),
+                regex(Api.PRODUCT_PATH+".*"),
+                regex(Api.USER_PATH+".*"));
     }
 
 }
