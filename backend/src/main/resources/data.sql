@@ -149,3 +149,153 @@ insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
 insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
     'Agua sin Gas',12,5,'https://i5.walmartimages.com/asr/646bffb9-c5f0-4c05-a918-cea2a6faeb44_1.9a516e8c58a0dfd6f24de8748ca0b2e2.jpeg',now(),'SYSTEM'
 );
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Agua con Gas',12,5,'http://inbac.com.co/298/agua-cielo-sin-gas.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Cusqueña',13,7,'https://reportperu.files.wordpress.com/2010/11/cusquena.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Pilsen',13,7,'http://www.infomarketing.pe/wp-content/uploads/2016/04/pilsenmkt.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Kirin',13,16,'http://www.infomarketing.pe/wp-content/uploads/2016/04/pilsenmkt.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Asahi',13,16,'http://jpninfo.com/wp-content/uploads/2015/10/beer-asahi.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Aloe Drink',11,6,'https://target.scene7.com/is/image/Target/47976129?wid=520&hei=520&fmt=pjpeg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Huevo Extra',7,2,'https://comoenlima.files.wordpress.com/2014/06/may-naruto-5.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Fideo Extra 1/2 porc',7,6,'https://i1.wp.com/golososdelmundo.com/wp-content/uploads/2017/07/zaru-soba4.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Kare extra',6,6,'http://japonpop.japonshop.com/wp-content/uploads/2014/04/Kare-Meshi-mascota-japon-japonshop09.png',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Ensalada Extra',7,5,'http://www.cooking-japan.com/recipeimages/Niku%20Udon_1344667466.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Naruto Extra',7,2,'http://2.bp.blogspot.com/_UIXOn06Pz70/R-GSNHYm1ZI/AAAAAAAACRc/AuGW348MSkY/s800/Kare+Udon+(Curry+Udon+Soup).jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Choclito Extra',7,2,'http://1.bp.blogspot.com/-dYrNM4-Fgg0/TViSG_ShoEI/AAAAAAAAAA8/UTG7SxKxd0M/s1600/choclo1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Fukujinzuke',7,2,'https://bebeloveokazu.files.wordpress.com/2012/06/hiyayako-1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Bambu',7,2,'https://www.dhresource.com/600x600/f2/albu/g5/M01/37/88/rBVaJFjl_56AT-KvAAKqoLDTp0I728.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Coca Cola S/H',11,5,'https://s3-us-west-1.amazonaws.com/img.coca-colafemsa.com/assets/images/es/carreras/1-2-3.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Coca Zero S/H',11,5,'https://s3-us-west-1.amazonaws.com/img.coca-colafemsa.com/assets/images/es/carreras/1-2-3.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Inca Kola S/H',11,5,'http://delivery.pappas.pe/wp-content/uploads/2014/04/pappas-pollos-brasa-parrillas-lima-bebidas-inca-kola.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Inca Zero S/H',11,5,'http://delivery.pappas.pe/wp-content/uploads/2014/04/pappas-pollos-brasa-parrillas-lima-bebidas-inca-kola.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Sprite S/H',11,4,'http://www.coca-colaindia.com/content/dam/journey/in/en/private/Choices/related%20stories/India-sprite-fountain.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Fanta S/H',11,5,'https://i5.walmartimages.com/asr/646bffb9-c5f0-4c05-a918-cea2a6faeb44_1.9a516e8c58a0dfd6f24de8748ca0b2e2.jpeg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Aloe Drink S/H',11,6,'https://target.scene7.com/is/image/Target/47976129?wid=520&hei=520&fmt=pjpeg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Agua sin Gas  S/H',12,5,'http://inbac.com.co/298/agua-cielo-sin-gas.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Agua con Gas S/H',12,5,'http://filtrodeagua.es/wp-content/uploads/2016/01/agua-con-gas-propiedades.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Free Tea',11,6,'https://a1.cdn.japantravel.com/photo/23919-131743/1320x550!/nara-free-tea-ceremonies-near-nara-park-131743.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Free Tea S/H',11,5,'https://a1.cdn.japantravel.com/photo/23919-131743/1320x550!/nara-free-tea-ceremonies-near-nara-park-131743.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Free Tea Ligth',11,5,'https://a1.cdn.japantravel.com/photo/23919-131743/1320x550!/nara-free-tea-ceremonies-near-nara-park-131743.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Free Tea Ligth S/H',11,5,'https://a1.cdn.japantravel.com/photo/23919-131743/1320x550!/nara-free-tea-ceremonies-near-nara-park-131743.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Asahi Select',13,16,'http://jpninfo.com/wp-content/uploads/2015/10/beer-asahi.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Beni Shoga',7,2,'https://themuddledpantry.files.wordpress.com/2014/11/img_7240-600x800.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Niku Udon',7,25,'http://www.cooking-japan.com/recipeimages/Niku%20Udon_1344667466.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Kare Udon',7,25,'http://2.bp.blogspot.com/_UIXOn06Pz70/R-GSNHYm1ZI/AAAAAAAACRc/AuGW348MSkY/s800/Kare+Udon+(Curry+Udon+Soup).jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Orion',13,16,'https://asahiimports.files.wordpress.com/2014/05/chuka-with-mikan.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Hiyashi Chuka',7,26,'http://www.wazen.com.my/images/menu-choice/big/yasai/4.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Tofu Sarada',1,19,'https://bebeloveokazu.files.wordpress.com/2012/06/hiyayako-1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Hiyayakko',1,14,'http://1.bp.blogspot.com/-dgxH6mcfqvY/UjKf9wUtU-I/AAAAAAAACWI/TbcZ0OQrLyw/s1600/Hiyashi+Chuka+Recipe+3.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Yasaitame con Pollo Extra',5,28,'https://stcs.japonshop.com/img/recetas/2011/07/enc/pantallarecetayasaiitame.png',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Shio Yakitori',1,15,'https://digjapan.travel/files/user/201609291816_1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Chahan',4,20,'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2014/11/gomoku-chahan-1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Butadon',3,23,'http://3.bp.blogspot.com/-p1PXjWfNuHI/TcTavIMUjOI/AAAAAAAACfI/lDu-qp4tjo0/s1600/butadon.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Kamaboko Extra',7,2,'http://i.imgur.com/WOqRy4H.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Pirikara Ramen',7,27,'http://ot-foodspotting-production.s3.amazonaws.com/reviews/4918850/thumb_600.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    '1/2 Pirikara Ramen',7,20,'https://media-cdn.tripadvisor.com/media/photo-s/0c/cd/c8/54/gyoza-and-ramen-3.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Naruto Maki',15,25,'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2014/11/gomoku-chahan-1.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Avocado',15,25,'https://i.pinimg.com/originals/50/ff/53/50ff532ea81919dde8dcaa90f5f8568c.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Crispy',15,25,'https://i.pinimg.com/originals/49/f6/22/49f6226d1feaa8cbddb768a15dc1def3.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    '1/2 Naruto Maki',15,15,'https://media-cdn.tripadvisor.com/media/photo-s/10/ca/e8/fe/photo0jpg.jpg',now(),'SYSTEM'
+);
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    '1/2 Avocado',15,15,'https://akitchenforfriends.files.wordpress.com/2011/09/dsc03153.jpg',now(),'SYSTEM'
+);
+
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    '1/2 Crispy',15,15,'https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2014/11/gomoku-chahan-1.jpg',now(),'SYSTEM'
+);
+
+insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
+    'Katsu KareCerdo',6,25,'http://www.alideda.com/wp-content/uploads/2015/11/5.16-avokado-maki.jpg',now(),'SYSTEM'
+);
+
