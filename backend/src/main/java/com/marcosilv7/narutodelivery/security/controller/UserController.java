@@ -1,10 +1,12 @@
 package com.marcosilv7.narutodelivery.security.controller;
 
 import com.marcosilv7.narutodelivery.configuration.api.Api;
+import com.marcosilv7.narutodelivery.security.dto.ProfileUserDTO;
 import com.marcosilv7.narutodelivery.security.dto.RegisterUserDTO;
 import com.marcosilv7.narutodelivery.security.service.interfaces.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public void createUser(@Valid RegisterUserDTO data){
-        securityService.createUser(data);
+    public ProfileUserDTO createUser(@Valid @RequestBody RegisterUserDTO data){
+        return securityService.createUser(data);
     }
 
 }

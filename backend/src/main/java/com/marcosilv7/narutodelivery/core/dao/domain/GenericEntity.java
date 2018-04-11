@@ -25,6 +25,17 @@ public class GenericEntity {
     @Column
     private String deletedBy;
 
+
+    @PrePersist
+    private void prePresist(){
+        createdAt = new Date();
+    }
+
+    @PreUpdate
+    private void preUpdate(){
+        updatedAt = new Date();
+    }
+
     public Long getId() {
         return id;
     }

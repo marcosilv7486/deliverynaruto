@@ -5,6 +5,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class User extends GenericEntity {
     @NotNull
     private String password;
     @Column
-    private Date bithDay;
+    private LocalDate bithDay;
     @Column
     private String phone;
 
@@ -100,11 +101,11 @@ public class User extends GenericEntity {
         this.scopes = scopes;
     }
 
-    public Date getBithDay() {
+    public LocalDate getBithDay() {
         return bithDay;
     }
 
-    public void setBithDay(Date bithDay) {
+    public void setBithDay(LocalDate bithDay) {
         this.bithDay = bithDay;
     }
 }

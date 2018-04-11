@@ -28,7 +28,6 @@ import java.util.Date;
 import java.util.List;
 
 @ControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CustomControllerAdvice {
 
     private final MessageUtil messageUtil;
@@ -64,7 +63,8 @@ public class CustomControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value= HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,WebRequest request) {
+        System.out.println("NO ENTRA:::::::");
         BindingResult result = ex.getBindingResult();
         List<FieldError> fieldError = result.getFieldErrors();
         List<CustomFieldError> fieldErrorDTOS = populateFieldErrors(fieldError);

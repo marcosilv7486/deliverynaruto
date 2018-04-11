@@ -1,5 +1,6 @@
 package com.marcosilv7.narutodelivery.security.service.interfaces;
 
+import com.marcosilv7.narutodelivery.security.dto.ProfileUserDTO;
 import com.marcosilv7.narutodelivery.security.dto.RegisterUserDTO;
 import com.marcosilv7.narutodelivery.security.dto.UserDTO;
 
@@ -10,5 +11,5 @@ public interface SecurityService {
 
     Optional<UserDTO> findByUsername(String username);
 
-    void createUser(RegisterUserDTO data);
+    ProfileUserDTO createUser(RegisterUserDTO data);
 }

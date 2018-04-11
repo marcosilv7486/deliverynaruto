@@ -8,6 +8,7 @@ import com.marcosilv7.narutodelivery.configuration.security.WebSecurityConfig;
 import com.marcosilv7.narutodelivery.security.authentication.login.LoginRequest;
 import com.marcosilv7.narutodelivery.security.dto.UserDTO;
 import com.marcosilv7.narutodelivery.security.service.interfaces.SecurityService;
+import com.marcosilv7.narutodelivery.util.TestUtil;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -59,15 +60,15 @@ public class AuthenticationControllerTest {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).dispatchOptions(true)
                 .addFilters(springSecurityFilterChain).build();
-        userDTOValido = securityService.findByUsername("marcosilv7486@gmail.com").get();
-        userDTOBloqueado = securityService.findByUsername("usuariobloqueado@gmail.com").get();
+        userDTOValido = securityService.findByUsername(TestUtil.EMAIL_USER).get();
+        userDTOBloqueado = securityService.findByUsername(TestUtil.EMAIL_USER_BLOCKED).get();
     }
 
     @Test
     public void login_correcto() throws Exception {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(userDTOValido.getUsername());
-        loginRequest.setPassword("123456");
+        loginRequest.setPassword(TestUtil.PASSWORD_USER);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(Api.LOGIN_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
                 .content(objectMapper.writeValueAsString(loginRequest))
@@ -113,7 +114,7 @@ public class AuthenticationControllerTest {
     public void login_usuario_bloqueado() throws Exception{
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(userDTOBloqueado.getUsername());
-        loginRequest.setPassword("123456");
+        loginRequest.setPassword(TestUtil.PASSWORD_USER);
         mockMvc.perform(MockMvcRequestBuilders.post(Api.LOGIN_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
                 .content(objectMapper.writeValueAsString(loginRequest))
