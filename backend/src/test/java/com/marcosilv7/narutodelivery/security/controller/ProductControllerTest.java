@@ -73,5 +73,4 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.content.length()").value(deliveryService.getAllProductsByPageable(pageable).getContent().size()))
                 .andDo(print()).andReturn();
     }
-
 }
