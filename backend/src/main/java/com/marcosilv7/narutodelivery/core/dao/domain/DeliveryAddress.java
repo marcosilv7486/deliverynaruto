@@ -14,7 +14,6 @@ public class DeliveryAddress extends GenericEntity {
 
     @ManyToOne
     private User user;
-
     @Column
     @NotNull
     private String locality;

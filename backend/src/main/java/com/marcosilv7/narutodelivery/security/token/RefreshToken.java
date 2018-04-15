@@ -17,4 +17,8 @@ public class RefreshToken {
         Jws<Claims> claims = token.parseClaims(signingKey);
         return Optional.of(new RefreshToken(claims));
     }
+
+    public String getSubject() {
+        return claims.getBody().getSubject();
+    }
 }
