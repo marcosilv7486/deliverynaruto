@@ -20,6 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
@@ -43,9 +44,8 @@ public class RefreshTokenController {
     }
 
     @GetMapping(Api.REFRESH_TOKEN_PATH)
-    public JwtDTO refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String tokenPayload = tokenUtil.extractToken(request.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM));
-
+    public JwtDTO refreshToken(@RequestParam("refreshToken") String refreshTokenParam) throws IOException, ServletException {
+        String tokenPayload = tokenUtil.extractToken(refreshTokenParam);
         RawAccessJwtToken rawToken = new RawAccessJwtToken(tokenPayload);
         try {
             RefreshToken refreshToken = RefreshToken.create(rawToken, TokenUtil.TOKEN_SIGNINGKEY).orElseThrow(()-> new InvalidJwtToken(""));
