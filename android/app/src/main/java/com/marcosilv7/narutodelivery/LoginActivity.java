@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Ingresar contraseña!", Toast.LENGTH_SHORT).show();
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
         Call<LoginResponseDTO> call = ServiceGenerator.createService(NarutoApi.class,this)
                 .validarAutenticacion(loginRequestDTO);
