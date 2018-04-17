@@ -2,12 +2,14 @@ package com.marcosilv7.narutodelivery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.api.NarutoApi;
@@ -36,6 +38,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
+
     public PrefenciasUsuario prefenciasUsuario;
 
     @NotEmpty(message = "Debe ingresar su correo electronico")
@@ -50,6 +53,9 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.btn_signup)
+    TextView btnCrearCuenta;
 
     Validator validator;
 
@@ -78,6 +84,12 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         validator.validate();
     }
 
+    @OnClick(R.id.btn_signup)
+    public void registrarUsuario(){
+        Intent intent = new Intent(LoginActivity.this, RegistrarUsuarioActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onValidationSucceeded() {
         //Validaciones
@@ -97,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                     finish();
                 }else {
                     ErrorResponse errorResponse = Util.parseError(response,LoginActivity.this);
-                    Toast.makeText(LoginActivity.this, errorResponse.getError(), Toast.LENGTH_SHORT).show();
+                    Snackbar.make(btnCrearCuenta,errorResponse.getError(),Snackbar.LENGTH_SHORT).show();;
                 }
             }
 

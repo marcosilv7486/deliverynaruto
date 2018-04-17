@@ -28,7 +28,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_principal" />
-        <activity android:name=".PrincipalActivity"></activity>
+        <activity android:name=".PrincipalActivity" />
+        <activity android:name=".RegistrarUsuarioActivity"></activity>
     </application>
 
 </manifest>
