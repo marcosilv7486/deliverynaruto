@@ -61,7 +61,6 @@ public class SecurityServiceImpl implements SecurityService {
         newUser.setPhone(data.getPhone());
         newUser.setBithDay(data.getBithDay());
         newUser = userRepository.save(newUser);
-        logger.info(newUser.getBithDay().toString());
         //Scopes
         UserScope userScope = new UserScope();
         userScope.setUser(newUser);
