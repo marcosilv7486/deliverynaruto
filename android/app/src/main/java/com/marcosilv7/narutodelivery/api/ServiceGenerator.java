@@ -1,12 +1,9 @@
 package com.marcosilv7.narutodelivery.api;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.marcosilv7.narutodelivery.BuildConfig;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
-import com.marcosilv7.narutodelivery.dto.AccessToken;
 import com.marcosilv7.narutodelivery.dto.TokenDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 
@@ -37,6 +34,22 @@ public class ServiceGenerator {
         builder = new Retrofit.Builder()
                 .baseUrl(ServiceGenerator.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
+        //Agregar el interceptor
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+                if(original.headers().get(Constantes.HEADER_TOKEN)!=null){
+                    Request.Builder requestBuilder = original.newBuilder()
+                            .header(Constantes.HEADER_TOKEN,
+                                    Constantes.TIPO_TOKEN + prefenciasUsuario.obtenerAccessToken())
+                            .method(original.method(), original.body());
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                }
+                return chain.proceed(original);
+            }
+        });
         //Agregar la seguridad en caso de que expire el accessToken
         httpClient.authenticator(new Authenticator() {
             @Override
