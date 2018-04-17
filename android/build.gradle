@@ -5,9 +5,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath "io.realm:realm-gradle-plugin:5.0.1"
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,6 +23,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
+        }
     }
 }
 
