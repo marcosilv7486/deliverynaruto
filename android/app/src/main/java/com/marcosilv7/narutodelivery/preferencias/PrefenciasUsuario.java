@@ -14,6 +14,7 @@ public class PrefenciasUsuario {
     public static final String PREFERENCIAS_KEY_USER_REFRESH_TOKEN="refresh_token";
     public static final String PREFERENCIAS_KEY_USER_FULL_NAME="user_full_name";
     public static final String PREFERENCIAS_KEY_USER_AVATAR="user_avatar";
+    public static final String PREFERENCIAS_KEY_LOGIN="login";
 
     private SharedPreferences sharedPreferences;
 
@@ -28,6 +29,7 @@ public class PrefenciasUsuario {
         editor.putString(PREFERENCIAS_KEY_USER_REFRESH_TOKEN,loginResponseDTO.getData().getRefreshtoken());
         editor.putString(PREFERENCIAS_KEY_USER_FULL_NAME,loginResponseDTO.getData().getFullName());
         editor.putString(PREFERENCIAS_KEY_USER_AVATAR,loginResponseDTO.getData().getAvatar());
+        editor.putBoolean(PREFERENCIAS_KEY_LOGIN,true);
         editor.apply();
     }
 
@@ -43,5 +45,9 @@ public class PrefenciasUsuario {
 
     public String obtenerRefreshToken(){
         return sharedPreferences.getString(PREFERENCIAS_KEY_USER_REFRESH_TOKEN,"");
+    }
+
+    public boolean verificarLogin(){
+        return sharedPreferences.getBoolean(PREFERENCIAS_KEY_LOGIN,false);
     }
 }

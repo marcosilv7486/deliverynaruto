@@ -17,6 +17,13 @@ import com.marcosilv7.narutodelivery.dto.LoginResponseDTO;
 import com.marcosilv7.narutodelivery.dto.error.ErrorResponse;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.util.Util;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Min;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,17 +32,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
     public PrefenciasUsuario prefenciasUsuario;
 
+    @NotEmpty(message = "Debe ingresar su correo electronico")
+    @Email(message = "El formato no es el correcto")
     @BindView(R.id.txtEmailLogin)
     EditText inputEmail;
+
     @BindView(R.id.txtPasswordLogin)
+    @NotEmpty(message = "Debe ingresar su contraseña")
+    @Min(value = 8,message = "La contraseña debe ser de 8 caracteres")
     EditText inputPassword;
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    Validator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,29 +58,30 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         prefenciasUsuario = new PrefenciasUsuario(this);
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        if(prefenciasUsuario.verificarLogin()) {
+            Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.btn_login)
     public void login(){
+        validator.validate();
+    }
+
+    @Override
+    public void onValidationSucceeded() {
         //Validaciones
         LoginRequestDTO loginRequestDTO = new LoginRequestDTO(inputEmail.getText().toString(),
                 inputPassword.getText().toString());
-        if (TextUtils.isEmpty(loginRequestDTO.getUsername())) {
-            Toast.makeText(getApplicationContext(), "Ingresar correo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(loginRequestDTO.getPassword())) {
-            Toast.makeText(getApplicationContext(), "Ingresar contraseña!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         progressBar.setVisibility(View.VISIBLE);
         Call<LoginResponseDTO> call = ServiceGenerator.createService(NarutoApi.class,this)
                 .validarAutenticacion(loginRequestDTO);
@@ -89,5 +105,19 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
