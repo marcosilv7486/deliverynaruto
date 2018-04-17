@@ -22,12 +22,12 @@ import retrofit2.http.QueryMap;
 
 public interface NarutoApi {
 
-    String REST_LOGIN="";
-    String REST_REFRESH_TOKEN="";
+    String REST_LOGIN="security/authenticacion";
+    String REST_REFRESH_TOKEN="security/refreshtoken";
 
-    @POST("security/authenticacion")
+    @POST(REST_LOGIN)
     Call<LoginResponseDTO> validarAutenticacion(@Body LoginRequestDTO data);
-    @GET("security/refreshtoken")
+    @GET(REST_REFRESH_TOKEN)
     Call<TokenDTO> obtenerNuevoAccessToken(@Query("refreshToken") String refreshToken);
 
     @POST("users")

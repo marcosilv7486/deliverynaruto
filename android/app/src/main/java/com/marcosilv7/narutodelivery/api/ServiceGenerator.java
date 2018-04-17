@@ -25,6 +25,7 @@ public class ServiceGenerator {
     private static OkHttpClient.Builder httpClient;
     private static Retrofit.Builder builder;
     private static PrefenciasUsuario prefenciasUsuario;
+    public static Retrofit retrofit;
 
     public static final String TAG = ServiceGenerator.class.getSimpleName();
 
@@ -95,7 +96,7 @@ public class ServiceGenerator {
             }
         });
         OkHttpClient client = httpClient.build();
-        Retrofit retrofit = builder.client(client).build();
+        retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
     }
 
