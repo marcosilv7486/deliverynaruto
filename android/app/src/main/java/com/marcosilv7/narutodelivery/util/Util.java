@@ -7,6 +7,9 @@ import com.marcosilv7.narutodelivery.dto.error.ErrorResponse;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -25,5 +28,14 @@ public class Util {
             return new ErrorResponse();
         }
         return error;
+    }
+
+    public static Date generarFecha(String fecha, String formato){
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(formato);
+            return formatter.parse(fecha);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

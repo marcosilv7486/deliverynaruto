@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         if(prefenciasUsuario.verificarLogin()) {
             Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

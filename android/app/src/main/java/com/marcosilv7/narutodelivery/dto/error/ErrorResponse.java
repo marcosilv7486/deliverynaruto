@@ -50,4 +50,17 @@ public class ErrorResponse {
     public void setErrorsDetails(List<FieldError> errorsDetails) {
         this.errorsDetails = errorsDetails;
     }
+
+    public String obtenerMensajeError(){
+        StringBuilder mensaje= new StringBuilder();
+        if(errorsDetails!=null && !errorsDetails.isEmpty()){
+            for(FieldError fieldError : errorsDetails){
+                mensaje.append(fieldError.getFieldError());
+                mensaje.append(" ");
+            }
+            return mensaje.toString();
+        }else {
+            return error;
+        }
+    }
 }

@@ -6,28 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegistrarUsuarioActivity">
 
-    <LinearLayout
-        android:id="@+id/llLoginStatus"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
-        <TextView
-            android:id="@+id/txtStatusMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="Espere un momento"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:ems="10"
-                android:hint="Nombre Completo"
+                android:hint="Nombre Completo*"
                 android:inputType="textPersonName" />
 
 
@@ -67,11 +46,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:drawablePadding="5dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:ems="10"
-                android:hint="Correo"
-                android:inputType="textPersonName" />
+                android:hint="Correo*"
+                android:inputType="textEmailAddress" />
 
 
             <EditText
@@ -79,11 +59,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:drawablePadding="5dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                 android:ems="10"
-                android:hint="Contraseña"
-                android:inputType="textPersonName" />
+                android:hint="Contraseña*"
+                android:inputType="textPassword" />
 
 
             <EditText
@@ -91,11 +72,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:drawablePadding="5dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                 android:ems="10"
-                android:hint="Confirmar contraseña"
-                android:inputType="textPersonName" />
+                android:hint="Confirmar contraseña*"
+                android:inputType="textPassword" />
 
 
             <EditText
@@ -103,11 +85,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:drawablePadding="5dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_local_phone_black_24dp"
                 android:ems="10"
                 android:hint="Teléfono"
-                android:inputType="date" />
+                android:inputType="phone" />
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_margin="10dp"
+                android:layout_height="wrap_content" android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtBirthDayCrearUsuario"
+                    android:layout_width="303dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_cake_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:ems="10"
+                    android:hint="Cumpleaños"
+                    android:inputType="none" />
+
+                <ImageView
+                    android:id="@+id/btnCalendarioCrearUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
+            </LinearLayout>
+
 
 
 
