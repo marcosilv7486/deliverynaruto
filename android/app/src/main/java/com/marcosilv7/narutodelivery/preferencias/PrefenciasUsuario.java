@@ -33,6 +33,17 @@ public class PrefenciasUsuario {
         editor.apply();
     }
 
+    public void eliminarDatosLogin() {
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREFERENCIAS_KEY_USER_ID,"");
+        editor.putString(PREFERENCIAS_KEY_USER_ACCESS_TOKEN,"");
+        editor.putString(PREFERENCIAS_KEY_USER_REFRESH_TOKEN,"");
+        editor.putString(PREFERENCIAS_KEY_USER_FULL_NAME,"");
+        editor.putString(PREFERENCIAS_KEY_USER_AVATAR,"");
+        editor.putBoolean(PREFERENCIAS_KEY_LOGIN,false);
+        editor.apply();
+    }
+
     public void actualizarAccessToken(String accessToken){
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREFERENCIAS_KEY_USER_ACCESS_TOKEN,accessToken);

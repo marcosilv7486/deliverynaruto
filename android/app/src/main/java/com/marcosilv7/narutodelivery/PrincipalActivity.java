@@ -1,5 +1,6 @@
 package com.marcosilv7.narutodelivery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,12 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PrincipalActivity extends AppCompatActivity {
 
+    public PrefenciasUsuario prefenciasUsuario;
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
     @BindView(R.id.frameLayout)
@@ -36,6 +39,7 @@ public class PrincipalActivity extends AppCompatActivity {
         productosFragment = new ProductosFragment();
         carritoFragment = new CarritoFragment();
         deliveryFragment = new DeliveryFragment();
+        prefenciasUsuario = new PrefenciasUsuario(this);
         //Iniciar el fragment Primario
         setFragment(productosFragment,PRODUCTOS_FRAGMENT);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,12 +58,22 @@ public class PrincipalActivity extends AppCompatActivity {
                         setFragment(deliveryFragment,DELIVERY_FRAGMENT);
                         return true;
                     }
+                    case R.id.navigation_logout : {
+                        logout();
+                        return true;
+                    }
                     default: return false;
                 }
             }
         });
     }
 
+    private void logout(){
+        prefenciasUsuario.eliminarDatosLogin();
+        Intent intent = new Intent(PrincipalActivity.this,LoginActivity.class);
+        startActivity(intent);
+        finish();;
+    }
     private void setFragment(Fragment fragment,String nombreFragmento){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
