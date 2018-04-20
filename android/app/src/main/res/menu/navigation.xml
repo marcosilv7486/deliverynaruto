@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_productos"
-        android:icon="@drawable/ic_shopping_basket_black_24dp"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_productos" />
 
     <item
@@ -16,9 +16,9 @@
         android:icon="@drawable/ic_motorcycle_black_24dp"
         android:title="@string/title_delivery_actual" />
 
-    <item
+    <!--<item
         android:id="@+id/navigation_logout"
         android:icon="@drawable/ic_logout_black_24dp"
-        android:title="Cerrar Sesion" />
+        android:title="Cerrar Sesion" />-->
 
 </menu>

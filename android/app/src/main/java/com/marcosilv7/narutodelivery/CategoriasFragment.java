@@ -2,6 +2,8 @@ package com.marcosilv7.narutodelivery;
 
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,16 +23,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.marcosilv7.narutodelivery.ProductosFragment.PRODUCT_FRAGMENT;
+
 
 public class CategoriasFragment extends CustomFragment {
 
     ArrayList<ProductFamilyDTO> data;
 
-
     RecyclerView recyclerView;
     ProgressBar progressBar;
     RecyclerView.LayoutManager layoutManager;
     ProductoFamilyAdapter adapter;
+    public static final String ID_FAMILIA="ID_FAMILIA";
+
 
     public CategoriasFragment() {
         data = new ArrayList<>();
@@ -77,6 +82,15 @@ public class CategoriasFragment extends CustomFragment {
 
     private void cargarProductosPorFamilia(ProductFamilyDTO familyDTO){
         Log.d("CategoriasFragment","ENTRANDO... "+familyDTO.getName());
+        ProductosFragment productosFragment = new ProductosFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong(ID_FAMILIA,familyDTO.getId());
+        productosFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout,productosFragment,PRODUCT_FRAGMENT);
+        transaction.addToBackStack(PRODUCT_FRAGMENT);
+        transaction.commit();
     }
 
     public interface FamilyProductOnClickListener{

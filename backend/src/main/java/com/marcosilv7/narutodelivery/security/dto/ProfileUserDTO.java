@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @ApiModel("Perfil de Usuario")
 public class ProfileUserDTO {
@@ -16,7 +17,7 @@ public class ProfileUserDTO {
     @ApiModelProperty(notes = "Avatar del usuario")
     private String avatar;
     @ApiModelProperty(notes = "Fecha de Cumpleaños del usuario")
-    private LocalDate birthDay;
+    private Date birthDay;
     @ApiModelProperty(notes = "Telefono del usuario")
     private String phone;
 
@@ -24,7 +25,7 @@ public class ProfileUserDTO {
 
     }
 
-    public ProfileUserDTO(Long id, String email,String fullName, String avatar, LocalDate birthDay, String phone) {
+    public ProfileUserDTO(Long id, String email,String fullName, String avatar, Date birthDay, String phone) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
@@ -65,11 +66,11 @@ public class ProfileUserDTO {
         this.avatar = avatar;
     }
 
-    public LocalDate getBirthDay() {
+    public Date getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(LocalDate birthDay) {
+    public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
 

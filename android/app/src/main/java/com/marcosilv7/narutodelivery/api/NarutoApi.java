@@ -19,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -35,13 +36,14 @@ public interface NarutoApi {
     @POST("users")
     Call<ProfileUserDTO> registrarUsuario(@Body RegisterUserDTO data);
 
-    @Headers(Constantes.HEADER_TOKEN)
     @GET("products")
     Call<PageDTO<ProductDTO>> obtenerProductosPorPaginacion(@QueryMap Map<String,Object> paginacion);
 
     @GET("families")
     Call<ArrayList<ProductFamilyDTO>> obtenerFamiliasProductos();
 
+    @GET("families/{id}/products")
+    Call<ArrayList<ProductDTO>> obtenerProductosPorFamilia(@Path("id") Long idFamilia);
 
 
 }

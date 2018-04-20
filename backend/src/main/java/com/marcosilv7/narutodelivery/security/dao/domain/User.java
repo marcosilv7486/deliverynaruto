@@ -30,7 +30,7 @@ public class User extends GenericEntity {
     @NotNull
     private String password;
     @Column
-    private LocalDate bithDay;
+    private Date bithDay;
     @Column
     private String phone;
 
@@ -101,11 +101,11 @@ public class User extends GenericEntity {
         this.scopes = scopes;
     }
 
-    public LocalDate getBithDay() {
+    public Date getBithDay() {
         return bithDay;
     }
 
-    public void setBithDay(LocalDate bithDay) {
+    public void setBithDay(Date bithDay) {
         this.bithDay = bithDay;
     }
 }

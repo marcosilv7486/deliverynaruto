@@ -47,7 +47,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity implements Valid
 
 
     @NotEmpty(message = "Debe ingresar un nombre")
-    @Length(min = 2,max = 40,message = "Debe tener entre 2 y 40 caracteres")
+    @Length(min = 2,max = 80,message = "Debe tener entre 2 y 40 caracteres")
     @BindView(R.id.txtNombreCrearUsuario) EditText txtNombreCrearUsuario;
 
     @NotEmpty(message = "Debe ingresar un email")
@@ -64,7 +64,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity implements Valid
     @BindView(R.id.txtConfirmarPasswordCrearUsuario) EditText txtConfirmarPasswordCrearUsuario;
 
 
-    @Length(min = 9,max = 9,message = "Debe tener 9 caracteres")
+    @Length(max = 9,message = "Maximo tener 9 caracteres")
     @BindView(R.id.txtTelefonoCrearUsuario) EditText txtTelefonoCrearUsuario;
 
     @BindView(R.id.btnCrearUsuario) Button btnCrearUsuario;

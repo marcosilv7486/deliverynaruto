@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 
 @ApiModel("Informacion para registrar un nuevo usuario en la aplicacion")
 public class RegisterUserDTO {
@@ -32,7 +33,7 @@ public class RegisterUserDTO {
     private String phone;
 
     @ApiModelProperty(notes = "Fecha de nacimiento del usuario")
-    private LocalDate bithDay;
+    private Date bithDay;
 
     @ApiModelProperty(notes = "Contraseña del usuario",required = true)
     @Size(min = 8,max = 100)
@@ -71,11 +72,11 @@ public class RegisterUserDTO {
         this.password = password;
     }
 
-    public LocalDate getBithDay() {
+    public Date getBithDay() {
         return bithDay;
     }
 
-    public void setBithDay(LocalDate bithDay) {
+    public void setBithDay(Date bithDay) {
         this.bithDay = bithDay;
     }
 

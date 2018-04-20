@@ -58,10 +58,10 @@ public class PrincipalActivity extends AppCompatActivity {
                         setFragment(deliveryFragment,DELIVERY_FRAGMENT);
                         return true;
                     }
-                    case R.id.navigation_logout : {
+                   /* case R.id.navigation_logout : {
                         logout();
                         return true;
-                    }
+                    }*/
                     default: return false;
                 }
             }
@@ -74,6 +74,7 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void setFragment(Fragment fragment,String nombreFragmento){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
