@@ -22,21 +22,28 @@
             android:theme="@style/AppThemePrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_principal" android:screenOrientation="portrait"
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemePrincipal" />
-        <activity android:name=".PrincipalActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PrincipalActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".AddressActivity" />
+        <activity android:name=".TipoPagoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemePrincipal"></activity>
     </application>
 
 </manifest>
