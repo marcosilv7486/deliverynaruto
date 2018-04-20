@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.marcosilv7.narutodelivery.ProductosFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.squareup.picasso.Picasso;
@@ -21,10 +22,13 @@ public class ProductoAdapter extends RecyclerView.Adapter{
     Context context;
     ArrayList<ProductDTO> data;
     int clickedPos = -1;
+    ProductosFragment.OnClickListenerProducto listenerProducto;
 
-    public ProductoAdapter(Context context, ArrayList<ProductDTO> data) {
+    public ProductoAdapter(Context context, ArrayList<ProductDTO> data,
+                           ProductosFragment.OnClickListenerProducto listenerProducto) {
         this.context = context;
         this.data = data;
+        this.listenerProducto = listenerProducto;
     }
 
     @Override
@@ -97,6 +101,12 @@ public class ProductoAdapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     clickedPos = posicion;
                     notifyDataSetChanged();
+                }
+            });
+            btnAgregarProductoItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listenerProducto.onClick(item);
                 }
             });
         }

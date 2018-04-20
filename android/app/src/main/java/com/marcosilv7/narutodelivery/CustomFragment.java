@@ -4,6 +4,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class CustomFragment extends Fragment {
     protected void ocultarLoadingUI(ProgressBar progressBar){
@@ -20,6 +21,11 @@ public class CustomFragment extends Fragment {
 
     protected void displayErrorGeneral(View view, String message){
         Snackbar snackbar= Snackbar.make(view,message,Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+    }
+
+    protected void displayMessageGeneral(View view, String message){
+        Toast snackbar= Toast.makeText(view.getContext(),message,Toast.LENGTH_SHORT);
         snackbar.show();
     }
 }

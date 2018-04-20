@@ -13,6 +13,8 @@ import com.marcosilv7.narutodelivery.adapters.ProductoAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
+import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
+import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 
 import java.util.ArrayList;
 
@@ -46,12 +48,30 @@ public class ProductosFragment extends CustomFragment {
         recyclerView = view.findViewById(R.id.recyclerProductos);
         progressBar = view.findViewById(R.id.progressBarProductos);
         layoutManager = new GridLayoutManager(getActivity(),2);
-        adapter = new ProductoAdapter(getActivity(), data);
+        adapter = new ProductoAdapter(getActivity(), data, new OnClickListenerProducto() {
+            @Override
+            public void onClick(ProductDTO productDTO) {
+                agregarItemCarrito(productDTO);
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         idFamilia = getArguments().getLong(CategoriasFragment.ID_FAMILIA,-1L);
         cargarData();
         return  view;
+    }
+
+    private void agregarItemCarrito(ProductDTO productDTO) {
+        CarritoItemModel carritoItemModel = new CarritoItemModel();
+        carritoItemModel.setImage(productDTO.getImage());
+        carritoItemModel.setCantidad(1);
+        carritoItemModel.setFamiliaProducto(productDTO.getFamily());
+        carritoItemModel.setNombreProducto(productDTO.getName());
+        carritoItemModel.setPrecio(productDTO.getPrice().doubleValue());
+        carritoItemModel.setSubTotal(productDTO.getPrice().doubleValue());
+        carritoItemModel.setIdProducto(productDTO.getId());
+        QueryCarrito.agregarItemCarrito(carritoItemModel);
+        displayMessageGeneral(recyclerView,"Se agrego al carrito");
     }
 
     private void cargarData() {
@@ -74,4 +94,7 @@ public class ProductosFragment extends CustomFragment {
         });
     }
 
+    public interface OnClickListenerProducto{
+        void onClick(ProductDTO productDTO);
+    }
 }

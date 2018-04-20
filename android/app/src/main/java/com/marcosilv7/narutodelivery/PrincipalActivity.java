@@ -74,6 +74,7 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void setFragment(Fragment fragment,String nombreFragmento){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
