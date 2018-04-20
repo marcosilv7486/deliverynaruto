@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardlist_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    card_view:cardElevation="7dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="#FFF"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/productoItemImagen"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:scaleType="fitCenter"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutProductoItem"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignLeft="@+id/productoItemImagen"
+            android:layout_alignStart="@+id/productoItemImagen"
+            android:layout_below="@+id/productoItemImagen"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="3dp"
+            android:paddingRight="4dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/lblSimboloMonedaProductoItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:textStyle="bold"
+                android:text="S/."
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/lblPrecioProductoItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.25"
+                android:text="120"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/lblNombreProductoItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblSubCategoriaProductoItem"
+            android:layout_alignLeft="@+id/productoItemImagen"
+            android:layout_alignStart="@+id/productoItemImagen"
+            android:layout_marginLeft="8dp"
+            android:text="Veg Burger"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblSubCategoriaProductoItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayoutProductoItem"
+            android:layout_alignLeft="@+id/productoItemImagen"
+            android:layout_alignStart="@+id/productoItemImagen"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:text="Category Name"
+            android:textColor="@color/white"
+            android:textSize="11dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnSettingsItemProducto"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/lblSubCategoriaProductoItem"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/lblNombreProductoItem"
+            android:foregroundGravity="right"
+            android:src="@drawable/ic_more_vert_white_24dp" />
+
+        <LinearLayout
+            android:id="@+id/linearTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView4"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/transparent_black"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/btnVerDetalleProductoItem"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:text="VER DETALLE" />
+
+            <Button
+                android:id="@+id/btnAgregarProductoItem"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@color/green"
+                android:text="AGREGAR"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnRealizarPedidoProductoItem"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@color/orange"
+                android:text="REALIZAR PEDIDO"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

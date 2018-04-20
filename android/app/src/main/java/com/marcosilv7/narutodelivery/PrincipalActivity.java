@@ -58,10 +58,10 @@ public class PrincipalActivity extends AppCompatActivity {
                         setFragment(deliveryFragment,DELIVERY_FRAGMENT);
                         return true;
                     }
-                    case R.id.navigation_logout : {
+                   /* case R.id.navigation_logout : {
                         logout();
                         return true;
-                    }
+                    }*/
                     default: return false;
                 }
             }
