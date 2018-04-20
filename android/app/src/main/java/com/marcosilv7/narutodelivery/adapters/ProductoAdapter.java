@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.marcosilv7.narutodelivery.ProductosFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
+import com.marcosilv7.narutodelivery.util.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -93,9 +94,9 @@ public class ProductoAdapter extends RecyclerView.Adapter{
         void onBind(final int posicion){
             final ProductDTO item = data.get(posicion);
             lblNombreProductoItem.setText(item.getName());
-            lblPrecioProductoItem.setText(item.getPrice().toString());
+            lblPrecioProductoItem.setText(Util.convertirFormatoDinero(item.getPrice().doubleValue()));
             lblSubCategoriaProductoItem.setText(item.getSubFamily());
-            Picasso.with(context).load(item.getImage()).into(productoItemImagen);
+            Picasso.with(context).load(item.getImage()).fit().into(productoItemImagen);
             btnSettingsItemProducto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

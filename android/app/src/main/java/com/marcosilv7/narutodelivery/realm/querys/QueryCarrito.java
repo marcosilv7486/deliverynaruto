@@ -41,7 +41,11 @@ public class QueryCarrito {
                         itemBuscado.setCantidad(itemBuscado.getCantidad()+carritoItemModel.getCantidad());
                         itemBuscado.setSubTotal(itemBuscado.getCantidad()*itemBuscado.getPrecio());
                         carritoModel.setCantidadItems(carritoModel.getItems().size());
-                        carritoModel.setTotal(itemBuscado.getSubTotal());
+                        double total= 0.0;
+                        for (CarritoItemModel itemModel : carritoModel.getItems()) {
+                            total = total + itemModel.getSubTotal();
+                        }
+                        carritoModel.setTotal(total);
                         realm.insertOrUpdate(carritoModel);
                         realm.insertOrUpdate(itemBuscado);
                     }else {
@@ -54,6 +58,11 @@ public class QueryCarrito {
                         itemBuscado.setImage(carritoItemModel.getImage());
                         itemBuscado.setFamiliaProducto(carritoItemModel.getFamiliaProducto());
                         carritoModel.getItems().add(itemBuscado);
+                        double total= 0.0;
+                        for (CarritoItemModel itemModel : carritoModel.getItems()) {
+                            total = total + itemModel.getSubTotal();
+                        }
+                        carritoModel.setTotal(total);
                         carritoModel.setCantidadItems(carritoModel.getItems().size());
                         realm.insertOrUpdate(carritoModel);
                     }

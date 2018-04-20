@@ -19,6 +19,7 @@ import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.marcosilv7.narutodelivery.events.onMoveAndSwipedListener;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
+import com.marcosilv7.narutodelivery.util.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -68,14 +69,21 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
     public void onItemDismiss(RecyclerView.ViewHolder viewHolder) {
         final int position = viewHolder.getAdapterPosition();
         final CarritoItemModel item = data.get(position);
-
+        final CarritoItemModel nuevo = new CarritoItemModel();
+        nuevo.setIdProducto(item.getIdProducto());
+        nuevo.setSubTotal(item.getSubTotal());
+        nuevo.setCantidad(item.getCantidad());
+        nuevo.setPrecio(item.getPrecio());
+        nuevo.setFamiliaProducto(item.getFamiliaProducto());
+        nuevo.setImage(item.getImage());
+        nuevo.setNombreProducto(item.getNombreProducto());
         Snackbar snackbar = Snackbar
                 .make(((Activity) context).findViewById(R.id.recyclerCarritoProductos),
                         "Se removio el producto", Snackbar.LENGTH_LONG)
                 .setAction("Deshacer", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        listenerOperaciones.agregarClickListener(item);
+                        listenerOperaciones.agregarClickListener(nuevo);
                     }
                 });
         snackbar.show();
@@ -87,7 +95,8 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
         TextView lblTituloProductoCarritoItem;
         TextView lblCategoriaProductoCarritoItem;
         TextView lblCantidadProductoCarritoItem;
-        TextView lblPrecioProductoCarritoItem;
+        TextView lblSubTotalProductoCarritoItem;
+        TextView lblPrecioUnitarCarritoItem;
         ImageView imagenProductoItemCarrito;
         ImageButton btnAumentarProductoItem;
         ImageButton btnDisminuirProductoItem;
@@ -97,7 +106,8 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
             lblTituloProductoCarritoItem = itemView.findViewById(R.id.lblTituloProductoCarritoItem);
             lblCategoriaProductoCarritoItem = itemView.findViewById(R.id.lblCategoriaProductoCarritoItem);
             lblCantidadProductoCarritoItem = itemView.findViewById(R.id.lblCantidadProductoCarritoItem);
-            lblPrecioProductoCarritoItem = itemView.findViewById(R.id.lblPrecioProductoCarritoItem);
+            lblSubTotalProductoCarritoItem = itemView.findViewById(R.id.lblSubTotalProductoCarritoItem);
+            lblPrecioUnitarCarritoItem = itemView.findViewById(R.id.lblPrecioUnitarCarritoItem);
             imagenProductoItemCarrito = itemView.findViewById(R.id.imagenProductoItemCarrito);
             btnAumentarProductoItem = itemView.findViewById(R.id.btnAumentarProductoItem);
             btnAumentarProductoItem = itemView.findViewById(R.id.btnAumentarProductoItem);
@@ -109,7 +119,8 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
             lblTituloProductoCarritoItem.setText(item.getNombreProducto());
             lblCategoriaProductoCarritoItem.setText(item.getFamiliaProducto());
             lblCantidadProductoCarritoItem.setText(item.getCantidad().toString());
-            lblPrecioProductoCarritoItem.setText(item.getSubTotal()+"");
+            lblSubTotalProductoCarritoItem.setText(Util.convertirFormatoDinero(item.getSubTotal()));
+            lblPrecioUnitarCarritoItem.setText("P.U: "+Util.convertirFormatoDinero(item.getPrecio()));
             Picasso.with(context).load(item.getImage()).fit().into(imagenProductoItemCarrito);
             btnAumentarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override

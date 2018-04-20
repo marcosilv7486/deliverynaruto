@@ -44,7 +44,7 @@
             android:textSize="12dp" />
     </LinearLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/rlCarritoCompras"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -76,12 +76,14 @@
                     android:text="SUBTOTAL:" />
 
                 <TextView
+                    android:id="@+id/lblTotalCarritoItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:text="S/ 1500.0"
+                    android:layout_marginRight="5dp"
+                    android:textAlignment="textEnd"
                     android:textSize="14sp"
-                    android:id="@+id/lblTotalCarritoItem"
-                    android:text="S/ 1500.0" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

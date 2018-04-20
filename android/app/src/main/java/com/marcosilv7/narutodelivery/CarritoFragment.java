@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
@@ -24,6 +25,7 @@ import com.marcosilv7.narutodelivery.events.ItemTouchOnSpiwed;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,7 @@ public class CarritoFragment extends CustomFragment {
     CarritoModel carritoModel;
     LinearLayout layoutCarritoVacio;
     TextView lblTotalCarritoItem;
+    RelativeLayout rlCarritoCompras;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -52,6 +55,7 @@ public class CarritoFragment extends CustomFragment {
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
         recyclerView = view.findViewById(R.id.recyclerCarritoProductos);
         lblTotalCarritoItem = view.findViewById(R.id.lblTotalCarritoItem);
+        rlCarritoCompras = view.findViewById(R.id.rlCarritoCompras);
         layoutManager = new LinearLayoutManager(getActivity());
         carritoItemAdapter = new CarritoItemAdapter(getActivity(), new ArrayList<CarritoItemModel>(),
                 new clickOperacionesCantidad() {
@@ -111,16 +115,16 @@ public class CarritoFragment extends CustomFragment {
 
     private void cargarData() {
         carritoModel = QueryCarrito.obtenerCarritoActual();
-        if(carritoModel != null){
-            recyclerView.setVisibility(View.VISIBLE);
+        if(carritoModel == null || carritoModel.getItems().isEmpty()){
+            layoutCarritoVacio.setVisibility(View.VISIBLE);
+            rlCarritoCompras.setVisibility(View.GONE);
+        }else {
+            rlCarritoCompras.setVisibility(View.VISIBLE);
             layoutCarritoVacio.setVisibility(View.GONE);
             ArrayList<CarritoItemModel> data = new ArrayList<>(carritoModel.getItems());
             carritoItemAdapter.actualizarData(data);
-        }else {
-            layoutCarritoVacio.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
         }
-        lblTotalCarritoItem.setText(carritoModel.getTotal()+"");
+        lblTotalCarritoItem.setText(Util.convertirFormatoDinero(carritoModel.getTotal()));
     }
 
     public interface clickOperacionesCantidad{

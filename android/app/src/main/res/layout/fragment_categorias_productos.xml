@@ -11,12 +11,28 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Toolbar
+            android:title="Últimos Productos"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:titleTextColor="@color/white"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerFamiliasProductos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:clipToPadding="false"
             android:paddingTop="10dp" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

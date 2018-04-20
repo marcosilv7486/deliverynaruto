@@ -7,6 +7,7 @@ import com.marcosilv7.narutodelivery.dto.error.ErrorResponse;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,5 +38,12 @@ public class Util {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    public static String convertirFormatoDinero(double monto){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        formatter.setMaximumFractionDigits(2);
+        formatter.setGroupingUsed(true);
+        return formatter.format(monto);
     }
 }
