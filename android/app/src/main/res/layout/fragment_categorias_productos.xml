@@ -3,19 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductosFragment">
+    tools:context=".CategoriasFragment">
 
     <ProgressBar
         android:id="@+id/progressBarFamiliasProductos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeRefreshFamiliasProductos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerFamiliasProductos"
@@ -24,7 +18,5 @@
             android:background="@android:color/transparent"
             android:clipToPadding="false"
             android:paddingTop="10dp" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

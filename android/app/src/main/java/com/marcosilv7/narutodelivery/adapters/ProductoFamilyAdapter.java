@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.ProductosFragment;
+import com.marcosilv7.narutodelivery.CategoriasFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.squareup.picasso.Picasso;
@@ -19,10 +19,10 @@ public class ProductoFamilyAdapter extends RecyclerView.Adapter{
 
     Context context;
     ArrayList<ProductFamilyDTO> data;
-    ProductosFragment.FamilyProductOnClickListener listener;
+    CategoriasFragment.FamilyProductOnClickListener listener;
 
     public ProductoFamilyAdapter(Context context, ArrayList<ProductFamilyDTO> data,
-                                 ProductosFragment.FamilyProductOnClickListener listener) {
+                                 CategoriasFragment.FamilyProductOnClickListener listener) {
         this.context = context;
         this.data = data;
         this.listener = listener;

@@ -2,8 +2,6 @@ package com.marcosilv7.narutodelivery;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,14 +17,12 @@ import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ProductosFragment extends CustomFragment {
+public class CategoriasFragment extends CustomFragment {
 
     ArrayList<ProductFamilyDTO> data;
 
@@ -36,14 +32,14 @@ public class ProductosFragment extends CustomFragment {
     RecyclerView.LayoutManager layoutManager;
     ProductoFamilyAdapter adapter;
 
-    public ProductosFragment() {
+    public CategoriasFragment() {
         data = new ArrayList<>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_productos, container, false);
+        View view = inflater.inflate(R.layout.fragment_categorias_productos, container, false);
         recyclerView = view.findViewById(R.id.recyclerFamiliasProductos);
         progressBar = view.findViewById(R.id.progressBarFamiliasProductos);
         layoutManager = new GridLayoutManager(getActivity(),2);
@@ -80,7 +76,7 @@ public class ProductosFragment extends CustomFragment {
     }
 
     private void cargarProductosPorFamilia(ProductFamilyDTO familyDTO){
-        Log.d("ProductosFragment","ENTRANDO... "+familyDTO.getName());
+        Log.d("CategoriasFragment","ENTRANDO... "+familyDTO.getName());
     }
 
     public interface FamilyProductOnClickListener{

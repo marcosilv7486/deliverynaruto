@@ -23,7 +23,7 @@ public class PrincipalActivity extends AppCompatActivity {
     @BindView(R.id.frameLayout)
     FrameLayout frameLayout;
 
-    ProductosFragment productosFragment;
+    CategoriasFragment categoriasFragment;
     CarritoFragment carritoFragment;
     DeliveryFragment deliveryFragment;
 
@@ -36,18 +36,18 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         ButterKnife.bind(this);
-        productosFragment = new ProductosFragment();
+        categoriasFragment = new CategoriasFragment();
         carritoFragment = new CarritoFragment();
         deliveryFragment = new DeliveryFragment();
         prefenciasUsuario = new PrefenciasUsuario(this);
         //Iniciar el fragment Primario
-        setFragment(productosFragment,PRODUCTOS_FRAGMENT);
+        setFragment(categoriasFragment,PRODUCTOS_FRAGMENT);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id. navigation_productos : {
-                        setFragment(productosFragment,PRODUCTOS_FRAGMENT);
+                        setFragment(categoriasFragment,PRODUCTOS_FRAGMENT);
                         return true;
                     }
                     case R.id.navigation_carrito : {
