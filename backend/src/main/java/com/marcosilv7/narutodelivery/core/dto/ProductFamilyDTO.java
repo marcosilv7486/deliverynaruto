@@ -4,11 +4,11 @@ public class ProductFamilyDTO {
     private Long id;
     private String name;
     private String image;
-    private Integer countProducts;
+    private Long countProducts;
 
     public ProductFamilyDTO(){}
 
-    public ProductFamilyDTO(Long id, String name,String image,Integer countProducts) {
+    public ProductFamilyDTO(Long id, String name,String image,Long countProducts) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -39,11 +39,11 @@ public class ProductFamilyDTO {
         this.image = image;
     }
 
-    public Integer getCountProducts() {
+    public Long getCountProducts() {
         return countProducts;
     }
 
-    public void setCountProducts(Integer countProducts) {
+    public void setCountProducts(Long countProducts) {
         this.countProducts = countProducts;
     }
 }

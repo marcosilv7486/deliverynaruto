@@ -5,10 +5,12 @@ import com.marcosilv7.narutodelivery.dto.LoginRequestDTO;
 import com.marcosilv7.narutodelivery.dto.LoginResponseDTO;
 import com.marcosilv7.narutodelivery.dto.PageDTO;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
+import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.marcosilv7.narutodelivery.dto.ProfileUserDTO;
 import com.marcosilv7.narutodelivery.dto.RegisterUserDTO;
 import com.marcosilv7.narutodelivery.dto.TokenDTO;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -36,5 +38,10 @@ public interface NarutoApi {
     @Headers(Constantes.HEADER_TOKEN)
     @GET("products")
     Call<PageDTO<ProductDTO>> obtenerProductosPorPaginacion(@QueryMap Map<String,Object> paginacion);
+
+    @GET("families")
+    Call<ArrayList<ProductFamilyDTO>> obtenerFamiliasProductos();
+
+
 
 }

@@ -3,27 +3,76 @@ package com.marcosilv7.narutodelivery;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
+import com.marcosilv7.narutodelivery.adapters.ProductoFamilyAdapter;
+import com.marcosilv7.narutodelivery.api.NarutoApi;
+import com.marcosilv7.narutodelivery.api.ServiceGenerator;
+import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProductosFragment extends Fragment {
 
+    ArrayList<ProductFamilyDTO> data;
+
+
+    RecyclerView recyclerView;
+    ProgressBar progressBar;
+    SwipeRefreshLayout refreshLayout;
+    RecyclerView.LayoutManager layoutManager;
+    ProductoFamilyAdapter adapter;
 
     public ProductosFragment() {
-        // Required empty public constructor
+        data = new ArrayList<>();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_productos, container, false);
+        View view = inflater.inflate(R.layout.fragment_productos, container, false);
+        recyclerView = view.findViewById(R.id.recyclerFamiliasProductos);
+        progressBar = view.findViewById(R.id.progressBarFamiliasProductos);
+        refreshLayout = view.findViewById(R.id.swipeRefreshFamiliasProductos);
+        layoutManager = new GridLayoutManager(getActivity(),2);
+        adapter = new ProductoFamilyAdapter(getActivity(),data);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        cargarData();
+        return view;
+    }
+
+    private void cargarData() {
+        Call<ArrayList<ProductFamilyDTO>> call = ServiceGenerator.createService(NarutoApi.class,getActivity())
+                .obtenerFamiliasProductos();
+        call.enqueue(new Callback<ArrayList<ProductFamilyDTO>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProductFamilyDTO>> call, Response<ArrayList<ProductFamilyDTO>> response) {
+                if(response.code() == 200){
+                    adapter.actualizarData(response.body());
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProductFamilyDTO>> call, Throwable t) {
+
+            }
+        });
     }
 
 }

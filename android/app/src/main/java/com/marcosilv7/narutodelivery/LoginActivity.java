@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
     @BindView(R.id.txtPasswordLogin)
     @NotEmpty(message = "Debe ingresar su contraseña")
-    @Length(min = 8,message = "La contraseña debe ser de 8 caracteres")
+    @Length(min = 6,message = "La contraseña debe ser de 6 caracteres")
     EditText inputPassword;
 
     @BindView(R.id.progressBar)

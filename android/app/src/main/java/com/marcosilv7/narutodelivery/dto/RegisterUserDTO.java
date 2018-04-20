@@ -10,7 +10,6 @@ public class RegisterUserDTO {
     private String phone;
     private Date bithDay;
     private String password;
-
     public String getEmail() {
         return email;
     }

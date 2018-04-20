@@ -72,7 +72,7 @@ public class PrincipalActivity extends AppCompatActivity {
         prefenciasUsuario.eliminarDatosLogin();
         Intent intent = new Intent(PrincipalActivity.this,LoginActivity.class);
         startActivity(intent);
-        finish();;
+        finish();
     }
     private void setFragment(Fragment fragment,String nombreFragmento){
         FragmentManager fragmentManager = getSupportFragmentManager();

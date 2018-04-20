@@ -9,6 +9,9 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.TokenDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
@@ -38,6 +41,11 @@ public class ServiceGenerator {
             .registerTypeAdapter(Date.class, new JsonDeserializer<Date>(){
                 public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                     return new Date(json.getAsJsonPrimitive().getAsLong());
+                }
+            }).registerTypeAdapter(Date.class, new JsonSerializer<Date> () {
+                @Override
+                public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+                    return new JsonPrimitive(src.getTime()/1000);
                 }
             }).create();
 
