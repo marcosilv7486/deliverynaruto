@@ -14,9 +14,12 @@ public class QueryCarrito {
 
     public static void limpiarCarrito() {
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        realm.delete(CarritoModel.class);
-        realm.beginTransaction();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.delete(CarritoModel.class);
+            }
+        });
     }
 
     public static void agregarItemCarrito(final CarritoItemModel carritoItemModel){

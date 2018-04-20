@@ -123,8 +123,8 @@ public class CarritoFragment extends CustomFragment {
             layoutCarritoVacio.setVisibility(View.GONE);
             ArrayList<CarritoItemModel> data = new ArrayList<>(carritoModel.getItems());
             carritoItemAdapter.actualizarData(data);
+            lblTotalCarritoItem.setText(Util.convertirFormatoDinero(carritoModel.getTotal()));
         }
-        lblTotalCarritoItem.setText(Util.convertirFormatoDinero(carritoModel.getTotal()));
     }
 
     public interface clickOperacionesCantidad{

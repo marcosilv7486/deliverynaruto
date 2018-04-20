@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
+import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,13 +67,6 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void logout(){
-        prefenciasUsuario.eliminarDatosLogin();
-        Intent intent = new Intent(PrincipalActivity.this,LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void setFragment(Fragment fragment,String nombreFragmento){
