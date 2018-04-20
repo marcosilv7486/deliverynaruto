@@ -27,7 +27,7 @@ public class PrincipalActivity extends AppCompatActivity {
     CarritoFragment carritoFragment;
     DeliveryFragment deliveryFragment;
 
-    public static final String PRODUCTOS_FRAGMENT = "PRODUCTOS_FRAGMENT";
+    public static final String PRODUCTOS_FRAGMENT = "PRODUCTOS_FRAGMEN";
     public static final String CARRITO_FRAGMENT = "CARRITO_FRAGMENT";
     public static final String DELIVERY_FRAGMENT = "DELIVERY_FRAGMENT";
 
