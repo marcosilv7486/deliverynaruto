@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.marcosilv7.narutodelivery.ProductosFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.squareup.picasso.Picasso;
@@ -18,10 +19,13 @@ public class ProductoFamilyAdapter extends RecyclerView.Adapter{
 
     Context context;
     ArrayList<ProductFamilyDTO> data;
+    ProductosFragment.FamilyProductOnClickListener listener;
 
-    public ProductoFamilyAdapter(Context context, ArrayList<ProductFamilyDTO> data) {
+    public ProductoFamilyAdapter(Context context, ArrayList<ProductFamilyDTO> data,
+                                 ProductosFragment.FamilyProductOnClickListener listener) {
         this.context = context;
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -61,10 +65,16 @@ public class ProductoFamilyAdapter extends RecyclerView.Adapter{
         }
 
         void onBind(int posicion){
-            ProductFamilyDTO item = data.get(posicion);
+            final ProductFamilyDTO item = data.get(posicion);
             tituloTextView.setText(item.getName());
-            cantidadProductosTextView.setText(item.getCountProducts());
+            cantidadProductosTextView.setText(item.getCountProducts().toString());
             Picasso.with(context).load(item.getImage()).into(fotoImageView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(item);
+                }
+            });
         }
     }
 }
