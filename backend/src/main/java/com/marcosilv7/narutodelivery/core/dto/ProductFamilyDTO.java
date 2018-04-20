@@ -3,12 +3,14 @@ package com.marcosilv7.narutodelivery.core.dto;
 public class ProductFamilyDTO {
     private Long id;
     private String name;
+    private String image;
 
     public ProductFamilyDTO(){}
 
-    public ProductFamilyDTO(Long id, String name) {
+    public ProductFamilyDTO(Long id, String name,String image) {
         this.id = id;
         this.name = name;
+        this.image = image;
     }
 
     public Long getId() {
@@ -25,5 +27,13 @@ public class ProductFamilyDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

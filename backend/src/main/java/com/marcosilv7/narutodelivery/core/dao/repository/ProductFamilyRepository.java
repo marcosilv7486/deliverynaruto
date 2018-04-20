@@ -12,6 +12,6 @@ import java.util.List;
 public interface ProductFamilyRepository extends JpaRepository<ProductFamily,Long> {
 
     @Query("select new com.marcosilv7.narutodelivery.core.dto.ProductFamilyDTO (" +
-            "p.id,p.name) from ProductFamily  p ")
+            "p.id,p.name,p.image) from ProductFamily  p ")
     List<ProductFamilyDTO> findDtoWithConstructorExpression();
 }

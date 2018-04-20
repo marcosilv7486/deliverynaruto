@@ -19,11 +19,11 @@ insert into user_scopes(user_id,scope_id,createdAt,createdBY) VALUE (1,3,now(),'
 insert into user_scopes(user_id,scope_id,createdAt,createdBY) VALUE (1,4,now(),'SYSTEM');
 
 -- Data maestra de familias
-insert into product_family(name,createdAt,createdBY) VALUE ('Comidas',now(),'SYSTEM');
-insert into product_family(name,createdAt,createdBY) VALUE ('Postres',now(),'SYSTEM');
-insert into product_family(name,createdAt,createdBY) VALUE ('Bebidas',now(),'SYSTEM');
-insert into product_family(name,createdAt,createdBY) VALUE ('Makis',now(),'SYSTEM');
-insert into product_family(name,createdAt,createdBY) VALUE ('Aperitivos',now(),'SYSTEM');
+insert into product_family(name,createdAt,createdBY,image) VALUE ('Comidas',now(),'SYSTEM','https://www-tc.pbs.org/food/wp-content/blogs.dir/2/files/2014/11/gomoku-chahan-1.jpg');
+insert into product_family(name,createdAt,createdBY,image) VALUE ('Postres',now(),'SYSTEM','https://canales.okdiario.com/recetas/img/2017/12/18/postres-navidad-655x368.jpg');
+insert into product_family(name,createdAt,createdBY,image) VALUE ('Bebidas',now(),'SYSTEM','http://www.eluniversal.com.mx/sites/default/files/styles/f03-651x400/public/2018/01/22/bebidas.jpg?itok=kksT-bHh');
+insert into product_family(name,createdAt,createdBY,image) VALUE ('Makis',now(),'SYSTEM','https://cdn.cuponidad.pe/images/Deals/Makis10.jpg');
+insert into product_family(name,createdAt,createdBY,image) VALUE ('Aperitivos',now(),'SYSTEM','https://www.rebanando.com/media/tartaletas_y_voulevants_minis_crop.jpg/rh/aperitivos.jpg');
 -- Data Maestra para las subfamilias
 insert into product_subfamily(name,createdAt,createdBY,family_id) values ('Entradas',now(),'SYSTEM',5);
 insert into product_subfamily(name,createdAt,createdBY,family_id) values ('Agemono',now(),'SYSTEM',1);
