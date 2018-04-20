@@ -15,4 +15,6 @@ public interface DeliveryService {
     List<ProductSubFamilyDTO> getAllSubFamilies();
 
     Page<ProductDTO> getAllProductsByPageable(Pageable pageable);
+
+    List<ProductDTO> getProductsByFamily(Long familyId);
 }

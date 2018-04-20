@@ -44,4 +44,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     public Page<ProductDTO> getAllProductsByPageable(Pageable pageable) {
         return productRepository.findDtoWithConstructorExpression(pageable);
     }
+
+    @Override
+    public List<ProductDTO> getProductsByFamily(Long familyId) {
+        return productRepository.findDtoWithConstructorExpression(familyId);
+    }
 }
