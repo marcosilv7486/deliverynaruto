@@ -1,6 +1,7 @@
 package com.marcosilv7.narutodelivery;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -42,6 +44,7 @@ public class CarritoFragment extends CustomFragment {
     LinearLayout layoutCarritoVacio;
     TextView lblTotalCarritoItem;
     RelativeLayout rlCarritoCompras;
+    Button btnProcederPagoCarritoCompras;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -83,6 +86,15 @@ public class CarritoFragment extends CustomFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(carritoItemAdapter);
         recyclerView.setHasFixedSize(true);
+        btnProcederPagoCarritoCompras = view.findViewById(R.id.btnProcederPagoCarritoCompras);
+        btnProcederPagoCarritoCompras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AddressActivity.class);
+                startActivity(intent);
+
+            }
+        });
         ItemTouchHelper.Callback callback = new ItemTouchOnSpiwed(carritoItemAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);

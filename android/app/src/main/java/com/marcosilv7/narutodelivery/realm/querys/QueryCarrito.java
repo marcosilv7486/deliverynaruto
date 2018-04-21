@@ -30,8 +30,18 @@ public class QueryCarrito {
             public void execute(Realm realm) {
                 if(carritoModel == null){
                     CarritoModel nuevo = realm.createObject(CarritoModel.class);
-                    nuevo.setCantidadItems(0);
-                    nuevo.setTotal(0);
+                    nuevo.setCantidadItems(1);
+                    nuevo.setTotal(carritoItemModel.getCantidad()*carritoItemModel.getPrecio());
+                    CarritoItemModel nuevoItem = realm.createObject(CarritoItemModel.class);
+                    nuevoItem.setSubTotal(carritoItemModel.getSubTotal());
+                    nuevoItem.setIdProducto(carritoItemModel.getIdProducto());
+                    nuevoItem.setCantidad(carritoItemModel.getCantidad());
+                    nuevoItem.setPrecio(carritoItemModel.getPrecio());
+                    nuevoItem.setNombreProducto(carritoItemModel.getNombreProducto());
+                    nuevoItem.setImage(carritoItemModel.getImage());
+                    nuevoItem.setFamiliaProducto(carritoItemModel.getFamiliaProducto());
+                    nuevo.getItems().add(nuevoItem);
+                    realm.insertOrUpdate(nuevo);
                 }else {
                     CarritoItemModel itemBuscado = null;
                     for(CarritoItemModel itemModel : carritoModel.getItems()){
