@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/blancohumo"
+    android:background="@android:color/white"
     tools:context=".SplashActivity">
 
     <LinearLayout
@@ -22,5 +22,5 @@
         android:layout_alignParentTop="true"
         android:padding="90dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo_splash" />
+        android:src="@drawable/splash_logo" />
 </LinearLayout>
