@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NarutoDelivery</string>
+    <string name="app_name">BorutoDelivery</string>
     <string name="title_activity_principal">PrincipalActivity</string>
     <string name="title_home">Home</string>
     <string name="title_productos">Productos</string>
