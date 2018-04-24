@@ -1,37 +1,31 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui.fragments.primero.hijos;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toolbar;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.ProductoFamilyAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
-import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 
 import java.util.ArrayList;
 
+import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
+import me.yokeyword.fragmentation.SupportFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.marcosilv7.narutodelivery.ProductosFragment.PRODUCT_FRAGMENT;
 
-
-public class CategoriasFragment extends CustomFragment implements Toolbar.OnMenuItemClickListener {
+public class CategoriasFragment extends SupportFragment {
 
     ArrayList<ProductFamilyDTO> data;
 
@@ -39,23 +33,35 @@ public class CategoriasFragment extends CustomFragment implements Toolbar.OnMenu
     ProgressBar progressBar;
     RecyclerView.LayoutManager layoutManager;
     ProductoFamilyAdapter adapter;
-    Toolbar toolbar;
     PrefenciasUsuario prefenciasUsuario;
 
     public static final String ID_FAMILIA="ID_FAMILIA";
 
-
     public CategoriasFragment() {
         data = new ArrayList<>();
+    }
+
+    public static CategoriasFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        CategoriasFragment fragment = new CategoriasFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categorias_productos, container, false);
+        inintView(view);
+        cargarData();
+        return view;
+    }
+
+    private void inintView(View view) {
         recyclerView = view.findViewById(R.id.recyclerFamiliasProductos);
         progressBar = view.findViewById(R.id.progressBarFamiliasProductos);
-        toolbar = view.findViewById(R.id.toolbarCategoriasProductos);
         layoutManager = new GridLayoutManager(getActivity(),2);
         adapter = new ProductoFamilyAdapter(getActivity(), data, new FamilyProductOnClickListener() {
             @Override
@@ -63,13 +69,9 @@ public class CategoriasFragment extends CustomFragment implements Toolbar.OnMenu
                 cargarProductosPorFamilia(data);
             }
         });
-        toolbar.setOnMenuItemClickListener(this);
-        toolbar.inflateMenu(R.menu.menu_categoria_productos);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         prefenciasUsuario = new PrefenciasUsuario(getActivity());
-        cargarData();
-        return view;
     }
 
     private void cargarData() {
@@ -78,7 +80,7 @@ public class CategoriasFragment extends CustomFragment implements Toolbar.OnMenu
         call.enqueue(new Callback<ArrayList<ProductFamilyDTO>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductFamilyDTO>> call, Response<ArrayList<ProductFamilyDTO>> response) {
-                ocultarLoadingUI(progressBar);
+                progressBar.setVisibility(View.GONE);
                 if(response.code() == 200){
                     adapter.actualizarData(response.body());
                 }else {
@@ -93,33 +95,13 @@ public class CategoriasFragment extends CustomFragment implements Toolbar.OnMenu
     }
 
     private void cargarProductosPorFamilia(ProductFamilyDTO familyDTO){
-        Log.d("CategoriasFragment","ENTRANDO... "+familyDTO.getName());
-        ProductosFragment productosFragment = new ProductosFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong(ID_FAMILIA,familyDTO.getId());
-        productosFragment.setArguments(bundle);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout,productosFragment,PRODUCT_FRAGMENT);
-        transaction.addToBackStack(PRODUCT_FRAGMENT);
-        transaction.commit();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        if(item.getItemId() == R.id.menuCategoriaProductos){
-            QueryCarrito.limpiarCarrito();
-            prefenciasUsuario.eliminarDatosLogin();
-            Intent intent = new Intent(getActivity(),LoginActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-            return true;
-        }
-        return false;
+        ProductosFragment fragment = ProductosFragment.newInstance(familyDTO.getId());
+        start(fragment);
     }
 
     public interface FamilyProductOnClickListener{
         void onClick(ProductFamilyDTO data);
     }
+
 
 }

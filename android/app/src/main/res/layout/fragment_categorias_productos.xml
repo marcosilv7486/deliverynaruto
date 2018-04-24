@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriasFragment">
+    tools:context=".ui.fragments.primero.hijos.CategoriasFragment">
 
     <ProgressBar
         android:id="@+id/progressBarFamiliasProductos"
@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:clipToPadding="false"
+            android:clipChildren="false"
             android:paddingTop="10dp" />
 
     </LinearLayout>

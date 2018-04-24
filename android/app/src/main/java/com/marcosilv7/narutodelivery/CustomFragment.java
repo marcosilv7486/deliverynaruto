@@ -6,7 +6,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class CustomFragment extends Fragment {
+import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
+
+public class CustomFragment extends SwipeBackFragment {
     protected void ocultarLoadingUI(ProgressBar progressBar){
         if(progressBar.getVisibility() == View.VISIBLE){
             progressBar.setVisibility(View.INVISIBLE);

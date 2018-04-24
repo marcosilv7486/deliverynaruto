@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(userRegistred()) {
-                    Intent mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent().setClass(SplashActivity.this, PrincipalActivity.class);
                     startActivity(mainIntent);
                 }else{
                     Intent mainIntent = new Intent().setClass(SplashActivity.this, LoginActivity.class);
