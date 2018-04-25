@@ -1,4 +1,4 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.LoginRequestDTO;
@@ -30,7 +30,6 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -86,12 +85,16 @@ public class RegistrarUsuarioActivity extends AppCompatActivity implements Valid
         validator = new Validator(this);
         validator.setValidationListener(this);
         prefenciasUsuario = new PrefenciasUsuario(this);
+        initView();
+    }
+
+    private void initView(){
         btnCalendarioCrearUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
                 new android.app.DatePickerDialog(
-                       RegistrarUsuarioActivity.this,
+                        RegistrarUsuarioActivity.this,
                         new android.app.DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -108,7 +111,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity implements Valid
         txtBirthDayCrearUsuario.setFocusable(false);
         txtBirthDayCrearUsuario.setClickable(false);
         txtBirthDayCrearUsuario.setEnabled(false);
-
     }
 
     @OnClick(R.id.btnLoginCrearUsuario)

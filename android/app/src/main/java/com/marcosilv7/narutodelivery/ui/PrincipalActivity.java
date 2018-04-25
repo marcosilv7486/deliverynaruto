@@ -1,9 +1,10 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.FrameLayout;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.events.TabSelectedEvent;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.CuartoFragment;
