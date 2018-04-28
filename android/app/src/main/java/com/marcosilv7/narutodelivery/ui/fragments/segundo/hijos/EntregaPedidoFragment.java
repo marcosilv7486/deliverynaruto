@@ -174,7 +174,6 @@ public class EntregaPedidoFragment extends BaseBackFragment {
 
     public void entregarpedido(){
 
-
     }
 
 }

@@ -24,6 +24,7 @@ import com.marcosilv7.narutodelivery.events.ItemTouchOnSpiwed;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -126,21 +127,27 @@ public class CarritoFragment extends SupportFragment {
             return;
         }
         QueryCarrito.disminuirEnUno(carritoItemModel);
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(-1);
         cargarData();
     }
 
     private void aumentarEnUnoCarrito(CarritoItemModel carritoItemModel) {
         QueryCarrito.aumentarEnUno(carritoItemModel);
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(1);
         cargarData();
     }
 
     private void agregar(CarritoItemModel carritoItemModel){
+        int cantidad = carritoItemModel.getCantidad();
         QueryCarrito.agregarItemCarrito(carritoItemModel);
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidad);
         cargarData();
     }
 
     private void remover(CarritoItemModel carritoItemModel){
+        int cantidad = carritoItemModel.getCantidad();
         QueryCarrito.eliminarItemCarrito(carritoItemModel);
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidad*-1);
         cargarData();
     }
 

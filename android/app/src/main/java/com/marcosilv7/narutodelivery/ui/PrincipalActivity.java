@@ -3,6 +3,7 @@ package com.marcosilv7.narutodelivery.ui;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.events.TabSelectedEvent;
@@ -20,6 +21,7 @@ import com.marcosilv7.narutodelivery.ui.view.BottomBar;
 import com.marcosilv7.narutodelivery.ui.view.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,10 +68,10 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
 
     private void initView() {
         mBottomBar
-                .addItem(new BottomBarTab(this, R.drawable.ic_home_black_24dp, "Inicio"))
-                .addItem(new BottomBarTab(this, R.drawable.ic_shopping_cart_black_24dp, "Carrito"))
-                .addItem(new BottomBarTab(this, R.drawable.ic_motorcycle_black_24dp, "Delivery"))
-                 .addItem(new BottomBarTab(this, R.drawable.ic_person_black_24dp, "Mi Cuenta"));
+                .addItem(new BottomBarTab(this, R.drawable.ic_home_black_24dp))
+                .addItem(new BottomBarTab(this, R.drawable.ic_shopping_cart_black_24dp))
+                .addItem(new BottomBarTab(this, R.drawable.ic_motorcycle_black_24dp))
+                 .addItem(new BottomBarTab(this, R.drawable.ic_person_black_24dp));
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {
@@ -115,6 +117,10 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
         } else {
             ActivityCompat.finishAfterTransition(this);
         }
+    }
+
+    public void actualizarCantidadCarrito(int numero){
+        mBottomBar.getItem(SECOND).setUnreadCount(mBottomBar.getItem(SECOND).getUnreadCount()+numero);
     }
 
 

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
@@ -37,6 +38,7 @@ public class CuartoFragment extends BaseMainFragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cuarto, container, false);
     }
+
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {

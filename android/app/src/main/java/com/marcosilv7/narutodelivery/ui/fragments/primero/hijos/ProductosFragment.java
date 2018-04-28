@@ -16,6 +16,7 @@ import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 
 import java.util.ArrayList;
@@ -83,6 +84,7 @@ public class ProductosFragment extends BaseBackFragment {
         QueryCarrito.agregarItemCarrito(carritoItemModel);
         //TODO displayMessageGeneral(recyclerView,"Se agrego al carrito");
         EventBusActivityScope.getDefault(_mActivity).post("HOLA");
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(1);
     }
 
     private void cargarData() {

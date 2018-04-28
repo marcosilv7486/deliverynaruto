@@ -1,20 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.cuarto.hijos.MiPerfilFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Toolbar
+        android:title="Mi Perfil"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:titleTextColor="@color/white"
+        android:id="@+id/toolbarMiPerfil"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <Button
-        android:id="@+id/btnSitio"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imagenMiPerfil"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_avatar_circle_black_24dp"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/opcionesMiPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/btnConfiguracionMiperfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_settings_gray_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:text="Configuracion"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/btnDireccionesMiperfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Direcciones de Entrega"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/btnTarjetasMiperfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_credit_card_black_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Tarjetas"
+            android:clickable="true"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/btnPedidosRealizadosMiperfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_insert_drive_file_gray_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Pedidos Realizados"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/btnLogoutMiperfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_exit_to_app_gray_24dp"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Cerrar Sesion"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -18,28 +18,29 @@ import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 
+/**
+ * Created by YoKeyword on 16/6/3.
+ */
 public class BottomBarTab extends FrameLayout {
     private ImageView mIcon;
-    private TextView mTvTitle;
     private Context mContext;
     private int mTabPosition = -1;
-
     private TextView mTvUnreadCount;
 
-    public BottomBarTab(Context context, @DrawableRes int icon, CharSequence title) {
-        this(context, null, icon, title);
+    public BottomBarTab(Context context, @DrawableRes int icon) {
+        this(context, null, icon);
     }
 
-    public BottomBarTab(Context context, AttributeSet attrs, int icon, CharSequence title) {
-        this(context, attrs, 0, icon, title);
+    public BottomBarTab(Context context, AttributeSet attrs, int icon) {
+        this(context, attrs, 0, icon);
     }
 
-    public BottomBarTab(Context context, AttributeSet attrs, int defStyleAttr, int icon, CharSequence title) {
+    public BottomBarTab(Context context, AttributeSet attrs, int defStyleAttr, int icon) {
         super(context, attrs, defStyleAttr);
-        init(context, icon, title);
+        init(context, icon);
     }
 
-    private void init(Context context, int icon, CharSequence title) {
+    private void init(Context context, int icon) {
         mContext = context;
         TypedArray typedArray = context.obtainStyledAttributes(new int[]{R.attr.selectableItemBackgroundBorderless});
         Drawable drawable = typedArray.getDrawable(0);
@@ -61,26 +62,21 @@ public class BottomBarTab extends FrameLayout {
         mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
         lLContainer.addView(mIcon);
 
-        mTvTitle = new TextView(context);
-        mTvTitle.setText(title);
+
         LinearLayout.LayoutParams paramsTv = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         paramsTv.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
-        mTvTitle.setTextSize(10);
-        mTvTitle.setTextColor(ContextCompat.getColor(context, R.color.tab_unselect));
-        mTvTitle.setLayoutParams(paramsTv);
-        lLContainer.addView(mTvTitle);
 
         addView(lLContainer);
 
         int min = dip2px(context, 20);
         int padding = dip2px(context, 5);
         mTvUnreadCount = new TextView(context);
-       // mTvUnreadCount.setBackgroundResource(R.drawable.bg_msg_bubble);
+        mTvUnreadCount.setBackgroundResource(R.drawable.bg_msg_bubble);
         mTvUnreadCount.setMinWidth(min);
         mTvUnreadCount.setTextColor(Color.WHITE);
         mTvUnreadCount.setPadding(padding, 0, padding, 0);
         mTvUnreadCount.setGravity(Gravity.CENTER);
-        LayoutParams tvUnReadParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, min);
+        FrameLayout.LayoutParams tvUnReadParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, min);
         tvUnReadParams.gravity = Gravity.CENTER;
         tvUnReadParams.leftMargin = dip2px(context, 17);
         tvUnReadParams.bottomMargin = dip2px(context, 14);
@@ -95,10 +91,8 @@ public class BottomBarTab extends FrameLayout {
         super.setSelected(selected);
         if (selected) {
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
         } else {
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselect));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_unselect));
         }
     }
 
@@ -113,9 +107,6 @@ public class BottomBarTab extends FrameLayout {
         return mTabPosition;
     }
 
-    /**
-     * 设置未读数量
-     */
     public void setUnreadCount(int num) {
         if (num <= 0) {
             mTvUnreadCount.setText(String.valueOf(0));
@@ -130,9 +121,6 @@ public class BottomBarTab extends FrameLayout {
         }
     }
 
-    /**
-     * 获取当前未读数量
-     */
     public int getUnreadCount() {
         int count = 0;
         if (TextUtils.isEmpty(mTvUnreadCount.getText())) {
