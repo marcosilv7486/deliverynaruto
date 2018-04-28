@@ -1,4 +1,4 @@
-package com.marcosilv7.narutodelivery.security.controller;
+package com.marcosilv7.narutodelivery.core.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,6 +6,9 @@ import com.marcosilv7.narutodelivery.NarutodeliveryApplication;
 import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.configuration.messages.MessageUtil;
 import com.marcosilv7.narutodelivery.configuration.security.WebSecurityConfig;
+import com.marcosilv7.narutodelivery.core.dto.DeliveryAddressDTO;
+import com.marcosilv7.narutodelivery.core.dto.ProductFamilyDTO;
+import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
 import com.marcosilv7.narutodelivery.security.authentication.login.LoginRequest;
 import com.marcosilv7.narutodelivery.security.dto.ProfileUserDTO;
 import com.marcosilv7.narutodelivery.security.dto.RegisterUserDTO;
@@ -54,6 +57,8 @@ public class UserControllerTest {
 
     @Autowired
     private SecurityService securityService;
+    @Autowired
+    private DeliveryService deliveryService;
 
     @Autowired
     private MessageUtil messageUtil;
@@ -87,7 +92,7 @@ public class UserControllerTest {
 
     @Test
     @Transactional
-    public void createUser_exitoso_y_login_exitoso() throws Exception {
+    public void createUser() throws Exception {
         //Creacion
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
@@ -134,6 +139,90 @@ public class UserControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void getAllByUserId() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(Api.USER_PATH+"/"+TestUtil.USER_ID+Api.DELIVERY_ADDRESS)
+                .contentType(WebSecurityConfig.CONTENT_TYPE)
+                .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
+                .accept(WebSecurityConfig.CONTENT_TYPE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print()).andReturn();
+        DeliveryAddressDTO[] response = objectMapper.readValue(result.getResponse().getContentAsString(),
+                DeliveryAddressDTO[].class);
+        Assert.assertEquals(4,response.length);
+        Assert.assertEquals(deliveryService.getDeliveryAddressByUser(TestUtil.USER_ID).size(),response.length);
+    }
 
+    @Test
+    @Transactional
+    public void createDeliveryAddress() throws Exception {
+        DeliveryAddressDTO data = new DeliveryAddressDTO();
+        data.setAddress("Mi Casita");
+        data.setReference("Cerca a mi parque");
+        data.setFavorite(true);
+        data.setLatitude(0.0);
+        data.setLongitude(0.0);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(Api.USER_PATH+"/"+TestUtil.USER_ID+Api.DELIVERY_ADDRESS)
+                .contentType(WebSecurityConfig.CONTENT_TYPE)
+                .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
+                .content(objectMapper.writeValueAsString(data))
+                .accept(WebSecurityConfig.CONTENT_TYPE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print()).andReturn();
+        DeliveryAddressDTO responseDTO = objectMapper.readValue(result.getResponse().getContentAsString(),
+                DeliveryAddressDTO.class);
+        Assert.assertNotNull(responseDTO);
+        Assert.assertNotNull(responseDTO.getId());
+        Assert.assertEquals(TestUtil.USER_ID,responseDTO.getUserId());
+        Assert.assertEquals(data.getAddress(),responseDTO.getAddress());
+        Assert.assertEquals(data.getReference(),responseDTO.getReference());
+        Assert.assertEquals(data.getLatitude(),responseDTO.getLatitude());
+        Assert.assertEquals(data.getLatitude(),responseDTO.getLongitude());
+        Assert.assertEquals(data.getFavorite(),responseDTO.getFavorite());
+    }
 
+    @Test
+    @Transactional
+    public void updateDeliveryAddress() throws Exception{
+        Long addressId = 1L;
+        DeliveryAddressDTO data = new DeliveryAddressDTO();
+        data.setAddress("Casa Grande");
+        data.setReference("Jupiter");
+        data.setFavorite(false);
+        data.setLatitude(-1.0);
+        data.setLongitude(-1.0);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put(Api.USER_PATH+"/"+TestUtil.USER_ID+Api.DELIVERY_ADDRESS+"/"+addressId)
+                .contentType(WebSecurityConfig.CONTENT_TYPE)
+                .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
+                .content(objectMapper.writeValueAsString(data))
+                .accept(WebSecurityConfig.CONTENT_TYPE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print()).andReturn();
+        DeliveryAddressDTO responseDTO = objectMapper.readValue(result.getResponse().getContentAsString(),
+                DeliveryAddressDTO.class);
+        Assert.assertNotNull(responseDTO);
+        Assert.assertEquals(TestUtil.USER_ID,responseDTO.getUserId());
+        Assert.assertEquals(addressId,responseDTO.getId());
+        Assert.assertEquals(data.getAddress(),responseDTO.getAddress());
+        Assert.assertEquals(data.getReference(),responseDTO.getReference());
+        Assert.assertEquals(data.getLatitude(),responseDTO.getLatitude());
+        Assert.assertEquals(data.getLatitude(),responseDTO.getLongitude());
+        Assert.assertEquals(data.getFavorite(),responseDTO.getFavorite());
+    }
+
+    @Test
+    @Transactional
+    public void deleteDeliveryAddress() throws Exception {
+        Long addressId = 1L;
+        mockMvc.perform(MockMvcRequestBuilders.delete(Api.USER_PATH+"/"+TestUtil.USER_ID+Api.DELIVERY_ADDRESS+"/"+addressId)
+                .contentType(WebSecurityConfig.CONTENT_TYPE)
+                .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
+                .accept(WebSecurityConfig.CONTENT_TYPE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+    }
 }

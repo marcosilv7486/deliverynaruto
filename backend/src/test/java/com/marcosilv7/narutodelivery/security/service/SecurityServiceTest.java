@@ -50,7 +50,6 @@ public class SecurityServiceTest {
         Assert.assertEquals(newUser.getName()+" "+newUser.getLastName(),profileUserDTO.getFullName());
         Assert.assertEquals(newUser.getEmail(),profileUserDTO.getEmail());
         Assert.assertEquals(newUser.getPhone(),profileUserDTO.getPhone());
-        //Assert.assertEquals(0,profileUserDTO.getBirthDay().compareTo(newUser.getBithDay()));
     }
 
     @Test(expected = BusinessException.class)

@@ -2,10 +2,7 @@ package com.marcosilv7.narutodelivery.core.dao.domain;
 
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -27,7 +24,7 @@ public class Product extends GenericEntity{
     @Min(0)
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductSubFamily subFamily;
 
     @Column

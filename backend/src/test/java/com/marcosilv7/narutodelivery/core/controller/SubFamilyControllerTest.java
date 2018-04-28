@@ -1,10 +1,10 @@
-package com.marcosilv7.narutodelivery.security.controller;
+package com.marcosilv7.narutodelivery.core.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcosilv7.narutodelivery.NarutodeliveryApplication;
 import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.configuration.security.WebSecurityConfig;
-import com.marcosilv7.narutodelivery.core.dto.ProductFamilyDTO;
+import com.marcosilv7.narutodelivery.core.dto.ProductSubFamilyDTO;
 import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,15 +24,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {NarutodeliveryApplication.class,WebSecurityConfig.class})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class FamilyControllerTest {
+public class SubFamilyControllerTest {
 
 
     private MockMvc mockMvc;
@@ -57,18 +55,18 @@ public class FamilyControllerTest {
     }
 
     @Test
-    public void getAllFamilies_exitoso() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(Api.PRODUCT_FAMILY_PATH)
+    public void getAllSubFamilies_exitoso() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(Api.PRODUCT_SUBFAMILY_PATH)
                 .contentType(WebSecurityConfig.CONTENT_TYPE)
                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM,Api.TOKEN_TEST)
                 .accept(WebSecurityConfig.CONTENT_TYPE))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print()).andReturn();
-        ProductFamilyDTO[] response = objectMapper.readValue(result.getResponse().getContentAsString(),
-                ProductFamilyDTO[].class);
-        Assert.assertEquals(5,response.length);
-        Assert.assertEquals(deliveryService.getAllFamilies().size(),response.length);
+        ProductSubFamilyDTO[] response = objectMapper.readValue(result.getResponse().getContentAsString(),
+                ProductSubFamilyDTO[].class);
+        Assert.assertEquals(16,response.length);
+        Assert.assertEquals(deliveryService.getAllSubFamilies().size(),response.length);
     }
 
 }

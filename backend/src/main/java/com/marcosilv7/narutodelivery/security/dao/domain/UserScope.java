@@ -4,6 +4,7 @@ import com.marcosilv7.narutodelivery.core.dao.domain.GenericEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -12,9 +13,9 @@ import javax.persistence.Table;
 @Where(clause = "deletedAt is null")
 public class UserScope extends GenericEntity{
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Scope scope;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Scope getScope() {

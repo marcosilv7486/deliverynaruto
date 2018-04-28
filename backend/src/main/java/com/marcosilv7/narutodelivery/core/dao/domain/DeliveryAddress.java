@@ -2,21 +2,15 @@ package com.marcosilv7.narutodelivery.core.dao.domain;
 
 import com.marcosilv7.narutodelivery.security.dao.domain.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "delivery_address")
 public class DeliveryAddress extends GenericEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @Column
-    @NotNull
-    private String locality;
     @Column
     @NotNull
     private String address;
@@ -28,7 +22,7 @@ public class DeliveryAddress extends GenericEntity {
     @Column
     private Double longitude;
     @Column
-    private boolean primary;
+    private Boolean favorite;
 
     public User getUser() {
         return user;
@@ -36,14 +30,6 @@ public class DeliveryAddress extends GenericEntity {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getLocality() {
-        return locality;
-    }
-
-    public void setLocality(String locality) {
-        this.locality = locality;
     }
 
     public String getAddress() {
@@ -78,11 +64,11 @@ public class DeliveryAddress extends GenericEntity {
         this.longitude = longitude;
     }
 
-    public boolean isPrimary() {
-        return primary;
+    public Boolean getFavorite() {
+        return favorite;
     }
 
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

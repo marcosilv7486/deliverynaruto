@@ -152,6 +152,7 @@ public class SwaggerConfig {
                 regex(Api.PRODUCT_SUBFAMILY_PATH+".*"),
                 regex(Api.PRODUCT_PATH+".*"),
                 regex(Api.REFRESH_TOKEN_PATH+".*"),
+                regex(Api.USER_PATH+"/.*"),
                 regex(Api.USER_PATH+".*"));
     }
 

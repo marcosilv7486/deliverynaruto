@@ -17,9 +17,6 @@ public class PaymentMethod extends GenericEntity {
     private User user;
     @Column
     @NotNull
-    private String type;
-    @Column
-    @NotNull
     private String numberCreditCard;
 
     @Column
@@ -35,7 +32,7 @@ public class PaymentMethod extends GenericEntity {
     @Length(min = 3,max = 3)
     private String cvs;
     @Column
-    private boolean primary;
+    private Boolean favorite;
 
     public User getUser() {
         return user;
@@ -43,14 +40,6 @@ public class PaymentMethod extends GenericEntity {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getNumberCreditCard() {
@@ -85,11 +74,11 @@ public class PaymentMethod extends GenericEntity {
         this.cvs = cvs;
     }
 
-    public boolean isPrimary() {
-        return primary;
+    public Boolean getFavorite() {
+        return favorite;
     }
 
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }
