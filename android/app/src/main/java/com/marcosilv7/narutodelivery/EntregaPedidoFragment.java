@@ -1,32 +1,37 @@
 package com.marcosilv7.narutodelivery;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
-import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Password;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressActivity extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class EntregaPedidoFragment extends Fragment {
 
     @NotEmpty(message = "Debe ingresar un nombre de Contacto")
-    @BindView(R.id.txtNombreContactoCrudDireccion) EditText txtNombreContactoCrudDireccion;
+    @BindView(R.id.txtNombreContactoCrudDireccion)
+    EditText txtNombreContactoCrudDireccion;
 
     @NotEmpty(message = "Debe ingresar una direccion")
     @BindView(R.id.txtDireccionCrudDireccion) EditText txtDireccionCrudDireccion;
@@ -42,24 +47,40 @@ public class AddressActivity extends AppCompatActivity {
     private LinearLayout layoutDireccionNueva;
     private LinearLayout layoutDireccionMemoria;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address);
-        ButterKnife.bind(AddressActivity.this);
-        prefenciasUsuario = new PrefenciasUsuario(this);
-        layoutDireccionNueva = (LinearLayout) findViewById(R.id.direccionnueva);
-        layoutDireccionMemoria = (LinearLayout) findViewById(R.id.direccionmemoria);
+
+    public EntregaPedidoFragment() {
+        // Required empty public constructor
     }
 
+    public static EntregaPedidoFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        EntregaPedidoFragment fragment = new EntregaPedidoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    Button btnDetalleProducto;
     @Override
-    protected void onResume() {
-        super.onResume();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_entrega_pedido, container, false);
+        btnDetalleProducto = (Button)view.findViewById(R.id.btnEntregarDireccion);
+        //ButterKnife.bind(getActivity());
+        prefenciasUsuario = new PrefenciasUsuario(getActivity());
+        layoutDireccionNueva = (LinearLayout) view.findViewById(R.id.direccionnueva);
+        layoutDireccionMemoria = (LinearLayout) view.findViewById(R.id.direccionmemoria);
+
+
+
         if(prefenciasUsuario.verificarLogin()==true && !prefenciasUsuario.obtenerNombre().toString().isEmpty()
                 && !prefenciasUsuario.obtenerDireccion().toString().isEmpty()) {
             layoutDireccionMemoria.setVisibility(View.VISIBLE);
             layoutDireccionNueva.setVisibility(View.GONE);
-            TextView detalledireccion = (TextView)findViewById(R.id.txtDatosDireccion);
+            TextView detalledireccion = (TextView)view.findViewById(R.id.txtDatosDireccion);
 
             String nombre = prefenciasUsuario.obtenerNombre();
             String direccion = prefenciasUsuario.obtenerDireccion();
@@ -71,11 +92,26 @@ public class AddressActivity extends AppCompatActivity {
             layoutDireccionMemoria.setVisibility(View.GONE);
             layoutDireccionNueva.setVisibility(View.VISIBLE);
         }
+
+        btnDetalleProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frameLayout, TipoPagoFragment.newInstance(), "TipoPagoFragment");
+                transaction.commit();
+            }
+        });
+
+
+        return  view ;
     }
+
+
 
     @OnClick(R.id.btnEditarDireccion)
     public void asignardireccion(){
-    seteardireccion();}
+        seteardireccion();}
 
     @OnClick(R.id.btnContinuar)
     public void irapago(){
@@ -87,7 +123,8 @@ public class AddressActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEntregarDireccion)
     public void entregar(){
-        entregarpedido();}
+        entregarpedido();
+    }
 
 
     public void seteardireccion(){
@@ -101,20 +138,20 @@ public class AddressActivity extends AppCompatActivity {
 
     public void continuarpago(){
         if(txtNombreContactoCrudDireccion.getText().toString().isEmpty()){
-            Toast.makeText(this,"Ingrese un nombre de contacto",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Ingrese un nombre de contacto",Toast.LENGTH_SHORT).show();
             txtNombreContactoCrudDireccion.setFocusable(true);
             return;
         }
         if(txtDireccionCrudDireccion.getText().toString().isEmpty()){
-            Toast.makeText(this,"Ingrese una Direccionireccion",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Ingrese una Direccionireccion",Toast.LENGTH_SHORT).show();
             return;
         }
         if(txtDistritoCrudDireccion.getText().toString().isEmpty()){
-            Toast.makeText(this,"Ingrese un Distrito",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Ingrese un Distrito",Toast.LENGTH_SHORT).show();
             return;
         }
         if(txtTelefonoCrudDireccion.getText().toString().isEmpty()){
-            Toast.makeText(this,"Ingrese su telefono",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Ingrese su telefono",Toast.LENGTH_SHORT).show();
             return;
         }
         String nombre = txtNombreContactoCrudDireccion.getText().toString();
@@ -126,9 +163,10 @@ public class AddressActivity extends AppCompatActivity {
         layoutDireccionMemoria.setVisibility(View.VISIBLE);
         layoutDireccionNueva.setVisibility(View.GONE);
         //progressBar.setVisibility(View.GONE);
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+
+        //Intent intent = getIntent();
+        // finish();
+        // startActivity(intent);
 
     }
 
@@ -139,7 +177,12 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     public void entregarpedido(){
-        Intent intent = new Intent(AddressActivity.this, TipoPagoActivity.class);
-        startActivity(intent);
+
+        Log.d("prueba","prueba");
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout, DetailsProductosFragment.newInstance(), "DetailsProductosFragment");
+        transaction.commit();
     }
+
 }

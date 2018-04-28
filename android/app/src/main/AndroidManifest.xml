@@ -40,7 +40,6 @@
         <activity
             android:name=".RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".AddressActivity" />
         <activity android:name=".TipoPagoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemePrincipal"></activity>

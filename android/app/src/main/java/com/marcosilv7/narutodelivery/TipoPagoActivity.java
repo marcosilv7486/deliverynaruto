@@ -44,7 +44,7 @@ public class TipoPagoActivity extends AppCompatActivity {
         regresarmenu();}
 
     public void procederpago(){
-        RadioGroup grupoun = (RadioGroup) findViewById(R.id.GrupoRbnEfectivo);
+     /*   RadioGroup grupoun = (RadioGroup) findViewById(R.id.GrupoRbnEfectivo);
 
         if (grupoun.getCheckedRadioButtonId() == -1)
         {
@@ -52,7 +52,10 @@ public class TipoPagoActivity extends AppCompatActivity {
             return;
         }
         tipopago.setVisibility(View.GONE);
-        operacionexitosa.setVisibility(View.VISIBLE);
+        operacionexitosa.setVisibility(View.VISIBLE);*/
+
+        Intent intent = new Intent(TipoPagoActivity.this, PrincipalActivity.class);
+        startActivity(intent);
         }
         public void regresarmenu(){
             Intent intent = new Intent(TipoPagoActivity.this, PrincipalActivity.class);

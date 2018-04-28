@@ -4,6 +4,8 @@ package com.marcosilv7.narutodelivery;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -90,8 +92,7 @@ public class CarritoFragment extends CustomFragment {
         btnProcederPagoCarritoCompras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddressActivity.class);
-                startActivity(intent);
+              iniciarFragmentEntregaPedido();
 
             }
         });
@@ -100,6 +101,13 @@ public class CarritoFragment extends CustomFragment {
         mItemTouchHelper.attachToRecyclerView(recyclerView);
         cargarData();
         return view;
+    }
+
+    private void iniciarFragmentEntregaPedido() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout, EntregaPedidoFragment.newInstance(), "EntregaPedidoFragment");
+        transaction.commit();
     }
 
     private void dismiunirEnUnoCarrito(CarritoItemModel carritoItemModel) {
