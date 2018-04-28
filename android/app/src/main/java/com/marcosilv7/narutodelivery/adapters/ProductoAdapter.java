@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.ProductosFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.util.Util;

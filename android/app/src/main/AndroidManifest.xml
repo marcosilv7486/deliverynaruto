@@ -11,13 +11,13 @@
     <application
         android:name=".config.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo_boruto"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_logo_boruto"
         android:supportsRtl="true"
         android:theme="@style/AppThemePrincipal">
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemePrincipal">
             <intent-filter>
@@ -27,22 +27,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_principal"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemePrincipal" />
-        <activity
-            android:name=".PrincipalActivity"
+            android:name=".ui.PrincipalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegistrarUsuarioActivity"
+            android:name=".ui.RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".TipoPagoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemePrincipal"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c"/>
     </application>
 
 </manifest>

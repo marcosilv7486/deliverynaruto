@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.CategoriasFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.squareup.picasso.Picasso;

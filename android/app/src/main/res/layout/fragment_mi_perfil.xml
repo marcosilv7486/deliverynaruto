@@ -3,12 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.tercero.hijos.DeliveryFragment">
+    tools:context=".ui.fragments.cuarto.hijos.MiPerfilFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragment Delivery" />
+        android:text="@string/hello_blank_fragment" />
+
+    <Button
+        android:id="@+id/btnSitio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </FrameLayout>

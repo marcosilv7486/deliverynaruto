@@ -1,17 +1,16 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.LoginRequestDTO;
@@ -23,7 +22,6 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
-import com.mobsandgeeks.saripaar.annotation.Min;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.util.List;
@@ -37,7 +35,6 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
 
-    public static final String TAG = LoginActivity.class.getSimpleName();
 
     public PrefenciasUsuario prefenciasUsuario;
 
@@ -67,7 +64,6 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         prefenciasUsuario = new PrefenciasUsuario(this);
         validator = new Validator(this);
         validator.setValidationListener(this);
-
     }
 
     @Override

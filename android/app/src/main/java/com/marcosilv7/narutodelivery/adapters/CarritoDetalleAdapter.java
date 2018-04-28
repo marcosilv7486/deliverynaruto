@@ -5,17 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.CarritoFragment;
-import com.marcosilv7.narutodelivery.DetailsProductosFragment;
 import com.marcosilv7.narutodelivery.R;
-import com.marcosilv7.narutodelivery.events.onMoveAndSwipedListener;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.util.Util;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

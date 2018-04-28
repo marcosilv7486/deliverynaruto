@@ -1,7 +1,6 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,22 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoDetalleAdapter;
-import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by Fernando on 22/04/2018.
  */
 
-public class DetailsProductosFragment extends Fragment {
+public class DetailsProductosFragment extends BaseBackFragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     CarritoModel carritoModel;

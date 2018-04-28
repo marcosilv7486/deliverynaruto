@@ -1,11 +1,8 @@
-package com.marcosilv7.narutodelivery;
+package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +12,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
+import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntregaPedidoFragment extends Fragment {
+public class EntregaPedidoFragment extends BaseBackFragment {
 
     @NotEmpty(message = "Debe ingresar un nombre de Contacto")
     @BindView(R.id.txtNombreContactoCrudDireccion)
@@ -96,10 +94,8 @@ public class EntregaPedidoFragment extends Fragment {
         btnDetalleProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.frameLayout, TipoPagoFragment.newInstance(), "TipoPagoFragment");
-                transaction.commit();
+                TipoPagoFragment tipoPagoFragment = TipoPagoFragment.newInstance();
+                start(tipoPagoFragment);
             }
         });
 
@@ -178,11 +174,7 @@ public class EntregaPedidoFragment extends Fragment {
 
     public void entregarpedido(){
 
-        Log.d("prueba","prueba");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, DetailsProductosFragment.newInstance(), "DetailsProductosFragment");
-        transaction.commit();
+
     }
 
 }
