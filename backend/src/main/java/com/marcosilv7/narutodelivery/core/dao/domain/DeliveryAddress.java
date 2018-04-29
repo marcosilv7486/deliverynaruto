@@ -1,12 +1,14 @@
 package com.marcosilv7.narutodelivery.core.dao.domain;
 
 import com.marcosilv7.narutodelivery.security.dao.domain.User;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "delivery_address")
+@Where(clause = "deletedAt is null")
 public class DeliveryAddress extends GenericEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
