@@ -17,10 +17,11 @@ public interface DeliveryAddressRepository extends JpaRepository<DeliveryAddress
             "d.id," +
             "d.user.id," +
             "d.address," +
-            "d.reference," +
+            "d.alias," +
             "d.latitude," +
             "d.longitude," +
-            "d.favorite" +
+            "d.favorite," +
+            "d.phone" +
             ") from " +
             "DeliveryAddress  d where d.user.id =:userId order by d.favorite desc")
     List<DeliveryAddressDTO> findDtoWithConstructorExpression(@Param("userId") Long userId);

@@ -85,13 +85,14 @@ public class DeliveryServiceImpl implements DeliveryService {
         entity.setFavorite(data.getFavorite());
         entity.setLatitude(data.getLatitude());
         entity.setLongitude(data.getLongitude());
-        entity.setReference(data.getReference());
+        entity.setAlias(data.getAlias());
+        entity.setPhone(data.getPhone());
         entity.setCreatedAt(new Date());
         entity = deliveryAddressRepository.save(entity);
         return new DeliveryAddressDTO(entity.getId(),
                 entity.getUser().getId(),entity.getAddress(),
-                entity.getReference(),entity.getLatitude(),
-                entity.getLongitude(),entity.getFavorite());
+                entity.getAlias(),entity.getLatitude(),
+                entity.getLongitude(),entity.getFavorite(),entity.getPhone());
     }
 
     @Override
@@ -115,15 +116,16 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
         DeliveryAddress deliveryAddress = entityOpt.get();
         deliveryAddress.setUpdatedAt(new Date());
-        deliveryAddress.setReference(data.getReference());
+        deliveryAddress.setAlias(data.getAlias());
         deliveryAddress.setAddress(data.getAddress());
         deliveryAddress.setLongitude(data.getLongitude());
         deliveryAddress.setLatitude(data.getLatitude());
         deliveryAddress.setFavorite(data.getFavorite());
+        deliveryAddress.setPhone(data.getPhone());
         deliveryAddress = deliveryAddressRepository.save(deliveryAddress);
         return new DeliveryAddressDTO(deliveryAddress.getId(),
                 deliveryAddress.getUser().getId(),deliveryAddress.getAddress(),
-                deliveryAddress.getReference(),deliveryAddress.getLatitude(),
-                deliveryAddress.getLongitude(),deliveryAddress.getFavorite());
+                deliveryAddress.getAlias(),deliveryAddress.getLatitude(),
+                deliveryAddress.getLongitude(),deliveryAddress.getFavorite(),deliveryAddress.getPhone());
     }
 }

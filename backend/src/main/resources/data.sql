@@ -299,11 +299,11 @@ insert into products(name,subFamily_id,price,image,createdAt,createdBY) values (
     'Katsu KareCerdo',6,25,'http://www.alideda.com/wp-content/uploads/2015/11/5.16-avokado-maki.jpg',now(),'SYSTEM'
 );
 -- Direcciones de prueba
-insert into delivery_address (user_id,address,reference,favorite,latitude,longitude,createdAt,createdBY)
+insert into delivery_address (user_id,address,alias,favorite,latitude,longitude,createdAt,createdBY)
 values (1,'Mi Casita1','Frente al parque1',0,0,true,now(),'SYSTEM');
-insert into delivery_address (user_id,address,reference,favorite,latitude,longitude,createdAt,createdBY)
+insert into delivery_address (user_id,address,alias,favorite,latitude,longitude,createdAt,createdBY)
 values (1,'Mi Casita2','Frente al parque2',0,0,true,now(),'SYSTEM');
-insert into delivery_address (user_id,address,reference,favorite,latitude,longitude,createdAt,createdBY)
+insert into delivery_address (user_id,address,alias,favorite,latitude,longitude,createdAt,createdBY)
 values (1,'Mi Casita3','Frente al parque3',0,0,true,now(),'SYSTEM');
-insert into delivery_address (user_id,address,reference,favorite,latitude,longitude,createdAt,createdBY)
+insert into delivery_address (user_id,address,alias,favorite,latitude,longitude,createdAt,createdBY)
 values (1,'Mi Casita4','Frente al parque4',0,0,true,now(),'SYSTEM');

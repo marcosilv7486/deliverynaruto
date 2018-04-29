@@ -16,13 +16,15 @@ public class DeliveryAddress extends GenericEntity {
     private String address;
     @Column
     @NotNull
-    private String reference;
+    private String alias;
     @Column
     private Double latitude;
     @Column
     private Double longitude;
     @Column
     private Boolean favorite;
+    @Column
+    private String phone;
 
     public User getUser() {
         return user;
@@ -38,14 +40,6 @@ public class DeliveryAddress extends GenericEntity {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
     }
 
     public Double getLatitude() {
@@ -70,5 +64,21 @@ public class DeliveryAddress extends GenericEntity {
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 }

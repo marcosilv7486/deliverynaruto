@@ -5,27 +5,30 @@ public class DeliveryAddressDTO {
     private Long id;
     private Long userId;
     private String address;
-    private String reference;
+    private String alias;
     private Double latitude;
     private Double longitude;
     private Boolean favorite;
+    private String phone;
 
     public DeliveryAddressDTO(){}
 
     public DeliveryAddressDTO(Long id,
                               Long userId,
                               String address,
-                              String reference,
+                              String alias,
                               Double latitude,
                               Double longitude,
-                              Boolean favorite) {
+                              Boolean favorite,
+                              String phone) {
         this.id = id;
         this.userId = userId;
         this.address = address;
-        this.reference = reference;
+        this.alias = alias;
         this.latitude = latitude;
         this.longitude = longitude;
         this.favorite = favorite;
+        this.phone = phone;
     }
 
     public Long getId() {
@@ -52,14 +55,6 @@ public class DeliveryAddressDTO {
         this.address = address;
     }
 
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
     public Double getLatitude() {
         return latitude;
     }
@@ -82,5 +77,21 @@ public class DeliveryAddressDTO {
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

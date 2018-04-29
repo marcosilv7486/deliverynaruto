@@ -159,7 +159,8 @@ public class UserControllerTest {
     public void createDeliveryAddress() throws Exception {
         DeliveryAddressDTO data = new DeliveryAddressDTO();
         data.setAddress("Mi Casita");
-        data.setReference("Cerca a mi parque");
+        data.setAlias("Cerca a mi parque");
+        data.setPhone("942696030");
         data.setFavorite(true);
         data.setLatitude(0.0);
         data.setLongitude(0.0);
@@ -177,10 +178,11 @@ public class UserControllerTest {
         Assert.assertNotNull(responseDTO.getId());
         Assert.assertEquals(TestUtil.USER_ID,responseDTO.getUserId());
         Assert.assertEquals(data.getAddress(),responseDTO.getAddress());
-        Assert.assertEquals(data.getReference(),responseDTO.getReference());
+        Assert.assertEquals(data.getAlias(),responseDTO.getAlias());
         Assert.assertEquals(data.getLatitude(),responseDTO.getLatitude());
         Assert.assertEquals(data.getLatitude(),responseDTO.getLongitude());
         Assert.assertEquals(data.getFavorite(),responseDTO.getFavorite());
+        Assert.assertEquals(data.getPhone(),responseDTO.getPhone());
     }
 
     @Test
@@ -189,7 +191,8 @@ public class UserControllerTest {
         Long addressId = 1L;
         DeliveryAddressDTO data = new DeliveryAddressDTO();
         data.setAddress("Casa Grande");
-        data.setReference("Jupiter");
+        data.setAlias("Jupiter");
+        data.setPhone("9426960301");
         data.setFavorite(false);
         data.setLatitude(-1.0);
         data.setLongitude(-1.0);
@@ -207,10 +210,11 @@ public class UserControllerTest {
         Assert.assertEquals(TestUtil.USER_ID,responseDTO.getUserId());
         Assert.assertEquals(addressId,responseDTO.getId());
         Assert.assertEquals(data.getAddress(),responseDTO.getAddress());
-        Assert.assertEquals(data.getReference(),responseDTO.getReference());
+        Assert.assertEquals(data.getAlias(),responseDTO.getAlias());
         Assert.assertEquals(data.getLatitude(),responseDTO.getLatitude());
         Assert.assertEquals(data.getLatitude(),responseDTO.getLongitude());
         Assert.assertEquals(data.getFavorite(),responseDTO.getFavorite());
+        Assert.assertEquals(data.getPhone(),responseDTO.getPhone());
     }
 
     @Test
