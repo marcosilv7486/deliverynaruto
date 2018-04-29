@@ -28,7 +28,7 @@ import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 public class MiPerfilFragment extends BaseBackFragment {
 
     //Button button;
-    int PLACE_PICKER_REQUEST = 1;
+
     TextView btnLogoutMiperfil;
     PrefenciasUsuario prefenciasUsuario;
 
@@ -107,14 +107,5 @@ public class MiPerfilFragment extends BaseBackFragment {
         dialog.show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace( getActivity(),data);
-                String toastMsg = String.format("Place: %s", place.getName());
-                Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
-            }
-        }
-    }
+
 }

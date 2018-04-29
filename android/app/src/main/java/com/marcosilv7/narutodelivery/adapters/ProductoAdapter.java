@@ -10,13 +10,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
 import com.marcosilv7.narutodelivery.util.Util;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
 public class ProductoAdapter extends RecyclerView.Adapter{
 
@@ -96,7 +99,7 @@ public class ProductoAdapter extends RecyclerView.Adapter{
             lblNombreProductoItem.setText(item.getName());
             lblPrecioProductoItem.setText(Util.convertirFormatoDinero(item.getPrice().doubleValue()));
             lblSubCategoriaProductoItem.setText(item.getSubFamily());
-            Picasso.with(context).load(item.getImage()).fit().into(productoItemImagen);
+            Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(productoItemImagen);
             btnSettingsItemProducto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

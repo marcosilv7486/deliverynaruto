@@ -17,9 +17,8 @@
 
         <ImageView
             android:id="@+id/productoItemImagen"
-            android:layout_width="150dp"
-            android:layout_height="130dp"
-            android:scaleType="fitCenter"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"

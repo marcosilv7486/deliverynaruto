@@ -11,12 +11,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.CarritoFragment;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.events.onMoveAndSwipedListener;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
+import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.CarritoFragment;
 import com.marcosilv7.narutodelivery.util.Util;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -117,7 +118,7 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
             lblCantidadProductoCarritoItem.setText(item.getCantidad().toString());
             lblSubTotalProductoCarritoItem.setText(Util.convertirFormatoDinero(item.getSubTotal()));
             lblPrecioUnitarCarritoItem.setText("P.U: "+Util.convertirFormatoDinero(item.getPrecio()));
-            Picasso.with(context).load(item.getImage()).fit().into(imagenProductoItemCarrito);
+            Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(imagenProductoItemCarrito);
             btnAumentarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

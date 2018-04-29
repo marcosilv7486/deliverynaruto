@@ -3,23 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.fragments.cuarto.hijos.DireccionesFragment">
-    <Toolbar
-        android:title="Mis Direcciones de Entrega"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:titleTextColor="@color/white"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <include layout="@layout/toolbar"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/clayout"
-        android:fitsSystemWindows="true">
+        android:id="@+id/clayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAddDireccionEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_add_circle_outline_white_24dp"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvListaDireccionesEntrega"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"
+            android:visibility="gone"/>
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
+
 </FrameLayout>

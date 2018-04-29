@@ -8,10 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
-import com.squareup.picasso.Picasso;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class ProductoFamilyAdapter extends RecyclerView.Adapter{
             final ProductFamilyDTO item = data.get(posicion);
             tituloTextView.setText(item.getName());
             cantidadProductosTextView.setText(item.getCountProducts().toString());
-            Picasso.with(context).load(item.getImage()).into(fotoImageView);
+            Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(fotoImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

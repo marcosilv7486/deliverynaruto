@@ -27,7 +27,7 @@
                         android:layout_height="wrap_content"
                         android:text="Seleccione el tipo de pago"
                         android:textAlignment="viewStart"
-                        android:textColor="@color/colorBottomNavigationPrimary"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="24sp"
                         android:textStyle="bold" />
                 </LinearLayout>
