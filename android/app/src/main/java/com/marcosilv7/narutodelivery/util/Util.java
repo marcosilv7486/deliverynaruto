@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
+import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.error.ErrorResponse;
 
 import java.io.IOException;
@@ -49,5 +50,12 @@ public class Util {
         formatter.setMaximumFractionDigits(2);
         formatter.setGroupingUsed(true);
         return formatter.format(monto);
+    }
+
+    public static String obtenerUrlMapaStatic(double latitud,double longitud){
+        String url = Constantes.URL_PREVIEW_GMAP;
+        url = url.replace(Constantes.PARAM_LATITUD,latitud+"");
+        url = url.replace(Constantes.PARAM_LONGITUD,longitud+"");
+        return url + Constantes.API_KEY_GOOGLE;
     }
 }

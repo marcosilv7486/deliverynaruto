@@ -1,4 +1,4 @@
-<android.support.v7.widget.Toolbar
+<Toolbar
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +15,6 @@
         tools:text="Inicio"
         android:textSize="19dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_gravity="center"/>
+        android:textColor="@color/white" />
 
-</android.support.v7.widget.Toolbar>
+</Toolbar>

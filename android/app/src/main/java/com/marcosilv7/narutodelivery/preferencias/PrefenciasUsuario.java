@@ -88,6 +88,10 @@ public class PrefenciasUsuario {
         return sharedPreferences.getString(PREFERENCIAS_KEY_USER_TELEFONO,"");
     }
 
+    public Long obtenerIdUsuario() {
+        return Long.valueOf(sharedPreferences.getString(PREFERENCIAS_KEY_USER_ID,"0"));
+    }
+
     public void actualizardireccion(String nombre, String direccion, String distrito, String telefono){
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREFERENCIAS_KEY_USER_FULL_NAME,nombre);
