@@ -2,7 +2,6 @@ package com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,11 +19,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
-import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -60,6 +58,9 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
     @Length(max = 30,message = "Maximo 30 caracteres")
     TextView txtAliasAgregarDireccion;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     AddressDTO data;
 
     Validator validator;
@@ -92,6 +93,7 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
         validator.setValidationListener(this);
         prefenciasUsuario = new PrefenciasUsuario(getActivity());
         toolbarTitle.setText("Agregar Direccion de Entrega");
+        initToolbarNav(toolbar);
         LatLng latLng =  getArguments().getParcelable(KEY_PLACE_LATLONG);
         String address =  getArguments().getString(KEY_PLACE_ADDRESS);
         if(latLng!=null){

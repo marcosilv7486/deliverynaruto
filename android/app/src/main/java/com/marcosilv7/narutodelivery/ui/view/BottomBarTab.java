@@ -26,21 +26,22 @@ public class BottomBarTab extends FrameLayout {
     private Context mContext;
     private int mTabPosition = -1;
     private TextView mTvUnreadCount;
+    private TextView mTvTitle;
 
-    public BottomBarTab(Context context, @DrawableRes int icon) {
-        this(context, null, icon);
+    public BottomBarTab(Context context, @DrawableRes int icon,CharSequence title) {
+        this(context, null, icon,title);
     }
 
-    public BottomBarTab(Context context, AttributeSet attrs, int icon) {
-        this(context, attrs, 0, icon);
+    public BottomBarTab(Context context, AttributeSet attrs, int icon,CharSequence title) {
+        this(context, attrs, 0, icon,title);
     }
 
-    public BottomBarTab(Context context, AttributeSet attrs, int defStyleAttr, int icon) {
+    public BottomBarTab(Context context, AttributeSet attrs, int defStyleAttr, int icon,CharSequence title) {
         super(context, attrs, defStyleAttr);
-        init(context, icon);
+        init(context, icon,title);
     }
 
-    private void init(Context context, int icon) {
+    private void init(Context context, int icon, CharSequence title) {
         mContext = context;
         TypedArray typedArray = context.obtainStyledAttributes(new int[]{R.attr.selectableItemBackgroundBorderless});
         Drawable drawable = typedArray.getDrawable(0);
@@ -65,6 +66,14 @@ public class BottomBarTab extends FrameLayout {
 
         LinearLayout.LayoutParams paramsTv = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         paramsTv.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+
+
+        mTvTitle = new TextView(context);
+        mTvTitle.setText(title);
+        mTvTitle.setTextSize(10);
+        mTvTitle.setTextColor(ContextCompat.getColor(context, R.color.tab_unselect));
+        mTvTitle.setLayoutParams(paramsTv);
+        lLContainer.addView(mTvTitle);
 
         addView(lLContainer);
 
@@ -91,8 +100,10 @@ public class BottomBarTab extends FrameLayout {
         super.setSelected(selected);
         if (selected) {
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary));
+            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
         } else {
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselect));
+            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_unselect));
         }
     }
 
