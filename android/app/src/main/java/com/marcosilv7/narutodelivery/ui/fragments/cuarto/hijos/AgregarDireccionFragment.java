@@ -131,7 +131,6 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
 
             @Override
             public void onFailure(Call<AddressDTO> call, Throwable t) {
-
             }
         });
 

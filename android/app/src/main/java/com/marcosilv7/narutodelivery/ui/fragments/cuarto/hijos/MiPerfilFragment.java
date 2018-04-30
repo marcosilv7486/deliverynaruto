@@ -24,15 +24,23 @@ import com.marcosilv7.narutodelivery.ui.LoginActivity;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class MiPerfilFragment extends BaseBackFragment {
 
     //Button button;
 
+    @BindView(R.id.btnLogoutMiperfil)
     TextView btnLogoutMiperfil;
     PrefenciasUsuario prefenciasUsuario;
 
+    @BindView(R.id.btnDireccionesMiperfil)
     TextView textViewDireccionMiPerfil;
+    @BindView(R.id.btnTarjetasMiperfil)
+    TextView btnTarjetasMiperfil;
 
 
     public MiPerfilFragment() {
@@ -50,41 +58,25 @@ public class MiPerfilFragment extends BaseBackFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_mi_perfil, container, false);
-        btnLogoutMiperfil = view.findViewById(R.id.btnLogoutMiperfil);
+        ButterKnife.bind(this,view);
         prefenciasUsuario = new PrefenciasUsuario(getActivity());
-        textViewDireccionMiPerfil = view.findViewById(R.id.btnDireccionesMiperfil);
-        textViewDireccionMiPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DireccionesFragment fragment = DireccionesFragment.newInstance();
-                start(fragment);
-            }
-        });
-        btnLogoutMiperfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
-        /*button = view.findViewById(R.id.btnSitio);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
         return view;
     }
 
-    private void logout() {
+    @OnClick(R.id.btnDireccionesMiperfil)
+    public void iniciarFragmentDirecciones(){
+        DireccionesFragment fragment = DireccionesFragment.newInstance();
+        start(fragment);
+    }
+
+    @OnClick(R.id.btnTarjetasMiperfil)
+    public void iniciarFragmentTarjetas(){
+        TarjetasCreditoFragment fragment = TarjetasCreditoFragment.newInstance();
+        start(fragment);
+    }
+
+    @OnClick(R.id.btnLogoutMiperfil)
+    public void logout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Esta seguro de cerrar la sesion?")
                 .setTitle("Cerrar sesion");
@@ -106,6 +98,5 @@ public class MiPerfilFragment extends BaseBackFragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 }

@@ -35,12 +35,19 @@
         <activity
             android:name=".ui.RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".TipoPagoActivity"
+        <activity
+            android:name=".TipoPagoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemePrincipal"></activity>
+            android:theme="@style/AppThemePrincipal" />
+        <activity
+            android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c"/>
+            android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c" />
+
+        <activity android:name=".ui.AgregarTarjetaActivity"></activity>
     </application>
 
 </manifest>
