@@ -19,6 +19,7 @@ public class Api {
     public static final String PRODUCT_SUBFAMILY_PATH=ROOT_PATH+"/subfamilies";
     public static final String PRODUCT_PATH=ROOT_PATH+"/products";
     public static final String DELIVERY_ADDRESS="/address";
+    public static final String PAYMENTS="/paymentmethods";
     public static final String USER_REGISTRATION_PATH=ROOT_PATH+USER_PATH+"/";
     public static final String SWAGGER_PATH="/swagger-resources/configuration/ui/**";
     public static final String SWAGGER_RESOURCES_PATH="/configuration/ui/**";

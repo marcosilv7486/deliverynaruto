@@ -2,6 +2,7 @@ package com.marcosilv7.narutodelivery.core.controller;
 
 import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.core.dto.DeliveryAddressDTO;
+import com.marcosilv7.narutodelivery.core.dto.PaymentMethodDTO;
 import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
 import com.marcosilv7.narutodelivery.security.dto.ProfileUserDTO;
 import com.marcosilv7.narutodelivery.security.dto.RegisterUserDTO;
@@ -67,4 +68,35 @@ public class UserController {
         deliveryService.deleteDeliveryAddress(userId,deliveryAddressId);
     }
 
+    @GetMapping("/{userId}"+Api.PAYMENTS)
+    @ApiOperation(value = "Obtener los metodos de pago del usuario", notes = "Obtiene un listado de los metodos de pago del usuario."
+            ,response = PaymentMethodDTO[].class)
+    public List<PaymentMethodDTO> getAllPaymentMethods(@PathVariable("userId") Long userId){
+        return deliveryService.getPaymentMethodByUser(userId);
+    }
+
+    @PostMapping("/{userId}"+Api.PAYMENTS)
+    @ApiOperation(value = "Crear un metodo de pago", notes = "Crea una nuevo metodo de pago asociado al usuario"
+            ,response = PaymentMethodDTO.class)
+    public PaymentMethodDTO createPaymentMethod(@PathVariable("userId") Long userId,
+                                                @Valid @RequestBody PaymentMethodDTO data){
+        return deliveryService.createPaymentMethod(userId,data);
+    }
+
+    @DeleteMapping("/{userId}"+Api.PAYMENTS+"/{paymentMethodId}")
+    @ApiOperation(value = "Eliminar un metodo de pago", notes = "Elimina un metodo de pago asociado al usuario")
+    public void deletePaymentMethod(@PathVariable("userId") Long userId,
+                                    @PathVariable("paymentMethodId") Long paymentMethodId){
+        deliveryService.deletePaymentMethod(userId,paymentMethodId);
+    }
+
+
+    @PutMapping("/{userId}"+Api.DELIVERY_ADDRESS+"/{paymentMethodId}")
+    @ApiOperation(value = "Modicar un metodo de pago", notes = "Modificar un metodo de pago asociado al usuario"
+            ,response = PaymentMethodDTO.class)
+    public PaymentMethodDTO updatePaymentMethod(@PathVariable("userId") Long userId,
+                                                @PathVariable("paymentMethodId") Long paymentMethodId,
+                                                @Valid @RequestBody PaymentMethodDTO data){
+        return deliveryService.updatePaymentMethod(userId,paymentMethodId,data);
+    }
 }

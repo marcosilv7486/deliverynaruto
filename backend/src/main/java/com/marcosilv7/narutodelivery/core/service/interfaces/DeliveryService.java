@@ -1,9 +1,6 @@
 package com.marcosilv7.narutodelivery.core.service.interfaces;
 
-import com.marcosilv7.narutodelivery.core.dto.DeliveryAddressDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductFamilyDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductSubFamilyDTO;
+import com.marcosilv7.narutodelivery.core.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,4 +24,13 @@ public interface DeliveryService {
     void deleteDeliveryAddress(Long userId, Long deliveryAddressId);
 
     DeliveryAddressDTO updateDeliveryAddress(Long userId, Long deliveryAddressId, @Valid DeliveryAddressDTO data);
+
+    List<PaymentMethodDTO> getPaymentMethodByUser(Long userId);
+
+    PaymentMethodDTO createPaymentMethod (Long userId,PaymentMethodDTO data);
+
+    PaymentMethodDTO updatePaymentMethod(Long userId,Long id,PaymentMethodDTO data);
+
+    void deletePaymentMethod(Long userId,Long id);
+
 }

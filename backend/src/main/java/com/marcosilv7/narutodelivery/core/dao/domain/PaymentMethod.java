@@ -1,38 +1,36 @@
 package com.marcosilv7.narutodelivery.core.dao.domain;
 
 import com.marcosilv7.narutodelivery.security.dao.domain.User;
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "payment_method")
+@Where(clause = "deletedAt is null")
 public class PaymentMethod extends GenericEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @Column
     @NotNull
     private String numberCreditCard;
-
     @Column
     @NotNull
-    @Length(min = 2,max = 2)
-    private String monthExp;
+    private int monthExp;
     @Column
     @NotNull
-    @Length(min = 2,max = 2)
-    private String yearExp;
+    private int yearExp;
     @Column
     @NotNull
     @Length(min = 3,max = 3)
-    private String cvs;
+    private String cvv;
     @Column
     private Boolean favorite;
+    @Column
+    private String postalCode;
 
     public User getUser() {
         return user;
@@ -50,35 +48,43 @@ public class PaymentMethod extends GenericEntity {
         this.numberCreditCard = numberCreditCard;
     }
 
-    public String getMonthExp() {
-        return monthExp;
-    }
-
-    public void setMonthExp(String monthExp) {
-        this.monthExp = monthExp;
-    }
-
-    public String getYearExp() {
-        return yearExp;
-    }
-
-    public void setYearExp(String yearExp) {
-        this.yearExp = yearExp;
-    }
-
-    public String getCvs() {
-        return cvs;
-    }
-
-    public void setCvs(String cvs) {
-        this.cvs = cvs;
-    }
-
     public Boolean getFavorite() {
         return favorite;
     }
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public int getMonthExp() {
+        return monthExp;
+    }
+
+    public void setMonthExp(int monthExp) {
+        this.monthExp = monthExp;
+    }
+
+    public int getYearExp() {
+        return yearExp;
+    }
+
+    public void setYearExp(int yearExp) {
+        this.yearExp = yearExp;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }

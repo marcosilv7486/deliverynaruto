@@ -3,14 +3,9 @@ package com.marcosilv7.narutodelivery.core.service.impl;
 import com.marcosilv7.narutodelivery.configuration.exceptions.BusinessException;
 import com.marcosilv7.narutodelivery.configuration.exceptions.EntityNotFoundException;
 import com.marcosilv7.narutodelivery.core.dao.domain.DeliveryAddress;
-import com.marcosilv7.narutodelivery.core.dao.repository.DeliveryAddressRepository;
-import com.marcosilv7.narutodelivery.core.dao.repository.ProductFamilyRepository;
-import com.marcosilv7.narutodelivery.core.dao.repository.ProductRepository;
-import com.marcosilv7.narutodelivery.core.dao.repository.ProductSubFamilyRepository;
-import com.marcosilv7.narutodelivery.core.dto.DeliveryAddressDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductFamilyDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductSubFamilyDTO;
+import com.marcosilv7.narutodelivery.core.dao.domain.PaymentMethod;
+import com.marcosilv7.narutodelivery.core.dao.repository.*;
+import com.marcosilv7.narutodelivery.core.dto.*;
 import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
 import com.marcosilv7.narutodelivery.security.dao.domain.User;
 import com.marcosilv7.narutodelivery.security.dao.repository.UserRepository;
@@ -33,18 +28,20 @@ public class DeliveryServiceImpl implements DeliveryService {
     private final ProductRepository productRepository;
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final UserRepository userRepository;
+    private final PaymentMethodRepository paymentMethodRepository;
 
     @Autowired
     public DeliveryServiceImpl(ProductFamilyRepository productFamilyRepository,
                                ProductSubFamilyRepository productSubFamilyRepository,
                                ProductRepository productRepository,
                                DeliveryAddressRepository deliveryAddressRepository,
-                               UserRepository userRepository) {
+                               UserRepository userRepository, PaymentMethodRepository paymentMethodRepository) {
         this.productFamilyRepository = productFamilyRepository;
         this.productSubFamilyRepository = productSubFamilyRepository;
         this.productRepository = productRepository;
         this.deliveryAddressRepository = deliveryAddressRepository;
         this.userRepository = userRepository;
+        this.paymentMethodRepository = paymentMethodRepository;
     }
 
     @Override
@@ -127,5 +124,59 @@ public class DeliveryServiceImpl implements DeliveryService {
                 deliveryAddress.getUser().getId(),deliveryAddress.getAddress(),
                 deliveryAddress.getAlias(),deliveryAddress.getLatitude(),
                 deliveryAddress.getLongitude(),deliveryAddress.getFavorite(),deliveryAddress.getPhone());
+    }
+
+    @Override
+    public List<PaymentMethodDTO> getPaymentMethodByUser(Long userId) {
+        return paymentMethodRepository.findDtoWithConstructorExpression(userId);
+    }
+
+    @Override
+    @Transactional
+    public PaymentMethodDTO createPaymentMethod(Long userId, PaymentMethodDTO data) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if(!userOpt.isPresent()){
+            throw new BusinessException("No se encontro el usuario con id: "+userId);
+        }
+        PaymentMethod entity = new PaymentMethod();
+        entity.setCreatedAt(new Date());
+        entity.setCvv(data.getCvv());
+        entity.setFavorite(true);
+        entity.setMonthExp(data.getMonthExp());
+        entity.setPostalCode(data.getPostalCode());
+        entity.setNumberCreditCard(data.getNumberCreditCard());
+        entity.setYearExp(data.getYearExp());
+        entity.setUser(userOpt.get());
+        entity = paymentMethodRepository.save(entity);
+        return new PaymentMethodDTO(entity.getId(),entity.getUser().getId(),
+                entity.getNumberCreditCard(), entity.getMonthExp(),entity.getYearExp(),
+                entity.getCvv(),entity.getFavorite(), entity.getPostalCode());
+    }
+
+    @Override
+    @Transactional
+    public PaymentMethodDTO updatePaymentMethod(Long userId, Long id, PaymentMethodDTO data) {
+        Optional<PaymentMethod> entityOpt = paymentMethodRepository.findByUserIdAndId(userId,id);
+        if(!entityOpt.isPresent()){
+            throw new EntityNotFoundException("No se encontro el metodo de pago con id: "+id);
+        }
+        PaymentMethod entity = entityOpt.get();
+        entity.setUpdatedAt(new Date());
+        entity = paymentMethodRepository.save(entity);
+        return new PaymentMethodDTO(entity.getId(),entity.getUser().getId(),
+                entity.getNumberCreditCard(), entity.getMonthExp(),entity.getYearExp(),
+                entity.getCvv(),entity.getFavorite(), entity.getPostalCode());
+    }
+
+    @Override
+    @Transactional
+    public void deletePaymentMethod(Long userId, Long id) {
+        Optional<PaymentMethod> entityOpt = paymentMethodRepository.findByUserIdAndId(userId,id);
+        if(!entityOpt.isPresent()){
+            throw new EntityNotFoundException("No se encontro el metodo de pago con id: "+id);
+        }
+        PaymentMethod entity = entityOpt.get();
+        entity.setDeletedAt(new Date());
+        paymentMethodRepository.save(entity);
     }
 }
