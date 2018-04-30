@@ -91,7 +91,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/{userId}"+Api.DELIVERY_ADDRESS+"/{paymentMethodId}")
+    @PutMapping("/{userId}"+Api.PAYMENTS+"/{paymentMethodId}")
     @ApiOperation(value = "Modicar un metodo de pago", notes = "Modificar un metodo de pago asociado al usuario"
             ,response = PaymentMethodDTO.class)
     public PaymentMethodDTO updatePaymentMethod(@PathVariable("userId") Long userId,
