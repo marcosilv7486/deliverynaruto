@@ -4,6 +4,7 @@ import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.dto.LoginRequestDTO;
 import com.marcosilv7.narutodelivery.dto.LoginResponseDTO;
 import com.marcosilv7.narutodelivery.dto.PageDTO;
+import com.marcosilv7.narutodelivery.dto.PaymentMethodDTO;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.dto.ProductFamilyDTO;
 import com.marcosilv7.narutodelivery.dto.ProfileUserDTO;
@@ -59,4 +60,19 @@ public interface NarutoApi {
     @DELETE("users/{userId}/address/{addressId}")
     Call<Void> eliminarDireccionPorUsuario(@Path("userId") Long userId,
                                            @Path("addressId") Long addressId);
+
+    @GET("users/{userId}/paymentmethods")
+    Call<ArrayList<PaymentMethodDTO>> obtenerMetodosDePagoPorUsuario(@Path("userId") Long userId);
+
+    @POST("users/{userId}/paymentmethods")
+    Call<PaymentMethodDTO> crearMetodoDePago(@Path("userId") Long userId, @Body PaymentMethodDTO data);
+
+    @PUT("users/{userId}/paymentmethods/{paymentMethodId}")
+    Call<AddressDTO> modificarMetodoDePagoPorUsuario(@Path("userId") Long userId,
+                                                     @Path("paymentMethodId") Long paymentMethodId,
+                                                     @Body PaymentMethodDTO data);
+
+    @DELETE("users/{userId}/paymentmethods/{paymentMethodId}")
+    Call<Void> eliminarMetodoDePagoPorUsuario(@Path("userId") Long userId,
+                                              @Path("paymentMethodId") Long paymentMethodId);
 }

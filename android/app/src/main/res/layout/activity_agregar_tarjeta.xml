@@ -10,20 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="vertical">
         <include layout="@layout/toolbar"/>
-        <com.braintreepayments.cardform.view.CardForm
-            android:id="@+id/card_form"
-            android:layout_margin="10dp"
+
+        <ProgressBar android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+        <LinearLayout android:id="@+id/llFormAgregarTarjeta"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <Button
-            android:id="@+id/btnAgregarTarjeta"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="20dip"
-            android:background="@color/colorPrimary"
-            android:text="Guardar"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <com.braintreepayments.cardform.view.CardForm
+                android:id="@+id/card_form"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/btnAgregarTarjeta"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dip"
+                android:background="@color/colorPrimary"
+                android:text="Guardar"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
