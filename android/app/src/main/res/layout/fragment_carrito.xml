@@ -1,67 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.segundo.hijos.CarritoFragment">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
-        android:id="@+id/layoutCarritoVacio"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/noMessagesIcon"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_shopping_cart_grey_24dp"
-            android:tint="@color/gray" />
-        <TextView
-            android:id="@+id/noMessagesText"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Su Carrito esta Vacio."
-            android:textStyle="bold"
-            android:textColor="@color/gray"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="No se encontró ningun producto agregado."
-            android:textColor="@color/gray"
-            android:textSize="12dp" />
-    </LinearLayout>
-
-    <RelativeLayout android:id="@+id/rlCarritoCompras"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerCarritoProductos"
+        <LinearLayout
+            android:id="@+id/layoutCarritoVacio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:layout_above="@id/llSubTotalCarritoItem"
-            android:paddingTop="10dp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/noMessagesIcon"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_shopping_cart_grey_24dp"
+                android:tint="@color/gray" />
+            <TextView
+                android:id="@+id/noMessagesText"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Su Carrito esta Vacio."
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="No se encontró ningun producto agregado."
+                android:textColor="@color/gray"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:id="@+id/rlCarritoCompras"
+            android:layout_height="match_parent" android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerCarritoProductos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
 
         <LinearLayout android:id="@+id/llSubTotalCarritoItem"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_alignParentBottom="true"
-            android:layout_height="100dp">
-
+            android:layout_height="wrap_content">
+            <View style="@style/Divider"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,20 +84,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:padding="10dp"
+                    android:text="SUBTOTAL:"
                     android:textColor="@color/colorPrimary"
-                    android:text="SUBTOTAL:" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/lblTotalCarritoItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="S/ 1500.0"
-                    android:layout_marginRight="5dp"
                     android:textAlignment="textEnd"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -98,6 +112,5 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-    </RelativeLayout>
-
-</FrameLayout>
+    </LinearLayout>
+</LinearLayout>

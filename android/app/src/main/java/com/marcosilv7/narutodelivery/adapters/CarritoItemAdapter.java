@@ -93,7 +93,6 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
         TextView lblCategoriaProductoCarritoItem;
         TextView lblCantidadProductoCarritoItem;
         TextView lblSubTotalProductoCarritoItem;
-        TextView lblPrecioUnitarCarritoItem;
         ImageView imagenProductoItemCarrito;
         ImageButton btnAumentarProductoItem;
         ImageButton btnDisminuirProductoItem;
@@ -104,7 +103,6 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
             lblCategoriaProductoCarritoItem = itemView.findViewById(R.id.lblCategoriaProductoCarritoItem);
             lblCantidadProductoCarritoItem = itemView.findViewById(R.id.lblCantidadProductoCarritoItem);
             lblSubTotalProductoCarritoItem = itemView.findViewById(R.id.lblSubTotalProductoCarritoItem);
-            lblPrecioUnitarCarritoItem = itemView.findViewById(R.id.lblPrecioUnitarCarritoItem);
             imagenProductoItemCarrito = itemView.findViewById(R.id.imagenProductoItemCarrito);
             btnAumentarProductoItem = itemView.findViewById(R.id.btnAumentarProductoItem);
             btnAumentarProductoItem = itemView.findViewById(R.id.btnAumentarProductoItem);
@@ -117,7 +115,6 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
             lblCategoriaProductoCarritoItem.setText(item.getFamiliaProducto());
             lblCantidadProductoCarritoItem.setText(item.getCantidad().toString());
             lblSubTotalProductoCarritoItem.setText(Util.convertirFormatoDinero(item.getSubTotal()));
-            lblPrecioUnitarCarritoItem.setText("P.U: "+Util.convertirFormatoDinero(item.getPrecio()));
             Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(imagenProductoItemCarrito);
             btnAumentarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override

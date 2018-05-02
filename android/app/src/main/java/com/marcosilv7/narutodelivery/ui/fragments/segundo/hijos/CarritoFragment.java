@@ -1,12 +1,7 @@
 package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -15,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Toolbar;
+
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
 import com.marcosilv7.narutodelivery.events.ItemTouchOnSpiwed;
@@ -31,32 +26,47 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportFragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class CarritoFragment extends SupportFragment {
 
+    @BindView(R.id.recyclerCarritoProductos)
     RecyclerView recyclerView;
+
+    @BindView(R.id.layoutCarritoVacio)
+    LinearLayout layoutCarritoVacio;
+
+    @BindView(R.id.lblTotalCarritoItem)
+    TextView lblTotalCarritoItem;
+
+    @BindView(R.id.rlCarritoCompras)
+    LinearLayout rlCarritoCompras;
+
+    @BindView(R.id.btnProcederPagoCarritoCompras)
+    Button btnProcederPagoCarritoCompras;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.toolbarTitle)
+    TextView toolbarTitle;
+
     RecyclerView.LayoutManager layoutManager;
     CarritoItemAdapter carritoItemAdapter;
     CarritoModel carritoModel;
-    LinearLayout layoutCarritoVacio;
-    TextView lblTotalCarritoItem;
-    RelativeLayout rlCarritoCompras;
-    Button btnProcederPagoCarritoCompras;
 
     public CarritoFragment() {
-        // Required empty public constructor
     }
 
     public static CarritoFragment newInstance() {
         
         Bundle args = new Bundle();
-        
         CarritoFragment fragment = new CarritoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,8 +75,8 @@ public class CarritoFragment extends SupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
+        ButterKnife.bind(this,view);
         EventBusActivityScope.getDefault(_mActivity).register(this);
         initView(view);
         cargarData();
@@ -74,9 +84,7 @@ public class CarritoFragment extends SupportFragment {
     }
 
     private void initView(View view) {
-        recyclerView = view.findViewById(R.id.recyclerCarritoProductos);
-        lblTotalCarritoItem = view.findViewById(R.id.lblTotalCarritoItem);
-        rlCarritoCompras = view.findViewById(R.id.rlCarritoCompras);
+        toolbarTitle.setText("Mi Pedido");
         layoutManager = new LinearLayoutManager(getActivity());
         carritoItemAdapter = new CarritoItemAdapter(getActivity(), new ArrayList<CarritoItemModel>(),
                 new clickOperacionesCantidad() {
@@ -104,23 +112,17 @@ public class CarritoFragment extends SupportFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(carritoItemAdapter);
         recyclerView.setHasFixedSize(true);
-        btnProcederPagoCarritoCompras = view.findViewById(R.id.btnProcederPagoCarritoCompras);
-        btnProcederPagoCarritoCompras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              iniciarFragmentEntregaPedido();
-
-            }
-        });
         ItemTouchHelper.Callback callback = new ItemTouchOnSpiwed(carritoItemAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    private void iniciarFragmentEntregaPedido() {
+    @OnClick(R.id.btnProcederPagoCarritoCompras)
+    public void onClickProcederConElPago(){
         EntregaPedidoFragment entregaPedidoFragment = EntregaPedidoFragment.newInstance();
         start(entregaPedidoFragment);
     }
+
 
     private void dismiunirEnUnoCarrito(CarritoItemModel carritoItemModel) {
         if(carritoItemModel.getCantidad() == 1){
@@ -175,7 +177,6 @@ public class CarritoFragment extends SupportFragment {
 
     @Subscribe
     public void demo(String text){
-        Toast.makeText(getActivity(),text,Toast.LENGTH_SHORT).show();
         cargarData();
     }
 
