@@ -7,12 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos.MiPerfilFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 
 /**
  * A simple {@link Fragment} subclass.

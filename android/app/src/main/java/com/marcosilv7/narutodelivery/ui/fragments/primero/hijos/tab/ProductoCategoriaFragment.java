@@ -3,7 +3,6 @@ package com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.tab;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,13 +15,15 @@ import com.marcosilv7.narutodelivery.adapters.ProductoAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
+import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
+import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,10 +43,6 @@ public class ProductoCategoriaFragment extends SupportFragment {
     RecyclerView.LayoutManager layoutManager;
     ProductoAdapter adapter;
 
-
-    public ProductoCategoriaFragment() {
-
-    }
 
     public static ProductoCategoriaFragment newInstance(Long categoriaId) {
         Bundle args = new Bundle();
@@ -67,12 +64,17 @@ public class ProductoCategoriaFragment extends SupportFragment {
     private void initView(View view) {
         layoutManager = new GridLayoutManager(getActivity(),2);
         adapter = new ProductoAdapter(getActivity(), new ArrayList<ProductDTO>(),
-                new ProductosFragment.OnClickListenerProducto() {
-            @Override
-            public void onClick(ProductDTO productDTO) {
+                new EventosProductos() {
+                    @Override
+                    public void agregarAlCarrito(ProductDTO data) {
+                        agregarProductoCarrito(data);
+                    }
 
-            }
-        });
+                    @Override
+                    public void verDetalle(ProductDTO data) {
+
+                    }
+                });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -106,5 +108,24 @@ public class ProductoCategoriaFragment extends SupportFragment {
                 recyclerView.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    public interface EventosProductos {
+        void agregarAlCarrito(ProductDTO data);
+        void verDetalle(ProductDTO data);
+    }
+
+    public void agregarProductoCarrito(ProductDTO productDTO){
+        CarritoItemModel carritoItemModel = new CarritoItemModel();
+        carritoItemModel.setImage(productDTO.getImage());
+        carritoItemModel.setCantidad(1);
+        carritoItemModel.setFamiliaProducto(productDTO.getFamily());
+        carritoItemModel.setNombreProducto(productDTO.getName());
+        carritoItemModel.setPrecio(productDTO.getPrice().doubleValue());
+        carritoItemModel.setSubTotal(productDTO.getPrice().doubleValue());
+        carritoItemModel.setIdProducto(productDTO.getId());
+        QueryCarrito.agregarItemCarrito(carritoItemModel);
+        EventBusActivityScope.getDefault(_mActivity).post("HOLA");
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(1);
     }
 }

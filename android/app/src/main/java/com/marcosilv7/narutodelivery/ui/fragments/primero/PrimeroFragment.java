@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.HomeFragment;
 
 /**

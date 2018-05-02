@@ -2,30 +2,22 @@ package com.marcosilv7.narutodelivery.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.R;
-import com.marcosilv7.narutodelivery.events.TabSelectedEvent;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.CuartoFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos.MiPerfilFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.CategoriasFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.primero.PrimeroFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.HomeFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.segundo.SegundoFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.CarritoFragment;
-import com.marcosilv7.narutodelivery.ui.fragments.tercero.hijos.DeliveryFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.tercero.TerceroFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.tercero.hijos.DeliveryFragment;
 import com.marcosilv7.narutodelivery.ui.view.BottomBar;
 import com.marcosilv7.narutodelivery.ui.view.BottomBarTab;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -89,7 +81,7 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
                 int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
                 if (count > 1) {
                     if (currentFragment instanceof PrimeroFragment) {
-                        currentFragment.popToChild(CategoriasFragment.class, false);
+                        currentFragment.popToChild(HomeFragment.class, false);
                     } else if (currentFragment instanceof SegundoFragment) {
                         currentFragment.popToChild(CarritoFragment.class, false);
                     } else if (currentFragment instanceof TerceroFragment) {

@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.ProductosFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.tab.ProductoCategoriaFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ public class ProductoAdapter extends RecyclerView.Adapter{
 
     Context context;
     ArrayList<ProductDTO> data;
-    ProductosFragment.OnClickListenerProducto listenerProducto;
+    ProductoCategoriaFragment.EventosProductos listenerProducto;
 
     public ProductoAdapter(Context context, ArrayList<ProductDTO> data,
-                           ProductosFragment.OnClickListenerProducto listenerProducto) {
+                           ProductoCategoriaFragment.EventosProductos listenerProducto) {
         this.context = context;
         this.data = data;
         this.listenerProducto = listenerProducto;
@@ -76,7 +76,7 @@ public class ProductoAdapter extends RecyclerView.Adapter{
             btnAgregarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listenerProducto.onClick(item);
+                    listenerProducto.agregarAlCarrito(item);
                 }
             });
         }
