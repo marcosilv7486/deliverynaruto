@@ -2,7 +2,6 @@ package com.marcosilv7.narutodelivery.util;
 
 import android.content.Context;
 
-import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.error.ErrorResponse;
@@ -20,7 +19,6 @@ import retrofit2.Response;
 
 public class Util {
 
-    public static RequestOptions optionsCenterCrop = new RequestOptions().centerCrop();
 
 
     public static ErrorResponse parseError(Response<?> response, Context context) {

@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos.DireccionesFragment;
 import com.marcosilv7.narutodelivery.util.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -78,13 +77,11 @@ public class DireccionAdapter extends RecyclerView.Adapter {
             lblNombreAliasDireccionItem.setText(item.getAlias());
             lblDireccionItem.setText(item.getAddress());
             lblTelefonoDireccionItem.setText(item.getPhone());
-            Glide.with(context)
+            Picasso.get()
                     .load(Util.obtenerUrlMapaStatic(item.getLatitude(),item.getLongitude()))
-                    .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.ic_panorama_gray_24dp))
                     .into(imagenMapaDireccionesItem);
-            Glide.with(context)
+            Picasso.get()
                     .load(item.isFavorite() ? R.drawable.ic_star_black_24dp : R.drawable.ic_star_border_black_24dp)
-                    .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.ic_panorama_gray_24dp))
                     .into(favoritoDireccionItem);
             favoritoDireccionItem.setOnClickListener(new View.OnClickListener() {
                 @Override

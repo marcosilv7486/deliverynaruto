@@ -1,22 +1,23 @@
 package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.events.ItemTouchOnSpiwed;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
@@ -49,8 +50,8 @@ public class CarritoFragment extends SupportFragment {
     @BindView(R.id.rlCarritoCompras)
     LinearLayout rlCarritoCompras;
 
-    @BindView(R.id.btnProcederPagoCarritoCompras)
-    Button btnProcederPagoCarritoCompras;
+    @BindView(R.id.btnProcederDireccionCarritoCompras)
+    Button btnProcederDireccionCarritoCompras;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -88,7 +89,7 @@ public class CarritoFragment extends SupportFragment {
     }
 
     private void initView(View view) {
-        toolbarTitle.setText("Mi Pedido");
+        toolbarTitle.setText("Mi Pedido ("+cantidadTotalProductos+")");
         layoutManager = new LinearLayoutManager(getActivity());
         carritoItemAdapter = new CarritoItemAdapter(getActivity(), new ArrayList<CarritoItemModel>(),
                 new clickOperacionesCantidad() {
@@ -116,15 +117,16 @@ public class CarritoFragment extends SupportFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(carritoItemAdapter);
         recyclerView.setHasFixedSize(true);
-        ItemTouchHelper.Callback callback = new ItemTouchOnSpiwed(carritoItemAdapter);
-        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    @OnClick(R.id.btnProcederPagoCarritoCompras)
+    @OnClick(R.id.btnProcederDireccionCarritoCompras)
     public void onClickProcederConElPago(){
-        EntregaPedidoFragment entregaPedidoFragment = EntregaPedidoFragment.newInstance();
-        start(entregaPedidoFragment);
+        if(cantidadTotalProductos >0 ){
+            EntregaPedidoFragment entregaPedidoFragment = EntregaPedidoFragment.newInstance();
+            start(entregaPedidoFragment);
+        }else {
+            Toast.makeText(getActivity(),"Debe agregar por lo menos un item",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -146,9 +148,25 @@ public class CarritoFragment extends SupportFragment {
         cargarData();
     }
 
-    private void remover(CarritoItemModel carritoItemModel){
-        QueryCarrito.removerItemCarrito(carritoItemModel);
-        cargarData();
+    private void remover(final CarritoItemModel carritoItemModel){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Esta seguro de eliminar el item?")
+                .setTitle("Remover item");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                QueryCarrito.removerItemCarrito(carritoItemModel);
+                cargarData();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
@@ -169,6 +187,7 @@ public class CarritoFragment extends SupportFragment {
             subTotal += item.getSubTotal();
         }
         lblTotalCarritoItem.setText(Util.convertirFormatoDinero(subTotal));
+        toolbarTitle.setText("Mi Pedido ("+cantidadTotalProductos+")");
         ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidadTotalProductos);
     }
 

@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.ui.fragments.primero.hijos.tab.ProductoCategoriaFragment;
 import com.marcosilv7.narutodelivery.util.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -54,13 +53,13 @@ public class ProductoAdapter extends RecyclerView.Adapter{
         return data.size();
     }
 
-    class ProductoHolder extends RecyclerView.ViewHolder {
+    public class ProductoHolder extends RecyclerView.ViewHolder {
         TextView lblNombreProductoItem;
         TextView lblPrecioProductoItem;
         ImageView btnAgregarProductoItem;
         ImageView productoItemImagen;
 
-        public ProductoHolder(View itemView) {
+        ProductoHolder(View itemView) {
             super(itemView);
             lblNombreProductoItem = itemView.findViewById(R.id.lblNombreProductoItem);
             lblPrecioProductoItem = itemView.findViewById(R.id.lblPrecioProductoItem);
@@ -72,8 +71,7 @@ public class ProductoAdapter extends RecyclerView.Adapter{
             final ProductDTO item = data.get(posicion);
             lblNombreProductoItem.setText(item.getName());
             lblPrecioProductoItem.setText(Util.convertirFormatoDinero(item.getPrice().doubleValue()));
-            Glide.with(context).load(item.getImage())
-                    .apply(RequestOptions.centerCropTransform()).into(productoItemImagen);
+            Picasso.get().load(item.getImage()).fit().into(productoItemImagen);
             btnAgregarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

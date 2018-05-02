@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.model.LatLng;
 import com.marcosilv7.narutodelivery.R;
@@ -27,6 +25,7 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -101,9 +100,8 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
             data.setLatitude(latLng.latitude);
             data.setLongitude(latLng.longitude);
             data.setAddress(address);
-            Glide.with(getActivity())
+            Picasso.get()
                     .load(Util.obtenerUrlMapaStatic(data.getLatitude(),data.getLongitude()))
-                    .apply(RequestOptions.centerCropTransform().placeholder(R.drawable.ic_panorama_gray_24dp))
                     .into(previewMapaAgregarDireccion);
         }
         return view;
