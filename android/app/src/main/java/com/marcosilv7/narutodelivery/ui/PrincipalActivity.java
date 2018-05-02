@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
 import com.marcosilv7.narutodelivery.R;
+import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.base.BaseMainFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.CuartoFragment;
 import com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos.MiPerfilFragment;
@@ -94,6 +95,7 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
                 }
             }
         });
+        mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());
     }
 
 
@@ -112,7 +114,7 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
     }
 
     public void actualizarCantidadCarrito(int numero){
-        mBottomBar.getItem(SECOND).setUnreadCount(mBottomBar.getItem(SECOND).getUnreadCount()+numero);
+        mBottomBar.getItem(SECOND).setUnreadCount(numero);
     }
 
 

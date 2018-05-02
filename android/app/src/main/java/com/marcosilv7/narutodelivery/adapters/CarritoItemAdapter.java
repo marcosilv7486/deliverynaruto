@@ -19,15 +19,15 @@ import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.CarritoFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAndSwipedListener {
 
     Context context;
-    ArrayList<CarritoItemModel> data;
+    List<CarritoItemModel> data;
     CarritoFragment.clickOperacionesCantidad listenerOperaciones;
 
-    public CarritoItemAdapter(Context context, ArrayList<CarritoItemModel> data,
+    public CarritoItemAdapter(Context context, List<CarritoItemModel> data,
                               CarritoFragment.clickOperacionesCantidad listenerOperaciones) {
         this.context = context;
         this.data = data;
@@ -45,7 +45,7 @@ public class CarritoItemAdapter extends RecyclerView.Adapter implements onMoveAn
         ((ProductoCarritoHolder)holder).onBind(position);
     }
 
-    public void actualizarData(ArrayList<CarritoItemModel> data){
+    public void actualizarData(List<CarritoItemModel> data){
         this.data = data;
         notifyDataSetChanged();
     }

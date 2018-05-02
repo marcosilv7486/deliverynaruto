@@ -72,7 +72,8 @@ public class ProductoAdapter extends RecyclerView.Adapter{
             final ProductDTO item = data.get(posicion);
             lblNombreProductoItem.setText(item.getName());
             lblPrecioProductoItem.setText(Util.convertirFormatoDinero(item.getPrice().doubleValue()));
-            Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(productoItemImagen);
+            Glide.with(context).load(item.getImage())
+                    .apply(RequestOptions.centerCropTransform()).into(productoItemImagen);
             btnAgregarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

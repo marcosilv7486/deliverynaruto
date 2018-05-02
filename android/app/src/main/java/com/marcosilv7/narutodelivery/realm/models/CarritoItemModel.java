@@ -11,6 +11,8 @@ public class CarritoItemModel extends RealmObject {
     private Integer cantidad;
     private double subTotal;
     private String image;
+    private boolean removido;
+    private int numeroItem;
 
     public String getNombreProducto() {
         return nombreProducto;
@@ -66,5 +68,21 @@ public class CarritoItemModel extends RealmObject {
 
     public void setIdProducto(long idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public boolean isRemovido() {
+        return removido;
+    }
+
+    public void setRemovido(boolean removido) {
+        this.removido = removido;
+    }
+
+    public int getNumeroItem() {
+        return numeroItem;
+    }
+
+    public void setNumeroItem(int numeroItem) {
+        this.numeroItem = numeroItem;
     }
 }

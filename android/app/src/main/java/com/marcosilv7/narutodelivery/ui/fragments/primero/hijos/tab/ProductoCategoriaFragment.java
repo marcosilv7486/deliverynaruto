@@ -15,7 +15,6 @@ import com.marcosilv7.narutodelivery.adapters.ProductoAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
-import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 
@@ -116,16 +115,9 @@ public class ProductoCategoriaFragment extends SupportFragment {
     }
 
     public void agregarProductoCarrito(ProductDTO productDTO){
-        CarritoItemModel carritoItemModel = new CarritoItemModel();
-        carritoItemModel.setImage(productDTO.getImage());
-        carritoItemModel.setCantidad(1);
-        carritoItemModel.setFamiliaProducto(productDTO.getFamily());
-        carritoItemModel.setNombreProducto(productDTO.getName());
-        carritoItemModel.setPrecio(productDTO.getPrice().doubleValue());
-        carritoItemModel.setSubTotal(productDTO.getPrice().doubleValue());
-        carritoItemModel.setIdProducto(productDTO.getId());
-        QueryCarrito.agregarItemCarrito(carritoItemModel);
-        EventBusActivityScope.getDefault(_mActivity).post("HOLA");
-        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(1);
+        QueryCarrito.agregarProductDTO(productDTO);
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(QueryCarrito.obtenerCantidadActualCarrito());
+        EventBusActivityScope.getDefault(_mActivity).post(productDTO);
+
     }
 }

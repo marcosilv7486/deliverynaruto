@@ -15,9 +15,9 @@ import android.widget.Toolbar;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
+import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.events.ItemTouchOnSpiwed;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
-import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
 import com.marcosilv7.narutodelivery.util.Util;
@@ -25,6 +25,7 @@ import com.marcosilv7.narutodelivery.util.Util;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,7 +60,10 @@ public class CarritoFragment extends SupportFragment {
 
     RecyclerView.LayoutManager layoutManager;
     CarritoItemAdapter carritoItemAdapter;
-    CarritoModel carritoModel;
+    List<CarritoItemModel> carritoItemModelList;
+
+    int cantidadTotalProductos = 0;
+    double subTotal=0.0;
 
     public CarritoFragment() {
     }
@@ -128,44 +132,44 @@ public class CarritoFragment extends SupportFragment {
         if(carritoItemModel.getCantidad() == 1){
             return;
         }
-        QueryCarrito.disminuirEnUno(carritoItemModel);
-        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(-1);
+        QueryCarrito.modificarItemCarrito(carritoItemModel,-1);
         cargarData();
     }
 
     private void aumentarEnUnoCarrito(CarritoItemModel carritoItemModel) {
-        QueryCarrito.aumentarEnUno(carritoItemModel);
-        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(1);
+        QueryCarrito.modificarItemCarrito(carritoItemModel,1);
         cargarData();
     }
 
     private void agregar(CarritoItemModel carritoItemModel){
-        int cantidad = carritoItemModel.getCantidad();
-        QueryCarrito.agregarItemCarrito(carritoItemModel);
-        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidad);
+        QueryCarrito.resucitarItemCarrito(carritoItemModel);
         cargarData();
     }
 
     private void remover(CarritoItemModel carritoItemModel){
-        int cantidad = carritoItemModel.getCantidad();
-        QueryCarrito.eliminarItemCarrito(carritoItemModel);
-        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidad*-1);
+        QueryCarrito.removerItemCarrito(carritoItemModel);
         cargarData();
     }
 
 
     private void cargarData() {
-        carritoModel = QueryCarrito.obtenerCarritoActual();
-        if(carritoModel == null || carritoModel.getItems().isEmpty()){
+        carritoItemModelList = QueryCarrito.obtenerCarritoActual();
+        if(carritoItemModelList == null || carritoItemModelList.isEmpty()){
             layoutCarritoVacio.setVisibility(View.VISIBLE);
             rlCarritoCompras.setVisibility(View.GONE);
         }else {
             rlCarritoCompras.setVisibility(View.VISIBLE);
             layoutCarritoVacio.setVisibility(View.GONE);
-            ArrayList<CarritoItemModel> data = new ArrayList<>(carritoModel.getItems());
-            carritoItemAdapter.actualizarData(data);
-            lblTotalCarritoItem.setText(Util.convertirFormatoDinero(carritoModel.getTotal()));
+            carritoItemAdapter.actualizarData(carritoItemModelList);
         }
+        cantidadTotalProductos = 0;
+        subTotal = 0.0;
+        for(CarritoItemModel item : carritoItemModelList){
+            cantidadTotalProductos += item.getCantidad();
+            subTotal += item.getSubTotal();
+        }
+        lblTotalCarritoItem.setText(Util.convertirFormatoDinero(subTotal));
+        ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(cantidadTotalProductos);
     }
 
     public interface clickOperacionesCantidad{
@@ -176,7 +180,7 @@ public class CarritoFragment extends SupportFragment {
     }
 
     @Subscribe
-    public void demo(String text){
+    public void agregarProductoDTO(ProductDTO productDTO){
         cargarData();
     }
 

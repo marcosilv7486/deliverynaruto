@@ -1,164 +1,105 @@
 package com.marcosilv7.narutodelivery.realm.querys;
 
+import com.marcosilv7.narutodelivery.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
-import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
+
+
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.Sort;
 
 public class QueryCarrito {
 
-    public static CarritoModel obtenerCarritoActual() {
+    public static List<CarritoItemModel> obtenerCarritoActual() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(CarritoModel.class).findFirst();
+        return realm.where(CarritoItemModel.class).equalTo("removido",false).findAll();
     }
+
+    public static int obtenerCantidadActualCarrito(){
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(CarritoItemModel.class).equalTo("removido",false).sum("cantidad").intValue();
+    }
+
 
     public static void limpiarCarrito() {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                realm.delete(CarritoModel.class);
+                realm.delete(CarritoItemModel.class);
             }
         });
     }
 
-    public static void agregarItemCarrito(final CarritoItemModel carritoItemModel){
+    public static void agregarProductDTO(final ProductDTO productDTO){
         Realm realm = Realm.getDefaultInstance();
-        final CarritoModel carritoModel = realm.where(CarritoModel.class).findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                if(carritoModel == null){
-                    CarritoModel nuevo = realm.createObject(CarritoModel.class);
-                    nuevo.setCantidadItems(1);
-                    nuevo.setTotal(carritoItemModel.getCantidad()*carritoItemModel.getPrecio());
-                    CarritoItemModel nuevoItem = realm.createObject(CarritoItemModel.class);
-                    nuevoItem.setSubTotal(carritoItemModel.getSubTotal());
-                    nuevoItem.setIdProducto(carritoItemModel.getIdProducto());
-                    nuevoItem.setCantidad(carritoItemModel.getCantidad());
-                    nuevoItem.setPrecio(carritoItemModel.getPrecio());
-                    nuevoItem.setNombreProducto(carritoItemModel.getNombreProducto());
-                    nuevoItem.setImage(carritoItemModel.getImage());
-                    nuevoItem.setFamiliaProducto(carritoItemModel.getFamiliaProducto());
-                    nuevo.getItems().add(nuevoItem);
-                    realm.insertOrUpdate(nuevo);
-                }else {
-                    CarritoItemModel itemBuscado = null;
-                    for(CarritoItemModel itemModel : carritoModel.getItems()){
-                        if(itemModel.getIdProducto() == carritoItemModel.getIdProducto()){
-                            itemBuscado = itemModel;
-                            break;
-                        }
-                    }
-                    if (itemBuscado != null){
-                        itemBuscado.setCantidad(itemBuscado.getCantidad()+carritoItemModel.getCantidad());
-                        itemBuscado.setSubTotal(itemBuscado.getCantidad()*itemBuscado.getPrecio());
-                        carritoModel.setCantidadItems(carritoModel.getItems().size());
-                        double total= 0.0;
-                        for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                            total = total + itemModel.getSubTotal();
-                        }
-                        carritoModel.setTotal(total);
-                        realm.insertOrUpdate(carritoModel);
-                        realm.insertOrUpdate(itemBuscado);
-                    }else {
-                        itemBuscado = realm.createObject(CarritoItemModel.class);
-                        itemBuscado.setSubTotal(carritoItemModel.getSubTotal());
-                        itemBuscado.setIdProducto(carritoItemModel.getIdProducto());
-                        itemBuscado.setCantidad(carritoItemModel.getCantidad());
-                        itemBuscado.setPrecio(carritoItemModel.getPrecio());
-                        itemBuscado.setNombreProducto(carritoItemModel.getNombreProducto());
-                        itemBuscado.setImage(carritoItemModel.getImage());
-                        itemBuscado.setFamiliaProducto(carritoItemModel.getFamiliaProducto());
-                        carritoModel.getItems().add(itemBuscado);
-                        double total= 0.0;
-                        for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                            total = total + itemModel.getSubTotal();
-                        }
-                        carritoModel.setTotal(total);
-                        carritoModel.setCantidadItems(carritoModel.getItems().size());
-                        realm.insertOrUpdate(carritoModel);
-                    }
+        final CarritoItemModel itemBuscado = realm.where(CarritoItemModel.class)
+                .equalTo("idProducto",productDTO.getId())
+                .equalTo("removido",false)
+                .sort("numeroItem", Sort.DESCENDING)
+                .findFirst();
+        if(itemBuscado == null){
+            final long numeroItem = realm.where(CarritoItemModel.class).count();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    CarritoItemModel nuevo = realm.createObject(CarritoItemModel.class);
+                    nuevo.setSubTotal(productDTO.getPrice().doubleValue());
+                    nuevo.setIdProducto(productDTO.getId());
+                    nuevo.setCantidad(1);
+                    nuevo.setPrecio(productDTO.getPrice().doubleValue());
+                    nuevo.setNombreProducto(productDTO.getName());
+                    nuevo.setImage(productDTO.getImage());
+                    nuevo.setFamiliaProducto(productDTO.getFamily());
+                    nuevo.setRemovido(false);
+                    nuevo.setNumeroItem((int)(numeroItem+1L));
                 }
-            }
-        });
-    }
-
-    public static void disminuirEnUno(final CarritoItemModel carritoItemModel) {
-        Realm realm = Realm.getDefaultInstance();
-        final CarritoModel carritoModel = realm.where(CarritoModel.class).findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                CarritoItemModel itemBuscado = null;
-                for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                    if (itemModel.getIdProducto() == carritoItemModel.getIdProducto()) {
-                        itemBuscado = itemModel;
-                        break;
-                    }
-                }
-                if(itemBuscado != null){
-                    itemBuscado.setCantidad(itemBuscado.getCantidad() - 1);
-                    itemBuscado.setSubTotal(itemBuscado.getCantidad() * itemBuscado.getPrecio());
+            });
+        }else {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    itemBuscado.setCantidad(itemBuscado.getCantidad()+1);
+                    itemBuscado.setSubTotal(itemBuscado.getCantidad()*itemBuscado.getPrecio());
                     realm.insertOrUpdate(itemBuscado);
-                    double total= 0.0;
-                    for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                        total = total + itemModel.getSubTotal();
-                    }
-                    carritoModel.setTotal(total);
-                    realm.insertOrUpdate(carritoModel);
                 }
+            });
+        }
+    }
+
+    public static void modificarItemCarrito(final CarritoItemModel carritoItemModel, final int cantidadAgregada){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                carritoItemModel.setCantidad(carritoItemModel.getCantidad()+cantidadAgregada);
+                carritoItemModel.setSubTotal(carritoItemModel.getCantidad()*carritoItemModel.getPrecio());
+                realm.insertOrUpdate(carritoItemModel);
             }
         });
     }
 
-    public static void aumentarEnUno(final CarritoItemModel carritoItemModel) {
+    public static void removerItemCarrito(final CarritoItemModel carritoItemModel){
         Realm realm = Realm.getDefaultInstance();
-        final CarritoModel carritoModel = realm.where(CarritoModel.class).findFirst();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                CarritoItemModel itemBuscado = null;
-                for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                    if (itemModel.getIdProducto() == carritoItemModel.getIdProducto()) {
-                        itemBuscado = itemModel;
-                        break;
-                    }
-                }
-                if (itemBuscado != null) {
-                    itemBuscado.setCantidad(itemBuscado.getCantidad() + 1);
-                    itemBuscado.setSubTotal(itemBuscado.getCantidad() * itemBuscado.getPrecio());
-                    realm.insertOrUpdate(itemBuscado);
-                    double total= 0.0;
-                    for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                        total = total + itemModel.getSubTotal();
-                    }
-                    carritoModel.setTotal(total);
-                    realm.insertOrUpdate(carritoModel);
-                }
+                carritoItemModel.setRemovido(true);
+                realm.insertOrUpdate(carritoItemModel);
             }
         });
     }
 
-    public static void eliminarItemCarrito(final CarritoItemModel carritoItemModel){
+    public static void resucitarItemCarrito(final CarritoItemModel carritoItemModel){
         Realm realm = Realm.getDefaultInstance();
-        final CarritoModel carritoModel = realm.where(CarritoModel.class).findFirst();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                CarritoItemModel itemBuscado = null;
-                for (CarritoItemModel itemModel : carritoModel.getItems()) {
-                    if (itemModel.getIdProducto() == carritoItemModel.getIdProducto()) {
-                        itemBuscado = itemModel;
-                        break;
-                    }
-                }
-                if (itemBuscado != null) {
-                    carritoModel.setTotal(carritoModel.getTotal()-itemBuscado.getSubTotal());
-                    itemBuscado.deleteFromRealm();
-                    realm.insertOrUpdate(carritoModel);
-                }
+                carritoItemModel.setRemovido(false);
+                realm.insertOrUpdate(carritoItemModel);
             }
         });
     }
+
 }

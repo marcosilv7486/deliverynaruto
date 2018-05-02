@@ -31,8 +31,7 @@
                     android:id="@+id/imagenProductoItemCarrito"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:padding="6dp"
-                    android:src="@drawable/logo_naruto" />
+                    android:padding="6dp" />
 
                 <ImageView
                     android:layout_width="100dp"

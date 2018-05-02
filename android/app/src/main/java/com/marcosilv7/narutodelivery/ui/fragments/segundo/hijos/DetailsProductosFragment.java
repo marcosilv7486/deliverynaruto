@@ -11,10 +11,7 @@ import android.widget.TextView;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoDetalleAdapter;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
-import com.marcosilv7.narutodelivery.realm.models.CarritoModel;
-import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
-import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
 
@@ -25,7 +22,7 @@ import java.util.ArrayList;
 public class DetailsProductosFragment extends BaseBackFragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    CarritoModel carritoModel;
+   // CarritoModel carritoModel;
     CarritoDetalleAdapter carritoItemAdapter;
     TextView lblValorTotal;
 
@@ -55,13 +52,13 @@ public class DetailsProductosFragment extends BaseBackFragment {
     }
 
     void cargarData(){
-        carritoModel = QueryCarrito.obtenerCarritoActual();
+        /*carritoModel = QueryCarrito.obtenerCarritoActual();
         if(carritoModel == null || carritoModel.getItems().isEmpty()){
 
         }else {
             ArrayList<CarritoItemModel> data = new ArrayList<>(carritoModel.getItems());
             carritoItemAdapter.actualizarData(data);
             lblValorTotal.setText(Util.convertirFormatoDinero(carritoModel.getTotal()));
-        }
+        }*/
     }
 }
