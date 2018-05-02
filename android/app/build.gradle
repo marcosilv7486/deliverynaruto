@@ -55,4 +55,5 @@ dependencies {
     implementation('com.braintreepayments:card-form:3.3.0') {
         exclude group: "com.android.support"
     }
+
 }

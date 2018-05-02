@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,13 +17,10 @@ import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
 
-import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
-
 public class ProductoAdapter extends RecyclerView.Adapter{
 
     Context context;
     ArrayList<ProductDTO> data;
-    int clickedPos = -1;
     ProductosFragment.OnClickListenerProducto listenerProducto;
 
     public ProductoAdapter(Context context, ArrayList<ProductDTO> data,
@@ -45,17 +40,6 @@ public class ProductoAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ProductoHolder pHolder = ((ProductoHolder)holder);
         pHolder.onBind(position);
-        if (clickedPos == position) {
-            pHolder.linearTransparent.setVisibility(View.VISIBLE);
-            pHolder.lblSubCategoriaProductoItem.setVisibility(View.INVISIBLE);
-            pHolder.lblNombreProductoItem.setVisibility(View.INVISIBLE);
-            pHolder.btnSettingsItemProducto.setVisibility(View.INVISIBLE);
-        } else {
-            pHolder.linearTransparent.setVisibility(View.INVISIBLE);
-            pHolder.lblSubCategoriaProductoItem.setVisibility(View.VISIBLE);
-            pHolder.lblNombreProductoItem.setVisibility(View.VISIBLE);
-            pHolder.btnSettingsItemProducto.setVisibility(View.VISIBLE);
-        }
     }
 
     public void actualizarData(ArrayList<ProductDTO> data){
@@ -71,42 +55,24 @@ public class ProductoAdapter extends RecyclerView.Adapter{
     }
 
     class ProductoHolder extends RecyclerView.ViewHolder {
-        LinearLayout linearTransparent;
         TextView lblNombreProductoItem;
         TextView lblPrecioProductoItem;
-        TextView lblSubCategoriaProductoItem;
-        Button btnVerDetalleProductoItem;
-        Button btnAgregarProductoItem;
-        Button btnRealizarPedidoProductoItem;
+        ImageView btnAgregarProductoItem;
         ImageView productoItemImagen;
-        ImageView btnSettingsItemProducto;
 
         public ProductoHolder(View itemView) {
             super(itemView);
             lblNombreProductoItem = itemView.findViewById(R.id.lblNombreProductoItem);
             lblPrecioProductoItem = itemView.findViewById(R.id.lblPrecioProductoItem);
-            lblSubCategoriaProductoItem = itemView.findViewById(R.id.lblSubCategoriaProductoItem);
-            btnVerDetalleProductoItem = itemView.findViewById(R.id.btnVerDetalleProductoItem);
             btnAgregarProductoItem = itemView.findViewById(R.id.btnAgregarProductoItem);
-            btnRealizarPedidoProductoItem = itemView.findViewById(R.id.btnRealizarPedidoProductoItem);
             productoItemImagen = itemView.findViewById(R.id.productoItemImagen);
-            linearTransparent = itemView.findViewById(R.id.linearTransparent);
-            btnSettingsItemProducto = itemView.findViewById(R.id.btnSettingsItemProducto);
         }
 
         void onBind(final int posicion){
             final ProductDTO item = data.get(posicion);
             lblNombreProductoItem.setText(item.getName());
             lblPrecioProductoItem.setText(Util.convertirFormatoDinero(item.getPrice().doubleValue()));
-            lblSubCategoriaProductoItem.setText(item.getSubFamily());
             Glide.with(context).load(item.getImage()).apply(RequestOptions.centerCropTransform()).into(productoItemImagen);
-            btnSettingsItemProducto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickedPos = posicion;
-                    notifyDataSetChanged();
-                }
-            });
             btnAgregarProductoItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
