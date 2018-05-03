@@ -12,20 +12,20 @@ import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Fernando on 22/04/2018.
  */
 
-public class CarritoDetalleAdapter extends RecyclerView.Adapter {
+public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
 
     Context context;
-    ArrayList<CarritoItemModel> data;
+    List<CarritoItemModel> data;
 
-    public CarritoDetalleAdapter(Context context, ArrayList<CarritoItemModel> data) {
+    public DetalleProductoGrillaAdapter(Context context, List<CarritoItemModel> data) {
         this.context = context;
         this.data = data;
-        //this.listenerOperaciones = listenerOperaciones;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CarritoDetalleAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((CarritoDetalleAdapter.DetalleProductoCarritoHolder) holder).onBind(position);
+        ((DetalleProductoGrillaAdapter.DetalleProductoCarritoHolder) holder).onBind(position);
     }
 
     public void actualizarData(ArrayList<CarritoItemModel> data){
@@ -51,14 +51,12 @@ public class CarritoDetalleAdapter extends RecyclerView.Adapter {
         return data.size();
     }
 
-    class DetalleProductoCarritoHolder extends RecyclerView.ViewHolder {
+    public class DetalleProductoCarritoHolder extends RecyclerView.ViewHolder {
 
         TextView lblDescripcion;
         TextView lblPrecioUnitario;
         TextView lblCantidad;
         TextView lblSubTotal;
-        TextView lblValorTotal;
-
 
         public DetalleProductoCarritoHolder(View itemView) {
             super(itemView);

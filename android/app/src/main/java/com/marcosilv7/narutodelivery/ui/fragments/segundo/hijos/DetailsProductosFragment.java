@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
-import com.marcosilv7.narutodelivery.adapters.CarritoDetalleAdapter;
+import com.marcosilv7.narutodelivery.adapters.DetalleProductoGrillaAdapter;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 
@@ -23,7 +23,7 @@ public class DetailsProductosFragment extends BaseBackFragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
    // CarritoModel carritoModel;
-    CarritoDetalleAdapter carritoItemAdapter;
+    DetalleProductoGrillaAdapter carritoItemAdapter;
     TextView lblValorTotal;
 
     public static DetailsProductosFragment newInstance() {
@@ -43,7 +43,7 @@ public class DetailsProductosFragment extends BaseBackFragment {
         recyclerView = view.findViewById(R.id.recyclerDetailsProductos);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        carritoItemAdapter = new CarritoDetalleAdapter(getActivity(), new ArrayList<CarritoItemModel>());
+        carritoItemAdapter = new DetalleProductoGrillaAdapter(getActivity(), new ArrayList<CarritoItemModel>());
         //cargarData();
         recyclerView.setAdapter(carritoItemAdapter);
         recyclerView.setHasFixedSize(true);

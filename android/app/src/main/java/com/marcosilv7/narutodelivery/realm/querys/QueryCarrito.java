@@ -21,6 +21,10 @@ public class QueryCarrito {
         return realm.where(CarritoItemModel.class).equalTo("removido",false).sum("cantidad").intValue();
     }
 
+    public static double obtenerImporteTotal(){
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(CarritoItemModel.class).equalTo("removido",false).sum("subTotal").doubleValue();
+    }
 
     public static void limpiarCarrito() {
         Realm realm = Realm.getDefaultInstance();

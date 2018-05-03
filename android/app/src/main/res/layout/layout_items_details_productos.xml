@@ -4,102 +4,47 @@
     android:id="@+id/cardlist_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="vertical"
-    card_view:cardElevation="7dp">
+    card_view:cardElevation="0dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="10">
 
         <TextView
+            android:id="@+id/lblDescripcion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:text="Jabón de manos x 1" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/lblCantidad"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2" />
+            android:text="CANT"
+            android:textAlignment="textEnd" />
 
         <TextView
+            android:id="@+id/lblPrecioUnitario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3" />
+            android:layout_weight="2"
+            android:text="P.U"
+            android:textAlignment="textEnd" />
 
-
+        <TextView
+            android:id="@+id/lblSubtotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Sub Total"
+            android:textAlignment="textEnd" />
     </LinearLayout>
 
-
-    <!--  <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:background="#FFF"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutProductoItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/productoItemImagen"
-            android:layout_alignStart="@+id/productoItemImagen"
-            android:layout_below="@+id/productoItemImagen"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-
-            <TextView
-                android:id="@+id/lblDescripcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:text="Arroz chaufa"
-                android:textAlignment="viewStart"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/lblPrecioUnitario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="0.25"
-                android:text="S/ 15.00"
-                android:textAlignment="center"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/lblCantidad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:text="1"
-                android:textAlignment="center"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/lblSubtotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:text="S/ 15.00"
-                android:textAlignment="textEnd"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>-->
+    <View style="@style/Divider" android:layout_marginBottom="3dp"/>
 
 </android.support.v7.widget.CardView>
