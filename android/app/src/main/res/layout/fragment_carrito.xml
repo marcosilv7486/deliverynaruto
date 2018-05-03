@@ -7,110 +7,119 @@
 
     <include layout="@layout/toolbar"/>
 
-    <LinearLayout
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/layoutCarritoVacio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/noMessagesIcon"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_shopping_cart_grey_24dp"
-                android:tint="@color/gray" />
-            <TextView
-                android:id="@+id/noMessagesText"
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Su Carrito esta Vacio."
-                android:textStyle="bold"
-                android:textColor="@color/gray"
-                android:textSize="16dp" />
-
-            <TextView
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="No se encontró ningun producto agregado."
-                android:textColor="@color/gray"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent" android:id="@+id/rlCarritoCompras"
-            android:layout_height="match_parent" android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerCarritoProductos"
+            <LinearLayout
+                android:id="@+id/layoutCarritoVacio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent" />
-        </LinearLayout>
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical">
-
-        <LinearLayout android:id="@+id/llSubTotalCarritoItem"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <View style="@style/Divider"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/noMessagesIcon"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_shopping_cart_grey_24dp"
+                    android:tint="@color/gray" />
+                <TextView
+                    android:id="@+id/noMessagesText"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Su Carrito esta Vacio."
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:textSize="16dp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="SUBTOTAL:"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/lblTotalCarritoItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="S/ 1500.0"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp" />
-
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="No se encontró ningun producto agregado."
+                    android:textColor="@color/gray"
+                    android:textSize="12dp" />
             </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/btnProcederDireccionCarritoCompras"
-                android:layout_marginRight="20dp"
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:text="CONTINUAR A DIRECCIÓN"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent" android:id="@+id/rlCarritoCompras"
+                    android:layout_height="wrap_content" android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerCarritoProductos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent" />
+
+                    <LinearLayout android:id="@+id/llSubTotalCarritoItem"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <View style="@style/Divider"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="SUBTOTAL:"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/lblTotalCarritoItem"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="S/ 1500.0"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/btnProcederDireccionCarritoCompras"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/colorPrimary"
+                            android:textColor="@android:color/white"
+                            android:text="CONTINUAR A DIRECCIÓN"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
 </LinearLayout>
