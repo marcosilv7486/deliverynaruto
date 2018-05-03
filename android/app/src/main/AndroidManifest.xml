@@ -42,10 +42,6 @@
             android:name=".ui.RegistrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TipoPagoActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemePrincipal" />
-        <activity
             android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
             android:screenOrientation="portrait" />
 
