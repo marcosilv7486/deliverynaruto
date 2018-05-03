@@ -16,6 +16,12 @@
         android:roundIcon="@mipmap/ic_logo_boruto"
         android:supportsRtl="true"
         android:theme="@style/AppThemePrincipal">
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "203931283722",
+    "firebase_url": "https://tp1-upc2018-1524626416790.firebaseio.com",
+    "project_id": "tp1-upc2018-1524626416790",
+    "storage_bucket": "tp1-upc2018-1524626416790.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203931283722:android:c2f67317c8a28cd8",
+        "android_client_info": {
+          "package_name": "com.marcosilv7.narutodelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203931283722-0sjt5dh3j30dp0ne6u4s7st0veqnrvhf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUVwDvgu4VvqsURGC7MTZpkGMjDRWuris"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
