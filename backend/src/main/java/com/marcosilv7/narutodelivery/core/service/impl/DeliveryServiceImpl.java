@@ -2,8 +2,7 @@ package com.marcosilv7.narutodelivery.core.service.impl;
 
 import com.marcosilv7.narutodelivery.configuration.exceptions.BusinessException;
 import com.marcosilv7.narutodelivery.configuration.exceptions.EntityNotFoundException;
-import com.marcosilv7.narutodelivery.core.dao.domain.DeliveryAddress;
-import com.marcosilv7.narutodelivery.core.dao.domain.PaymentMethod;
+import com.marcosilv7.narutodelivery.core.dao.domain.*;
 import com.marcosilv7.narutodelivery.core.dao.repository.*;
 import com.marcosilv7.narutodelivery.core.dto.*;
 import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,19 +29,24 @@ public class DeliveryServiceImpl implements DeliveryService {
     private final DeliveryAddressRepository deliveryAddressRepository;
     private final UserRepository userRepository;
     private final PaymentMethodRepository paymentMethodRepository;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
+
 
     @Autowired
     public DeliveryServiceImpl(ProductFamilyRepository productFamilyRepository,
                                ProductSubFamilyRepository productSubFamilyRepository,
                                ProductRepository productRepository,
                                DeliveryAddressRepository deliveryAddressRepository,
-                               UserRepository userRepository, PaymentMethodRepository paymentMethodRepository) {
+                               UserRepository userRepository, PaymentMethodRepository paymentMethodRepository, OrderRepository orderRepository, OrderDetailRepository orderDetailRepository) {
         this.productFamilyRepository = productFamilyRepository;
         this.productSubFamilyRepository = productSubFamilyRepository;
         this.productRepository = productRepository;
         this.deliveryAddressRepository = deliveryAddressRepository;
         this.userRepository = userRepository;
         this.paymentMethodRepository = paymentMethodRepository;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     @Override
@@ -178,5 +183,65 @@ public class DeliveryServiceImpl implements DeliveryService {
         PaymentMethod entity = entityOpt.get();
         entity.setDeletedAt(new Date());
         paymentMethodRepository.save(entity);
+    }
+
+    @Override
+    @Transactional
+    public OrderDTO createOrder(@Valid OrderDTO data) {
+        Optional<User> userOpt = userRepository.findById(data.getUserId());
+        if(!userOpt.isPresent()){
+            throw new EntityNotFoundException("No se encontro el usuario con id : "+data.getUserId());
+        }
+        Order order = new Order();
+        //User
+        order.setUser(userOpt.get());
+        order.setUserFullName(userOpt.get().getFullName());
+        order.setUserPhone(userOpt.get().getPhone());
+        //Fechas
+        order.setCreatedAt(new Date());
+        order.setArrivalDate(new Date());
+        order.setShippingDate(new Date());
+        //Direccion
+        order.setLatUserAddress(data.getLatUserAddress());
+        order.setLonUserAddress(data.getLonUserAddress());
+        order.setUserAddress(data.getUserAddress());
+        //Estado
+        order.setStatus("ENVIADO");
+        //Extras
+        order.setNumberCreditCard(data.getNumberCreditCard());
+        order.setNumber(new Date().getTime()+"");
+        order.setInvoiceType(data.getInvoiceType());
+        order.setPaymentType(data.getPaymentType());
+        order.setRucNumber(data.getRucNumber());
+        order.setRazonSocial(data.getRazonSocial());
+        order.setNombreComercial(data.getNombreComercial());
+        order.setDomicilioFiscal(data.getDomicilioFiscal());
+        order.setTotal(BigDecimal.ZERO);
+        //Detalle
+        int numberItem=1;
+        for(OrderDetailDTO itemDTO : data.getItems()){
+            OrderDetail item = new OrderDetail();
+            item.setOrder(order);
+            item.setItem(numberItem);
+            item.setQuantity(itemDTO.getQuantity());
+            Optional<Product> productOpt = productRepository.findById(itemDTO.getProductId());
+            if(!productOpt.isPresent()){
+                throw new EntityNotFoundException("No se encontro el producto con id : "+itemDTO.getProductId());
+            }
+            item.setProduct(productOpt.get());
+            item.setDescription(productOpt.get().getName());
+            item.setDescriptionImage(productOpt.get().getImage());
+            item.setUnitPrice(productOpt.get().getPrice());
+            item.setTotal(new BigDecimal(item.getQuantity()).multiply(item.getUnitPrice()));
+            order.getDetails().add(item);
+            order.setTotal(order.getTotal().add(item.getTotal()));
+            numberItem++;
+        }
+        order = orderRepository.save(order);
+        Optional<OrderDTO> orderCreated = orderRepository.findByOrderId(order.getId());
+        if(orderCreated.isPresent()){
+            orderCreated.get().setItems(orderDetailRepository.findByOrderId(order.getId()));
+        }
+        return orderCreated.orElse(null);
     }
 }

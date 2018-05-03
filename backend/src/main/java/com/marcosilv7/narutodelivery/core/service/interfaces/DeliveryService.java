@@ -33,4 +33,5 @@ public interface DeliveryService {
 
     void deletePaymentMethod(Long userId,Long id);
 
+    OrderDTO createOrder(@Valid OrderDTO data);
 }

@@ -18,6 +18,7 @@ public class Api {
     public static final String PRODUCT_FAMILY_PATH=ROOT_PATH+"/families";
     public static final String PRODUCT_SUBFAMILY_PATH=ROOT_PATH+"/subfamilies";
     public static final String PRODUCT_PATH=ROOT_PATH+"/products";
+    public static final String ORDER_PATH=ROOT_PATH+"/orders";
     public static final String DELIVERY_ADDRESS="/address";
     public static final String PAYMENTS="/paymentmethods";
     public static final String USER_REGISTRATION_PATH=ROOT_PATH+USER_PATH+"/";

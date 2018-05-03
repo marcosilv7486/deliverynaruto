@@ -1,85 +1,96 @@
-package com.marcosilv7.narutodelivery.core.dao.domain;
+package com.marcosilv7.narutodelivery.core.dto;
 
-import com.marcosilv7.narutodelivery.security.dao.domain.User;
-import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
-@Where(clause = "deletedAt is null")
-public class Order extends GenericEntity {
+public class OrderDTO {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
-    @Column
+    private Long id;
     @NotNull
+    private Long userId;
     private String number;
-    @Column
-    @NotNull
     private String userFullName;
-    @Column
-    @NotNull
     private String userPhone;
-    @Column
     @NotNull
     private String userAddress;
-    @Column
     @NotNull
     private Double latUserAddress;
-    @Column
     @NotNull
     private Double lonUserAddress;
-    @Column
     @NotNull
     private String paymentType;
-    @Column
     private String numberCreditCard;
-    @Column
     @NotNull
     private String invoiceType;
-    @Column
     private String rucNumber;
-    @Column
     private String razonSocial;
-    @Column
     private String nombreComercial;
-    @Column
     private String domicilioFiscal;
-    @Column
-    @NotNull
     private BigDecimal total;
-    @Column
-    @NotNull
     private String status;
-    @Column
     private Date shippingDate;
-    @Column
     private Date arrivalDate;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = {CascadeType.PERSIST})
-    private List<OrderDetail> details;
+    private List<OrderDetailDTO> items;
 
-    public User getUser() {
-        return user;
-    }
+    public OrderDTO(){}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getUserFullName() {
-        return userFullName;
-    }
-
-    public void setUserFullName(String userFullName) {
+    public OrderDTO(Long id, @NotNull Long userId,
+                    String number,
+                    String userFullName,
+                    String userPhone,
+                    @NotNull String userAddress,
+                    @NotNull Double latUserAddress,
+                    @NotNull Double lonUserAddress,
+                    @NotNull String paymentType,
+                    String numberCreditCard,
+                    @NotNull String invoiceType,
+                    String rucNumber,
+                    String razonSocial,
+                    String nombreComercial,
+                    String domicilioFiscal,
+                    BigDecimal total,
+                    String status,
+                    Date shippingDate,
+                    Date arrivalDate) {
+        this.id = id;
+        this.userId = userId;
+        this.number = number;
         this.userFullName = userFullName;
+        this.userPhone = userPhone;
+        this.userAddress = userAddress;
+        this.latUserAddress = latUserAddress;
+        this.lonUserAddress = lonUserAddress;
+        this.paymentType = paymentType;
+        this.numberCreditCard = numberCreditCard;
+        this.invoiceType = invoiceType;
+        this.rucNumber = rucNumber;
+        this.razonSocial = razonSocial;
+        this.nombreComercial = nombreComercial;
+        this.domicilioFiscal = domicilioFiscal;
+        this.total = total;
+        this.status = status;
+        this.shippingDate = shippingDate;
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getNumber() {
@@ -88,6 +99,14 @@ public class Order extends GenericEntity {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
     public String getUserPhone() {
@@ -138,22 +157,6 @@ public class Order extends GenericEntity {
         this.numberCreditCard = numberCreditCard;
     }
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getInvoiceType() {
         return invoiceType;
     }
@@ -194,29 +197,45 @@ public class Order extends GenericEntity {
         this.domicilioFiscal = domicilioFiscal;
     }
 
-    public void setShippingDate(Date shippingDate) {
-        this.shippingDate = shippingDate;
+    public BigDecimal getTotal() {
+        return total;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
-    public List<OrderDetail> getDetails() {
-        if(details == null)
-            details = new ArrayList<>();
-        return details;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDetails(List<OrderDetail> details) {
-        this.details = details;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getShippingDate() {
         return shippingDate;
     }
 
+    public void setShippingDate(Date shippingDate) {
+        this.shippingDate = shippingDate;
+    }
+
     public Date getArrivalDate() {
         return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public List<OrderDetailDTO> getItems() {
+        if(items == null)
+            items = new ArrayList<>();
+        return items;
+    }
+
+    public void setItems(List<OrderDetailDTO> items) {
+        this.items = items;
     }
 }
