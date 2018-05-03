@@ -122,8 +122,8 @@ public class CarritoFragment extends SupportFragment {
     @OnClick(R.id.btnProcederDireccionCarritoCompras)
     public void onClickProcederConElPago(){
         if(cantidadTotalProductos >0 ){
-            EntregaPedidoFragment entregaPedidoFragment = EntregaPedidoFragment.newInstance();
-            start(entregaPedidoFragment);
+            SeleccionarDireccionFragment seleccionarDireccionFragment = SeleccionarDireccionFragment.newInstance();
+            start(seleccionarDireccionFragment);
         }else {
             Toast.makeText(getActivity(),"Debe agregar por lo menos un item",Toast.LENGTH_SHORT).show();
         }

@@ -11,6 +11,7 @@
         android:layout_marginBottom="50dp"
         android:layout_height="match_parent"/>
 
+
     <com.marcosilv7.narutodelivery.ui.view.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"

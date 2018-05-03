@@ -60,11 +60,12 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
     }
 
     private void initView() {
+        mBottomBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         mBottomBar
                 .addItem(new BottomBarTab(this, R.drawable.ic_home_black_24dp,"Inicio"))
-                .addItem(new BottomBarTab(this, R.drawable.ic_shopping_cart_black_24dp,"Carritos"))
+                .addItem(new BottomBarTab(this, R.drawable.ic_shopping_cart_black_24dp,"Mi Orden"))
                 .addItem(new BottomBarTab(this, R.drawable.ic_motorcycle_black_24dp,"Delivery"))
-                 .addItem(new BottomBarTab(this, R.drawable.ic_person_black_24dp,"Mi Cuenta"));
+                .addItem(new BottomBarTab(this, R.drawable.ic_person_black_24dp,"Mi Cuenta"));
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {

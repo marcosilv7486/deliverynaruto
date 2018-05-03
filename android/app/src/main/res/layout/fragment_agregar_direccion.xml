@@ -3,49 +3,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.fragments.cuarto.hijos.AgregarDireccionFragment">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:orientation="vertical">
-        <include layout="@layout/toolbar"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txtAliasAgregarDireccion"
+        <include layout="@layout/toolbar" />
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:ems="10"
-            android:hint="Alias*"
-            android:inputType="textPersonName" />
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
 
-        <EditText
-            android:id="@+id/txtTelefonoAgregarDireccion"
+            <EditText
+                android:id="@+id/txtAliasAgregarDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="30"
+                android:drawableLeft="@drawable/ic_home_gray_24dp"
+                android:drawableStart="@drawable/ic_home_gray_24dp"
+                android:drawablePadding="10dp"
+                android:hint="Ingrese un nombre"
+                android:inputType="text"
+                android:maxLength="30"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
-            android:ems="10"
-            android:hint="Teléfono"
-            android:inputType="phone" />
+            app:counterEnabled="true"
+            app:counterMaxLength="10">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp" android:layout_margin="10dp"
-            android:id="@+id/previewMapaAgregarDireccion"/>
+            <EditText
+                android:id="@+id/txtTelefonoAgregarDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLength="10"
+                android:drawableLeft="@drawable/ic_local_phone_gray_24dp"
+                android:drawableStart="@drawable/ic_local_phone_gray_24dp"
+                android:hint="Ingrese un télefono"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btnAgregarDireccion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_marginTop="20dip"
             android:background="@color/colorPrimary"
             android:text="Guardar"
             android:textColor="@android:color/white" />

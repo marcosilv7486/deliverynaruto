@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -20,12 +19,10 @@ import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
-import com.marcosilv7.narutodelivery.util.Util;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,14 +39,12 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
     @BindView(R.id.toolbarTitle)
     TextView toolbarTitle;
 
-    @BindView(R.id.previewMapaAgregarDireccion)
-    ImageView previewMapaAgregarDireccion;
-
     @BindView(R.id.btnAgregarDireccion)
     Button btnAgregarDireccion;
 
     @BindView(R.id.txtTelefonoAgregarDireccion)
-    @Length(max = 10,message = "Maximo 10 numeros")
+    @NotEmpty(message = "Campo requerido")
+    @Length(max = 10,message = "Maximo 10 caracteres")
     TextView txtTelefonoAgregarDireccion;
 
     @BindView(R.id.txtAliasAgregarDireccion)
@@ -91,7 +86,7 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
         validator = new Validator(this);
         validator.setValidationListener(this);
         prefenciasUsuario = new PrefenciasUsuario(getActivity());
-        toolbarTitle.setText("Agregar Direccion de Entrega");
+        toolbarTitle.setText("Agregar Direccion");
         initToolbarNav(toolbar);
         LatLng latLng =  getArguments().getParcelable(KEY_PLACE_LATLONG);
         String address =  getArguments().getString(KEY_PLACE_ADDRESS);
@@ -100,9 +95,6 @@ public class AgregarDireccionFragment extends BaseBackFragment implements Valida
             data.setLatitude(latLng.latitude);
             data.setLongitude(latLng.longitude);
             data.setAddress(address);
-            Picasso.get()
-                    .load(Util.obtenerUrlMapaStatic(data.getLatitude(),data.getLongitude()))
-                    .into(previewMapaAgregarDireccion);
         }
         return view;
     }

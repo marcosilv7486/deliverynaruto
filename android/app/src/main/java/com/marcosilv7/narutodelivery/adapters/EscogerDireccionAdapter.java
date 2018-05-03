@@ -1,37 +1,34 @@
 package com.marcosilv7.narutodelivery.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
-import com.marcosilv7.narutodelivery.ui.fragments.cuarto.hijos.DireccionesFragment;
+import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.SeleccionarDireccionFragment;
 
 import java.util.ArrayList;
 
-public class DireccionAdapter extends RecyclerView.Adapter {
+public class EscogerDireccionAdapter extends RecyclerView.Adapter {
 
     ArrayList<AddressDTO> data;
     Context context;
-    DireccionesFragment.OperacionesDireccionEntrega listener;
-    boolean usarSeleccion;
+    SeleccionarDireccionFragment.eventos eventos;
 
-    public DireccionAdapter(ArrayList<AddressDTO> data, Context context,
-                            DireccionesFragment.OperacionesDireccionEntrega listener,boolean usarSeleccion) {
+    public EscogerDireccionAdapter(ArrayList<AddressDTO> data, Context context,SeleccionarDireccionFragment.eventos eventos) {
         this.data = data;
         this.context = context;
-        this.listener = listener;
-        this.usarSeleccion = usarSeleccion;
+        this.eventos = eventos;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_item_direcciones,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_item_escoger_direcciones,parent,false);
         return new DireccionHolder(view);
     }
 
@@ -55,17 +52,14 @@ public class DireccionAdapter extends RecyclerView.Adapter {
         TextView lblNombreAliasDireccionItem;
         TextView lblTelefonoDireccionItem;
         TextView lblDireccionItem;
-        ImageView editarDireccionItem;
-        ImageView btnEliminarDireccion;
-
+        CardView cardView;
 
         public DireccionHolder(View itemView) {
             super(itemView);
             lblNombreAliasDireccionItem = itemView.findViewById(R.id.lblNombreAliasDireccionItem);
             lblTelefonoDireccionItem = itemView.findViewById(R.id.lblTelefonoDireccionItem);
             lblDireccionItem = itemView.findViewById(R.id.lblDireccionItem);
-            editarDireccionItem = itemView.findViewById(R.id.editarDireccionItem);
-            btnEliminarDireccion = itemView.findViewById(R.id.btnEliminarDireccion);
+            cardView = itemView.findViewById(R.id.cardView);
         }
 
         void onBind(int posicion){
@@ -73,16 +67,10 @@ public class DireccionAdapter extends RecyclerView.Adapter {
             lblNombreAliasDireccionItem.setText(item.getAlias());
             lblDireccionItem.setText(item.getAddress());
             lblTelefonoDireccionItem.setText(item.getPhone());
-            editarDireccionItem.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.editar(item);
-                }
-            });
-            btnEliminarDireccion.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.eliminar(item);
+                    eventos.onClickCardView(item);
                 }
             });
         }

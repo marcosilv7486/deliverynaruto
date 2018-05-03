@@ -108,7 +108,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/colorPrimary"
                 android:textColor="@android:color/white"
-                android:text="SELECCIONAR ENTREGA"
+                android:text="CONTINUAR A DIRECCIÓN"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

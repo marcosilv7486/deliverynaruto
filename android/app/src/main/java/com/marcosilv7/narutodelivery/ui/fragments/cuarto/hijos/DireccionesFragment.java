@@ -85,7 +85,7 @@ public class DireccionesFragment extends BaseBackFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_direcciones, container, false);
         ButterKnife.bind(this,view);
-        toolbarTitle.setText("Mis Direcciones de Entrega");
+        toolbarTitle.setText("Mis Direcciones");
         initToolbarNav(toolbar);
         layoutManager = new LinearLayoutManager(getActivity());
         prefenciasUsuario = new PrefenciasUsuario(getActivity());
@@ -105,7 +105,7 @@ public class DireccionesFragment extends BaseBackFragment {
 
             }
 
-        });
+        },false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(direccionAdapter);
         recyclerView.setHasFixedSize(true);
