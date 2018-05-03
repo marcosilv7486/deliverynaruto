@@ -15,7 +15,9 @@ import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.EscogerDireccionAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
+import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
+import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 
@@ -26,6 +28,8 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
 
 public class SeleccionarDireccionFragment extends BaseBackFragment {
@@ -42,13 +46,15 @@ public class SeleccionarDireccionFragment extends BaseBackFragment {
     RecyclerView.LayoutManager layoutManager;
     EscogerDireccionAdapter escogerDireccionAdapter;
     PrefenciasUsuario prefenciasUsuario;
+    OrderDTO orderDTO;
 
     public SeleccionarDireccionFragment() {
 
     }
 
-    public static SeleccionarDireccionFragment newInstance() {
+    public static SeleccionarDireccionFragment newInstance(OrderDTO data) {
         Bundle args = new Bundle();
+        args.putParcelable(Constantes.ORDER_DATA,data);
         SeleccionarDireccionFragment fragment = new SeleccionarDireccionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -81,12 +87,19 @@ public class SeleccionarDireccionFragment extends BaseBackFragment {
     }
 
     private void iniciarFragmentSeleccionarPago(AddressDTO addressDTO) {
-       start(SeleccionarPagoFragment.newInstance());
+        if(orderDTO != null){
+            orderDTO.setUserAddress(addressDTO.getAddress());
+            orderDTO.setUserPhone(addressDTO.getPhone());
+            orderDTO.setLatUserAddress(addressDTO.getLatitude());
+            orderDTO.setLonUserAddress(addressDTO.getLongitude());
+        }
+        start(SeleccionarPagoFragment.newInstance(orderDTO));
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        orderDTO = getArguments().getParcelable(ORDER_DATA);
         cargarData();
     }
 

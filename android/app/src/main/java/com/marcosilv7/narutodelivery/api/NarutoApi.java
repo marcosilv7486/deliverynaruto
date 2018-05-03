@@ -3,6 +3,7 @@ package com.marcosilv7.narutodelivery.api;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.dto.LoginRequestDTO;
 import com.marcosilv7.narutodelivery.dto.LoginResponseDTO;
+import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.dto.PageDTO;
 import com.marcosilv7.narutodelivery.dto.PaymentMethodDTO;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
@@ -75,4 +76,7 @@ public interface NarutoApi {
     @DELETE("users/{userId}/paymentmethods/{paymentMethodId}")
     Call<Void> eliminarMetodoDePagoPorUsuario(@Path("userId") Long userId,
                                               @Path("paymentMethodId") Long paymentMethodId);
+
+    @POST("orders")
+    Call<OrderDTO> registrarOrden(@Body OrderDTO data);
 }

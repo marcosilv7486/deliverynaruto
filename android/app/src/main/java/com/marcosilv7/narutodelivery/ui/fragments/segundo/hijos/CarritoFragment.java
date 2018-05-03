@@ -17,7 +17,10 @@ import android.widget.Toolbar;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
+import com.marcosilv7.narutodelivery.dto.OrderDTO;
+import com.marcosilv7.narutodelivery.dto.OrderDetailDTO;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
+import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
@@ -25,6 +28,7 @@ import com.marcosilv7.narutodelivery.util.Util;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,7 @@ public class CarritoFragment extends SupportFragment {
     RecyclerView.LayoutManager layoutManager;
     CarritoItemAdapter carritoItemAdapter;
     List<CarritoItemModel> carritoItemModelList;
+    PrefenciasUsuario prefenciasUsuario;
 
     int cantidadTotalProductos = 0;
     double subTotal=0.0;
@@ -82,6 +87,7 @@ public class CarritoFragment extends SupportFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
         ButterKnife.bind(this,view);
+        prefenciasUsuario = new PrefenciasUsuario(getActivity());
         EventBusActivityScope.getDefault(_mActivity).register(this);
         initView(view);
         cargarData();
@@ -122,7 +128,24 @@ public class CarritoFragment extends SupportFragment {
     @OnClick(R.id.btnProcederDireccionCarritoCompras)
     public void onClickProcederConElPago(){
         if(cantidadTotalProductos >0 ){
-            SeleccionarDireccionFragment seleccionarDireccionFragment = SeleccionarDireccionFragment.newInstance();
+            //LLenar Carrito DTO
+            OrderDTO data = new OrderDTO();
+            data.setUserId(prefenciasUsuario.obtenerIdUsuario());
+            data.setUserPhone(prefenciasUsuario.obtenerTelefono());
+            data.setUserFullName(prefenciasUsuario.obtenerNombre());
+            data.setTotal(new BigDecimal(subTotal+""));
+            for(CarritoItemModel carritoItem : carritoItemModelList){
+                OrderDetailDTO itemDto = new OrderDetailDTO();
+                itemDto.setDescription(carritoItem.getNombreProducto());
+                itemDto.setDescriptionImage(carritoItem.getImage());
+                itemDto.setQuantity(carritoItem.getCantidad());
+                itemDto.setProductId(carritoItem.getIdProducto());
+                itemDto.setUnitPrice(new BigDecimal(carritoItem.getPrecio()+""));
+                itemDto.setTotal(new BigDecimal(carritoItem.getSubTotal()+""));
+                data.getItems().add(itemDto);
+            }
+            SeleccionarDireccionFragment seleccionarDireccionFragment =
+                    SeleccionarDireccionFragment.newInstance(data);
             start(seleccionarDireccionFragment);
         }else {
             Toast.makeText(getActivity(),"Debe agregar por lo menos un item",Toast.LENGTH_SHORT).show();

@@ -49,6 +49,7 @@
                                 android:text="TOTAL A PAGAR"
                                 android:textStyle="bold" />
                             <TextView
+                                android:id="@+id/totalAPagar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="S/. 150.00"
@@ -103,7 +104,7 @@
                     </LinearLayout>
 
                     <RadioGroup
-                        android:id="@+id/GrupoRbnEfectivo"
+                        android:id="@+id/grupoRbnFormaPago"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >
                         <RadioButton
@@ -145,6 +146,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         app:counterEnabled="true"
+                        android:visibility="gone"
+                        android:id="@+id/textImputLayoutEfectivo"
                         app:counterMaxLength="10">
 
                         <EditText
@@ -231,7 +234,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:id="@+id/textInputLayoutNumeroRuc"
                         app:counterEnabled="true"
+                        android:visibility="gone"
                         app:counterMaxLength="11">
 
                         <EditText

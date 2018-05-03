@@ -47,7 +47,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c" />
 
-        <activity android:name=".ui.AgregarTarjetaActivity"></activity>
+        <activity android:name=".ui.AgregarTarjetaActivity" />
+        <activity android:name=".ui.PedidoEnviadoActivity"></activity>
     </application>
 
 </manifest>

@@ -10,10 +10,7 @@ import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.DetalleProductoGrillaAdapter;
-import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
-
-import java.util.ArrayList;
 
 /**
  * Created by Fernando on 22/04/2018.
@@ -43,7 +40,7 @@ public class DetailsProductosFragment extends BaseBackFragment {
         recyclerView = view.findViewById(R.id.recyclerDetailsProductos);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        carritoItemAdapter = new DetalleProductoGrillaAdapter(getActivity(), new ArrayList<CarritoItemModel>());
+        carritoItemAdapter = new DetalleProductoGrillaAdapter(getActivity(), null);
         //cargarData();
         recyclerView.setAdapter(carritoItemAdapter);
         recyclerView.setHasFixedSize(true);

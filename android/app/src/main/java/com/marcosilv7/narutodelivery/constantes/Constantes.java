@@ -9,4 +9,6 @@ public interface Constantes {
     String URL_PREVIEW_GMAP="https://maps.googleapis.com/maps/api/staticmap?" +
             "size=600x300&maptype=roadma&markers=color:red%7Clabel:M%7C"+PARAM_LATITUD+","+PARAM_LONGITUD+"&key=";
     String API_KEY_GOOGLE ="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c";
+
+    String ORDER_DATA="ORDER_DATA";
 }

@@ -1,5 +1,6 @@
 package com.marcosilv7.narutodelivery.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
@@ -117,6 +118,13 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
     public void actualizarCantidadCarrito(int numero){
         mBottomBar.getItem(SECOND).setUnreadCount(numero);
     }
+    
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 3){
+            mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());
+        }
+    }
 }

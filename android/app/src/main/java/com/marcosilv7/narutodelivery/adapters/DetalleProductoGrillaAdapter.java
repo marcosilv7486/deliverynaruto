@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
-import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
+import com.marcosilv7.narutodelivery.dto.OrderDetailDTO;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ import java.util.List;
 public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
 
     Context context;
-    List<CarritoItemModel> data;
+    List<OrderDetailDTO> data;
 
-    public DetalleProductoGrillaAdapter(Context context, List<CarritoItemModel> data) {
+    public DetalleProductoGrillaAdapter(Context context, List<OrderDetailDTO> data) {
         this.context = context;
         this.data = data;
     }
@@ -39,7 +39,7 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
         ((DetalleProductoGrillaAdapter.DetalleProductoCarritoHolder) holder).onBind(position);
     }
 
-    public void actualizarData(ArrayList<CarritoItemModel> data){
+    public void actualizarData(ArrayList<OrderDetailDTO> data){
         this.data = data;
         notifyDataSetChanged();
     }
@@ -49,6 +49,11 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
         if (data == null)
             return 0;
         return data.size();
+    }
+
+    public void actualizarData(List<OrderDetailDTO> data){
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     public class DetalleProductoCarritoHolder extends RecyclerView.ViewHolder {
@@ -68,11 +73,11 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
         }
 
         void onBind(int posicion) {
-            final CarritoItemModel item = data.get(posicion);
-            lblDescripcion.setText(item.getNombreProducto());
-            lblPrecioUnitario.setText(Util.convertirFormatoDinero(item.getPrecio()));
-            lblCantidad.setText(item.getCantidad().toString());
-            lblSubTotal.setText(Util.convertirFormatoDinero(item.getSubTotal()));
+            final OrderDetailDTO item = data.get(posicion);
+            lblDescripcion.setText(item.getDescription());
+            lblPrecioUnitario.setText(Util.convertirFormatoDinero(item.getUnitPrice().doubleValue()));
+            lblCantidad.setText(item.getQuantity()+"");
+            lblSubTotal.setText(Util.convertirFormatoDinero(item.getTotal().doubleValue()));
         }
     }
 }
