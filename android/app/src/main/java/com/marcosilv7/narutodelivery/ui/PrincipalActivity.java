@@ -128,6 +128,7 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Toast.makeText(this,requestCode+"-"+requestCode,Toast.LENGTH_LONG).show();
         if(requestCode == PedidoEnviadoActivity.REFRESH_DELIVERY){
             mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());

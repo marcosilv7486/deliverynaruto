@@ -49,7 +49,7 @@ public class SeleccionarDireccionActivity extends CustomSupportActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionar_direccion);
         ButterKnife.bind(this);
-        toolbarTitle.setText("Escoger dirección");
+        toolbarTitle.setText("Seleccione una direccion");
         initToolbarNav(toolbar);
         prefenciasUsuario = new PrefenciasUsuario(this);
         layoutManager = new LinearLayoutManager(this);
@@ -102,6 +102,4 @@ public class SeleccionarDireccionActivity extends CustomSupportActivity {
     public interface eventos{
         void onClickCardView(AddressDTO addressDTO);
     }
-
-
 }

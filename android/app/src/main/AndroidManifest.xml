@@ -49,11 +49,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c" />
 
-        <activity android:name=".ui.AgregarTarjetaActivity" />
-        <activity android:name=".ui.PedidoEnviadoActivity" />
-        <activity android:name=".ui.SeleccionarDireccionActivity" />
-        <activity android:name=".ui.SeleccionFormaPagoActivity" />
-        <activity android:name=".ui.ConfirmarPedidoActivity"></activity>
+        <activity android:name=".ui.AgregarTarjetaActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PedidoEnviadoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SeleccionarDireccionActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SeleccionFormaPagoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ConfirmarPedidoActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

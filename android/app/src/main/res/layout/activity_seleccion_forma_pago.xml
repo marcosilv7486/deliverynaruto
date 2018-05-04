@@ -44,16 +44,16 @@
                                 android:layout_margin="10dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 android:layout_alignParentStart="true"
-                                android:text="TOTAL A PAGAR"
+                                android:text="Importe Total a Pagar"
                                 android:textStyle="bold" />
                             <TextView
                                 android:id="@+id/totalAPagar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="S/. 150.00"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 android:layout_margin="10dp"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorPrimary"
@@ -96,10 +96,10 @@
                                 android:layout_margin="10dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="18sp"
+                                style="@style/textLayout"
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignParentStart="true"
-                                android:text="FORMA DE PAGO" />
+                                android:text="Forma de Pago" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -116,6 +116,7 @@
                             android:drawableLeft="@drawable/ic_efectivo_black_24dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:text="Efectivo" />
 
                         <RadioButton
@@ -127,6 +128,7 @@
                             android:drawableLeft="@drawable/ic_tarjetacredito_black_24dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:text="POS" />
 
                         <RadioButton
@@ -138,6 +140,7 @@
                             android:drawableLeft="@drawable/ic_cloud_black_24dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:text="Pago Online" />
                     </RadioGroup>
 
@@ -158,6 +161,7 @@
                             android:drawablePadding="10dp"
                             android:drawableStart="@drawable/ic_attach_gray_black_24dp"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:hint="Ingrese el importe en efectivo"
                             android:inputType="numberDecimal"
                             android:maxLength="10"
@@ -195,12 +199,13 @@
                             android:layout_height="wrap_content">
                             <TextView
                                 android:layout_margin="10dp"
+                                style="@style/textLayout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="18sp"
+                                android:screenOrientation="portrait"
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignParentStart="true"
-                                android:text="TIPO DE FACTURACIÓN" />
+                                android:text="Tipo de Facturación" />
                         </RelativeLayout>
                     </LinearLayout>
                     <RadioGroup
@@ -216,6 +221,7 @@
                             android:drawableLeft="@drawable/ic_account_circle_black_24dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:text="Boleta" />
 
                         <RadioButton
@@ -227,6 +233,7 @@
                             android:drawableLeft="@drawable/ic_insert_drive_file_black_24dp"
                             android:layout_weight="1"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:text="Factura" />
                     </RadioGroup>
 
@@ -247,6 +254,7 @@
                             android:drawablePadding="10dp"
                             android:drawableStart="@drawable/ic_account_balance_black_24dp"
                             android:ems="10"
+                            style="@style/textLayout"
                             android:hint="Ingrese el ruc"
                             android:inputType="number"
                             android:maxLength="11"

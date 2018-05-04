@@ -134,6 +134,7 @@ public class ConfirmarPedidoActivity extends CustomSupportActivity {
                 if(response.code() == 200){
                     QueryCarrito.limpiarCarrito();
                     Intent intent = new Intent(ConfirmarPedidoActivity.this, PedidoEnviadoActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra(Constantes.ORDER_DATA,new Gson().toJson(orderDTO));
                     startActivity(intent);
                 }

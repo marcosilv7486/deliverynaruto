@@ -33,7 +33,7 @@ public class PedidoEnviadoActivity extends SupportActivity {
     @OnClick(R.id.btnCerrarCarrito)
     public void cerrarCarrito(){
         Intent intent = new Intent(this, PrincipalActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent,REFRESH_DELIVERY);
     }
 }

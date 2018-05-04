@@ -12,6 +12,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -44,7 +45,7 @@ public class Util {
     }
 
     public static String convertirFormatoDinero(double monto){
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "pe"));
         formatter.setMaximumFractionDigits(2);
         formatter.setGroupingUsed(true);
         return formatter.format(monto);

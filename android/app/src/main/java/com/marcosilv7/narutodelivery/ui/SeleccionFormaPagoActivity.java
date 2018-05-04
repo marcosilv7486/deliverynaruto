@@ -3,6 +3,7 @@ package com.marcosilv7.narutodelivery.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,6 +16,7 @@ import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.ui.base.CustomSupportActivity;
+import com.marcosilv7.narutodelivery.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +78,7 @@ public class SeleccionFormaPagoActivity extends CustomSupportActivity {
     }
 
     private void initView() {
+        totalAPagar.setText(Util.convertirFormatoDinero(orderDTO.getTotal().doubleValue()));
         rbtEfectivo.setChecked(true);
         rbtEfectivo.callOnClick();
         rbtBoleta.setChecked(true);
@@ -127,6 +130,17 @@ public class SeleccionFormaPagoActivity extends CustomSupportActivity {
                 String formaPago = rbtEfectivo.getText().toString();
                 orderDTO.setPaymentType(formaPago);
                 String efectivo = textImputLayoutEfectivo.getEditText().getText().toString();
+                if(TextUtils.isEmpty(efectivo)){
+                    textImputLayoutEfectivo.setError("El Importe es requerido");
+                    textImputLayoutEfectivo.getEditText().requestFocus();
+                    return;
+                }
+                double montoEfectivo = Double.parseDouble(efectivo);
+                if(montoEfectivo<orderDTO.getTotal().doubleValue()){
+                    textImputLayoutEfectivo.setError("El Importe es insuficiente.");
+                    textImputLayoutEfectivo.getEditText().requestFocus();
+                    return;
+                }
             }
             if(rbnPOS.isChecked()){
                 String formaPago = rbnPOS.getText().toString();
@@ -142,6 +156,16 @@ public class SeleccionFormaPagoActivity extends CustomSupportActivity {
                 String numeroRuc = textInputLayoutNumeroRuc.getEditText().getText().toString();
                 orderDTO.setRucNumber(numeroRuc);
                 orderDTO.setInvoiceType(tipoFacturacion);
+                if(TextUtils.isEmpty(numeroRuc)){
+                    textInputLayoutNumeroRuc.setError("El numero de ruc es requerido");
+                    textInputLayoutNumeroRuc.getEditText().requestFocus();
+                    return;
+                }
+                if(numeroRuc.length()!=11){
+                    textInputLayoutNumeroRuc.setError("El numero de ruc debe tener 11 digitos");
+                    textInputLayoutNumeroRuc.getEditText().requestFocus();
+                    return;
+                }
             }
             if(rbtBoleta.isChecked()){
                 String tipoFacturacion  = rbtBoleta.getText().toString();
