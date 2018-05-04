@@ -159,6 +159,29 @@
                             style="@style/textLayout"
                             android:text="BOLETA" />
                     </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textInputLayoutNumeroRuc"
+                        app:counterEnabled="true"
+                        android:visibility="gone"
+                        app:counterMaxLength="11">
+
+                        <EditText
+                            android:id="@+id/txtNumeroRuc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_account_balance_black_24dp"
+                            android:drawablePadding="10dp"
+                            android:drawableStart="@drawable/ic_account_balance_black_24dp"
+                            android:ems="10"
+                            android:enabled="false"
+                            style="@style/textLayout"
+                            android:hint="Ruc"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

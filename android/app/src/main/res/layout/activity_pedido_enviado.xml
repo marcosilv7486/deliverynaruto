@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Su pedido fue registrado correctamente.Para realizar el seguiente seleccione la opcion delivery del menu principal."
+            android:text="Su pedido fue registrado correctamente.Para ver el estado , seleccione la opcion delivery del menu principal."
             android:textColor="@color/colorPrimary"
             android:textSize="12dp" />
 
@@ -50,7 +50,7 @@
             android:layout_marginTop="30dp"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:text="CERRAR CARRIto"
+            android:text="CERRAR CARRITO"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

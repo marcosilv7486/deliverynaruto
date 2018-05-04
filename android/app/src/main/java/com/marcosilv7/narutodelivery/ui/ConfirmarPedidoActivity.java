@@ -3,10 +3,14 @@ package com.marcosilv7.narutodelivery.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -60,6 +64,12 @@ public class ConfirmarPedidoActivity extends CustomSupportActivity {
     @BindView(R.id.txtTipoFacturacion)
     TextView txtTipoFacturacion;
 
+    @BindView(R.id.textInputLayoutNumeroRuc)
+    TextInputLayout textInputLayoutNumeroRuc;
+
+    @BindView(R.id.txtNumeroRuc)
+    EditText txtNumeroRuc;
+
     @BindView(R.id.btnRealizarPedido)
     Button btnRealizarPedido;
 
@@ -102,6 +112,12 @@ public class ConfirmarPedidoActivity extends CustomSupportActivity {
             txtTipoFacturacion.setText(orderDTO.getInvoiceType());
             txtTipoFacturacion.setFocusable(false);
             adapter.actualizarData(orderDTO.getItems());
+            textInputLayoutNumeroRuc.setVisibility(View.GONE);
+            txtNumeroRuc.setFocusable(false);
+            if(!TextUtils.isEmpty(orderDTO.getRucNumber())){
+                textInputLayoutNumeroRuc.setVisibility(View.VISIBLE);
+                textInputLayoutNumeroRuc.getEditText().setText(orderDTO.getRucNumber());
+            }
         }
     }
 
@@ -145,4 +161,6 @@ public class ConfirmarPedidoActivity extends CustomSupportActivity {
             }
         });
     }
+
+
 }
