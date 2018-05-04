@@ -197,7 +197,7 @@ public class CarritoFragment extends SupportFragment {
     }
 
 
-    private void cargarData() {
+    public void cargarData() {
         carritoItemModelList = QueryCarrito.obtenerCarritoActual();
         if(carritoItemModelList == null || carritoItemModelList.isEmpty()){
             layoutCarritoVacio.setVisibility(View.VISIBLE);

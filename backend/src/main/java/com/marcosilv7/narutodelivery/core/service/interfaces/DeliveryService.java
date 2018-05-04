@@ -34,4 +34,10 @@ public interface DeliveryService {
     void deletePaymentMethod(Long userId,Long id);
 
     OrderDTO createOrder(@Valid OrderDTO data);
+
+    List<OrderDTO> getOrdersByStatusAndUserId(String status, Long userId);
+
+    List<OrderDTO> getOrdersByStatus(String status);
+
+    List<OrderDTO> getOrdersByUserId(Long userId);
 }

@@ -14,15 +14,15 @@ import com.google.gson.Gson;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
+import com.marcosilv7.narutodelivery.ui.base.CustomSupportActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.SupportActivity;
 
 import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
-public class SeleccionFormaPagoActivity extends SupportActivity {
+public class SeleccionFormaPagoActivity extends CustomSupportActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -68,6 +68,7 @@ public class SeleccionFormaPagoActivity extends SupportActivity {
         setContentView(R.layout.activity_seleccion_forma_pago);
         ButterKnife.bind(this);
         toolbarTitle.setText("Seleccionar Pago");
+        initToolbarNav(toolbar);
         Intent intent = getIntent();
         String json = intent.getStringExtra(ORDER_DATA);
         orderDTO = new Gson().fromJson(json,OrderDTO.class);

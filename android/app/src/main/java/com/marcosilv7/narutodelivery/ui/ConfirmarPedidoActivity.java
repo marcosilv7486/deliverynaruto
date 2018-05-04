@@ -19,19 +19,19 @@ import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
+import com.marcosilv7.narutodelivery.ui.base.CustomSupportActivity;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.SupportActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
-public class ConfirmarPedidoActivity extends SupportActivity {
+public class ConfirmarPedidoActivity extends CustomSupportActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -76,6 +76,7 @@ public class ConfirmarPedidoActivity extends SupportActivity {
         setContentView(R.layout.activity_confirmar_pedido);
         ButterKnife.bind(this);
         toolbarTitle.setText("Confirmar Orden");
+        initToolbarNav(toolbar);
         String json = getIntent().getStringExtra(ORDER_DATA);
         orderDTO = new Gson().fromJson(json,OrderDTO.class);
         initView();
@@ -91,10 +92,15 @@ public class ConfirmarPedidoActivity extends SupportActivity {
             recyclerView.setHasFixedSize(true);
             lblSubtotal.setText(Util.convertirFormatoDinero(orderDTO.getTotal().doubleValue()));
             txtDireccionEntrega.setText(orderDTO.getUserAddress());
+            txtDireccionEntrega.setFocusable(false);
             txtNombreCompleto.setText(orderDTO.getUserFullName());
+            txtNombreCompleto.setFocusable(false);
             txtTelefono.setText(orderDTO.getUserPhone());
+            txtTelefono.setFocusable(false);
             txtFormaPago.setText(orderDTO.getPaymentType());
+            txtFormaPago.setFocusable(false);
             txtTipoFacturacion.setText(orderDTO.getInvoiceType());
+            txtTipoFacturacion.setFocusable(false);
             adapter.actualizarData(orderDTO.getItems());
         }
     }

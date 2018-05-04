@@ -16,19 +16,19 @@ import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
+import com.marcosilv7.narutodelivery.ui.base.CustomSupportActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
-public class SeleccionarDireccionActivity extends SupportActivity {
+public class SeleccionarDireccionActivity extends CustomSupportActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -50,6 +50,7 @@ public class SeleccionarDireccionActivity extends SupportActivity {
         setContentView(R.layout.activity_seleccionar_direccion);
         ButterKnife.bind(this);
         toolbarTitle.setText("Escoger dirección");
+        initToolbarNav(toolbar);
         prefenciasUsuario = new PrefenciasUsuario(this);
         layoutManager = new LinearLayoutManager(this);
         escogerDireccionAdapter = new EscogerDireccionAdapter(new ArrayList<AddressDTO>(), this, new SeleccionarDireccionActivity.eventos() {
@@ -101,4 +102,6 @@ public class SeleccionarDireccionActivity extends SupportActivity {
     public interface eventos{
         void onClickCardView(AddressDTO addressDTO);
     }
+
+
 }

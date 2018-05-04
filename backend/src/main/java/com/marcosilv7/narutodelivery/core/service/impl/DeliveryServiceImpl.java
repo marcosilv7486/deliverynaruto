@@ -244,4 +244,19 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
         return orderCreated.orElse(null);
     }
+
+    @Override
+    public List<OrderDTO> getOrdersByStatusAndUserId(String status, Long userId) {
+        return null;
+    }
+
+    @Override
+    public List<OrderDTO> getOrdersByStatus(String status) {
+        +return null;
+    }
+
+    @Override
+    public List<OrderDTO> getOrdersByUserId(Long userId) {
+        return null;
+    }
 }

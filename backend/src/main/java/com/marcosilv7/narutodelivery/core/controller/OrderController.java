@@ -2,15 +2,15 @@ package com.marcosilv7.narutodelivery.core.controller;
 
 import com.marcosilv7.narutodelivery.configuration.api.Api;
 import com.marcosilv7.narutodelivery.core.dto.OrderDTO;
-import com.marcosilv7.narutodelivery.core.dto.ProductDTO;
 import com.marcosilv7.narutodelivery.core.service.interfaces.DeliveryService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(Api.ORDER_PATH)
@@ -29,5 +29,24 @@ public class OrderController {
             ,response = OrderDTO.class)
     public OrderDTO createOrder(@Valid @RequestBody OrderDTO data){
         return deliveryService.createOrder(data);
+    }
+
+    @PostMapping
+    @ApiOperation(value = "Listado de Ordenes de Pedido Por Usuario", notes = "Crear una nueva orden de pedido."
+            ,response = OrderDTO.class)
+    public List<OrderDTO> getByStatusAndUserId(@RequestParam(value = "status",required = false) String status,
+                                               @RequestParam(value = "userId",required = false) Long userId){
+        List<OrderDTO> data = new ArrayList<>();
+        if(!StringUtils.isEmpty(status) && userId!=null){
+            data = deliveryService.getOrdersByStatusAndUserId(status,userId);
+        }else {
+            if(!StringUtils.isEmpty(status)){
+                data = deliveryService.getOrdersByStatus(status);
+            }
+            if(userId!=null){
+                data = deliveryService.getOrdersByUserId(userId);
+            }
+        }
+        return data;
     }
 }

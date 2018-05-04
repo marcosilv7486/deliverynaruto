@@ -3,6 +3,7 @@ package com.marcosilv7.narutodelivery.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
@@ -118,13 +119,14 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
     public void actualizarCantidadCarrito(int numero){
         mBottomBar.getItem(SECOND).setUnreadCount(numero);
     }
-    
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 3){
+        Toast.makeText(this,requestCode+"-"+requestCode,Toast.LENGTH_LONG).show();
+        if(requestCode == PedidoEnviadoActivity.REFRESH_DELIVERY){
             mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());
+            mBottomBar.getItem(THIRD).setUnreadCount(1);
+            mBottomBar.setCurrentItem(THIRD);
         }
     }
 }
