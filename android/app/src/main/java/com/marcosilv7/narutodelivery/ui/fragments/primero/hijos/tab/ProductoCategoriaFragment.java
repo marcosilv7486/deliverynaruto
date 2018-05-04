@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.ProductoAdapter;
@@ -118,6 +119,7 @@ public class ProductoCategoriaFragment extends SupportFragment {
         QueryCarrito.agregarProductDTO(productDTO);
         ((PrincipalActivity)getActivity()).actualizarCantidadCarrito(QueryCarrito.obtenerCantidadActualCarrito());
         EventBusActivityScope.getDefault(_mActivity).post(productDTO);
+        Toast.makeText(getActivity(),"Agregado al carrito",Toast.LENGTH_SHORT).show();
 
     }
 }
