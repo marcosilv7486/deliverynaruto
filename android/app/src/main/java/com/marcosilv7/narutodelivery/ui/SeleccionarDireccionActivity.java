@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -38,6 +40,9 @@ public class SeleccionarDireccionActivity extends CustomSupportActivity {
 
     @BindView(R.id.rvListaDirecciones)
     RecyclerView rvListaDirecciones;
+
+    @BindView(R.id.layoutSinDirecciones)
+    LinearLayout layoutSinDirecciones;
 
     RecyclerView.LayoutManager layoutManager;
     EscogerDireccionAdapter escogerDireccionAdapter;
@@ -78,11 +83,16 @@ public class SeleccionarDireccionActivity extends CustomSupportActivity {
             public void onResponse(Call<ArrayList<AddressDTO>> call, Response<ArrayList<AddressDTO>> response) {
                 if(response.code() == 200){
                     escogerDireccionAdapter.actualizarData(response.body());
+                    if(response.body().isEmpty()){
+                        layoutSinDirecciones.setVisibility(View.VISIBLE);
+                        rvListaDirecciones.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<AddressDTO>> call, Throwable t) {
+
             }
         });
     }
