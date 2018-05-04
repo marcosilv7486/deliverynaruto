@@ -247,16 +247,28 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public List<OrderDTO> getOrdersByStatusAndUserId(String status, Long userId) {
-        return null;
+        List<OrderDTO> data = orderRepository.findByStatusAndUserId(status,userId);
+        for(OrderDTO item : data){
+            item.setItems(orderDetailRepository.findByOrderId(item.getId()));
+        }
+        return data;
     }
 
     @Override
     public List<OrderDTO> getOrdersByStatus(String status) {
-        +return null;
+        List<OrderDTO> data = orderRepository.findByStatus(status);
+        for(OrderDTO item : data){
+            item.setItems(orderDetailRepository.findByOrderId(item.getId()));
+        }
+        return data;
     }
 
     @Override
     public List<OrderDTO> getOrdersByUserId(Long userId) {
-        return null;
+        List<OrderDTO> data = orderRepository.findByUserId(userId);
+        for(OrderDTO item : data){
+            item.setItems(orderDetailRepository.findByOrderId(item.getId()));
+        }
+        return data;
     }
 }

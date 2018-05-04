@@ -35,5 +35,26 @@ public interface OrderRepository extends JpaRepository<Order,Long>{
             "from Order o where o.user.id =:userId order by o.createdAt desc ")
     List<OrderDTO> findByUserId(@Param("userId") Long userId);
 
+    @Query("select new com.marcosilv7.narutodelivery.core.dto.OrderDTO(" +
+            "o.id,o.user.id,o.number,o.userFullName,o.userPhone," +
+            "o.userAddress,o.latUserAddress,o.lonUserAddress," +
+            "o.paymentType,o.numberCreditCard,o.invoiceType," +
+            "o.rucNumber,o.razonSocial,o.nombreComercial,o.domicilioFiscal," +
+            "o.total,o.status," +
+            "o.shippingDate,o.arrivalDate" +
+            ")" +
+            "from Order o where o.status =:status order by o.createdAt desc ")
+    List<OrderDTO> findByStatus(@Param("status") String status);
 
+
+    @Query("select new com.marcosilv7.narutodelivery.core.dto.OrderDTO(" +
+            "o.id,o.user.id,o.number,o.userFullName,o.userPhone," +
+            "o.userAddress,o.latUserAddress,o.lonUserAddress," +
+            "o.paymentType,o.numberCreditCard,o.invoiceType," +
+            "o.rucNumber,o.razonSocial,o.nombreComercial,o.domicilioFiscal," +
+            "o.total,o.status," +
+            "o.shippingDate,o.arrivalDate" +
+            ")" +
+            "from Order o where o.status =:status and o.user.id =:userId order by o.createdAt desc ")
+    List<OrderDTO> findByStatusAndUserId(@Param("status") String status,@Param("userId") Long userId);
 }
