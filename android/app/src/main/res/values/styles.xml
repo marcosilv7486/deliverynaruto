@@ -21,4 +21,14 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="DividerBlue">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="textLayout">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

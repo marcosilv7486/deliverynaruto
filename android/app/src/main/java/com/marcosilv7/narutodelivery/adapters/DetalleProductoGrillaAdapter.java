@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.OrderDetailDTO;
 import com.marcosilv7.narutodelivery.util.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,7 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
         TextView lblPrecioUnitario;
         TextView lblCantidad;
         TextView lblSubTotal;
+        ImageView imagenProductoItemCarrito;
 
         public DetalleProductoCarritoHolder(View itemView) {
             super(itemView);
@@ -69,6 +72,7 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
             lblPrecioUnitario = itemView.findViewById(R.id.lblPrecioUnitario);
             lblCantidad = itemView.findViewById(R.id.lblCantidad);
             lblSubTotal = itemView.findViewById(R.id.lblSubtotal);
+            imagenProductoItemCarrito = itemView.findViewById(R.id.imagenProductoItemCarrito);
 
         }
 
@@ -78,6 +82,7 @@ public class DetalleProductoGrillaAdapter extends RecyclerView.Adapter {
             lblPrecioUnitario.setText(Util.convertirFormatoDinero(item.getUnitPrice().doubleValue()));
             lblCantidad.setText(item.getQuantity()+"");
             lblSubTotal.setText(Util.convertirFormatoDinero(item.getTotal().doubleValue()));
+            Picasso.get().load(item.getDescriptionImage()).fit().into(imagenProductoItemCarrito);
         }
     }
 }

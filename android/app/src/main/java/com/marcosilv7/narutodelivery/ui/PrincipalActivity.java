@@ -98,7 +98,6 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
                 }
             }
         });
-        mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());
     }
 
 
@@ -114,6 +113,13 @@ public class PrincipalActivity extends SupportActivity implements BaseMainFragme
         } else {
             ActivityCompat.finishAfterTransition(this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBottomBar.getItem(SECOND).setUnreadCount(QueryCarrito.obtenerCantidadActualCarrito());
+        
     }
 
     public void actualizarCantidadCarrito(int numero){
