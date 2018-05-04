@@ -31,7 +31,7 @@ public class OrderController {
         return deliveryService.createOrder(data);
     }
 
-    @PostMapping
+    @GetMapping
     @ApiOperation(value = "Listado de Ordenes de Pedido Por Usuario", notes = "Crear una nueva orden de pedido."
             ,response = OrderDTO.class)
     public List<OrderDTO> getByStatusAndUserId(@RequestParam(value = "status",required = false) String status,
