@@ -53,7 +53,7 @@
                 android:drawableStart="@drawable/ic_local_phone_gray_24dp"
                 android:hint="Ingrese un télefono"
                 android:drawablePadding="10dp"
-                android:inputType="text"
+                android:inputType="phone"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 

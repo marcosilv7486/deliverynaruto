@@ -45,6 +45,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="10dp"
+            android:visibility="gone"
             android:text="Configuracion"
             android:textSize="16sp" />
         <TextView
@@ -86,6 +87,7 @@
             android:gravity="center_vertical"
             android:clickable="true"
             android:paddingLeft="16dp"
+            android:visibility="gone"
             android:paddingRight="16dp"
             android:text="Pedidos Realizados"
             android:textSize="16sp" />

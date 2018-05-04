@@ -13,6 +13,7 @@ import com.marcosilv7.narutodelivery.dto.RegisterUserDTO;
 import com.marcosilv7.narutodelivery.dto.TokenDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -79,4 +80,7 @@ public interface NarutoApi {
 
     @POST("orders")
     Call<OrderDTO> registrarOrden(@Body OrderDTO data);
+
+    @GET("orders")
+    Call<List<OrderDTO>> obtenerOrdenesPorUsuario(@Query("userId") Long userId);
 }
