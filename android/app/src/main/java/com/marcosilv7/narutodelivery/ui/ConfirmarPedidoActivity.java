@@ -1,45 +1,37 @@
-package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
-
+package com.marcosilv7.narutodelivery.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.DetalleProductoGrillaAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
+import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
-import com.marcosilv7.narutodelivery.dto.OrderDetailDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
-import com.marcosilv7.narutodelivery.ui.PedidoEnviadoActivity;
-import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 import com.marcosilv7.narutodelivery.util.Util;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
-
-public class ConfirmarPedidoFragment extends BaseBackFragment {
+public class ConfirmarPedidoActivity extends SupportActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -77,44 +69,26 @@ public class ConfirmarPedidoFragment extends BaseBackFragment {
     DetalleProductoGrillaAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
 
-    public static ConfirmarPedidoFragment newInstance(OrderDTO data) {
-        Bundle args = new Bundle();
-        args.putParcelable(ORDER_DATA,data);
-        ConfirmarPedidoFragment fragment = new ConfirmarPedidoFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public ConfirmarPedidoFragment() {
-
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_confirmar_pedido, container, false);
-        ButterKnife.bind(this,view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_confirmar_pedido);
+        ButterKnife.bind(this);
         toolbarTitle.setText("Confirmar Orden");
-        initToolbarNav(toolbar);
-        initView(view);
-        return view;
+        String json = getIntent().getStringExtra(ORDER_DATA);
+        orderDTO = new Gson().fromJson(json,OrderDTO.class);
+        initView();
     }
 
-    private void initView(View view) {
-        prefenciasUsuario = new PrefenciasUsuario(getActivity());
-        layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new DetalleProductoGrillaAdapter(getActivity(), new ArrayList<OrderDetailDTO>());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        orderDTO = getArguments().getParcelable(ORDER_DATA);
+    private void initView() {
         if(orderDTO != null){
+            prefenciasUsuario = new PrefenciasUsuario(this);
+            layoutManager = new LinearLayoutManager(this);
+            adapter = new DetalleProductoGrillaAdapter(this, orderDTO.getItems());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setHasFixedSize(true);
             lblSubtotal.setText(Util.convertirFormatoDinero(orderDTO.getTotal().doubleValue()));
             txtDireccionEntrega.setText(orderDTO.getUserAddress());
             txtNombreCompleto.setText(orderDTO.getUserFullName());
@@ -127,7 +101,7 @@ public class ConfirmarPedidoFragment extends BaseBackFragment {
 
     @OnClick(R.id.btnRealizarPedido)
     public void onClickButton(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Esta seguro de realizar el pedido ? , una vez enviado ya no se podra cancelar.")
                 .setTitle("Realizar pedido");
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -147,13 +121,14 @@ public class ConfirmarPedidoFragment extends BaseBackFragment {
     }
 
     private void enviarPedido() {
-        Call<OrderDTO> call = ServiceGenerator.createService(NarutoApi.class,getActivity()).registrarOrden(orderDTO);
+        Call<OrderDTO> call = ServiceGenerator.createService(NarutoApi.class,this).registrarOrden(orderDTO);
         call.enqueue(new Callback<OrderDTO>() {
             @Override
             public void onResponse(Call<OrderDTO> call, Response<OrderDTO> response) {
                 if(response.code() == 200){
                     QueryCarrito.limpiarCarrito();
-                    Intent intent = new Intent(getActivity(), PedidoEnviadoActivity.class);
+                    Intent intent = new Intent(ConfirmarPedidoActivity.this, PedidoEnviadoActivity.class);
+                    intent.putExtra(Constantes.ORDER_DATA,new Gson().toJson(orderDTO));
                     startActivity(intent);
                 }
             }

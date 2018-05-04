@@ -16,12 +16,12 @@
         android:roundIcon="@mipmap/ic_logo_boruto"
         android:supportsRtl="true"
         android:theme="@style/AppThemePrincipal">
-        <service
-            android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
@@ -50,7 +50,10 @@
             android:value="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c" />
 
         <activity android:name=".ui.AgregarTarjetaActivity" />
-        <activity android:name=".ui.PedidoEnviadoActivity"></activity>
+        <activity android:name=".ui.PedidoEnviadoActivity" />
+        <activity android:name=".ui.SeleccionarDireccionActivity" />
+        <activity android:name=".ui.SeleccionFormaPagoActivity" />
+        <activity android:name=".ui.ConfirmarPedidoActivity"></activity>
     </application>
 
 </manifest>

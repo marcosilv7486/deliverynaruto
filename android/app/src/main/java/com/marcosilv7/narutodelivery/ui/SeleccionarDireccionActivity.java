@@ -1,16 +1,13 @@
-package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
+package com.marcosilv7.narutodelivery.ui;
 
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.EscogerDireccionAdapter;
 import com.marcosilv7.narutodelivery.api.NarutoApi;
@@ -19,20 +16,19 @@ import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
-import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.SupportActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.marcosilv7.narutodelivery.constantes.Constantes.ORDER_DATA;
 
-
-public class SeleccionarDireccionFragment extends BaseBackFragment {
+public class SeleccionarDireccionActivity extends SupportActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -48,58 +44,33 @@ public class SeleccionarDireccionFragment extends BaseBackFragment {
     PrefenciasUsuario prefenciasUsuario;
     OrderDTO orderDTO;
 
-    public SeleccionarDireccionFragment() {
-
-    }
-
-    public static SeleccionarDireccionFragment newInstance(OrderDTO data) {
-        Bundle args = new Bundle();
-        args.putParcelable(Constantes.ORDER_DATA,data);
-        SeleccionarDireccionFragment fragment = new SeleccionarDireccionFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_seleccionar_direccion, container, false);
-        ButterKnife.bind(this,view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seleccionar_direccion);
+        ButterKnife.bind(this);
         toolbarTitle.setText("Escoger dirección");
-        initToolbarNav(toolbar);
-        initView(view);
-        return view;
-    }
-
-    private void initView(View view) {
-        prefenciasUsuario = new PrefenciasUsuario(getActivity());
-        layoutManager = new LinearLayoutManager(getActivity());
-        escogerDireccionAdapter = new EscogerDireccionAdapter(new ArrayList<AddressDTO>(), getActivity(), null);
+        prefenciasUsuario = new PrefenciasUsuario(this);
+        layoutManager = new LinearLayoutManager(this);
+        escogerDireccionAdapter = new EscogerDireccionAdapter(new ArrayList<AddressDTO>(), this, new SeleccionarDireccionActivity.eventos() {
+            @Override
+            public void onClickCardView(AddressDTO addressDTO) {
+                iniciarActivityFormapago(addressDTO);
+            }
+        });
         rvListaDirecciones.setLayoutManager(layoutManager);
         rvListaDirecciones.setAdapter(escogerDireccionAdapter);
         rvListaDirecciones.setHasFixedSize(true);
-    }
-
-    private void iniciarFragmentSeleccionarPago(AddressDTO addressDTO) {
-        if(orderDTO != null){
-            orderDTO.setUserAddress(addressDTO.getAddress());
-            orderDTO.setUserPhone(addressDTO.getPhone());
-            orderDTO.setLatUserAddress(addressDTO.getLatitude());
-            orderDTO.setLonUserAddress(addressDTO.getLongitude());
+        Intent intent = getIntent();
+        if(intent != null){
+            String json = intent.getStringExtra(ORDER_DATA);
+            orderDTO = new Gson().fromJson(json,OrderDTO.class);
+            cargarData();
         }
-        start(SeleccionarPagoFragment.newInstance(orderDTO));
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        orderDTO = getArguments().getParcelable(ORDER_DATA);
-        cargarData();
     }
 
     private void cargarData() {
-        Call<ArrayList<AddressDTO>> call = ServiceGenerator.createService(NarutoApi.class,getActivity())
+        Call<ArrayList<AddressDTO>> call = ServiceGenerator.createService(NarutoApi.class,this)
                 .obtenerDireccionesPorUsuario(prefenciasUsuario.obtenerIdUsuario());
         call.enqueue(new Callback<ArrayList<AddressDTO>>() {
             @Override
@@ -113,6 +84,18 @@ public class SeleccionarDireccionFragment extends BaseBackFragment {
             public void onFailure(Call<ArrayList<AddressDTO>> call, Throwable t) {
             }
         });
+    }
+
+    private void iniciarActivityFormapago(AddressDTO addressDTO) {
+        if(orderDTO != null){
+            orderDTO.setUserAddress(addressDTO.getAddress());
+            orderDTO.setUserPhone(addressDTO.getPhone());
+            orderDTO.setLatUserAddress(addressDTO.getLatitude());
+            orderDTO.setLonUserAddress(addressDTO.getLongitude());
+        }
+        Intent intent = new Intent(this,SeleccionFormaPagoActivity.class);
+        intent.putExtra(Constantes.ORDER_DATA,new Gson().toJson(orderDTO));
+        startActivity(intent);
     }
 
     public interface eventos{

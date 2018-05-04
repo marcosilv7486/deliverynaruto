@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.AddressDTO;
-import com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos.SeleccionarDireccionFragment;
+import com.marcosilv7.narutodelivery.ui.SeleccionarDireccionActivity;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ public class EscogerDireccionAdapter extends RecyclerView.Adapter {
 
     ArrayList<AddressDTO> data;
     Context context;
-    SeleccionarDireccionFragment.eventos eventos;
+    SeleccionarDireccionActivity.eventos eventos;
 
-    public EscogerDireccionAdapter(ArrayList<AddressDTO> data, Context context,SeleccionarDireccionFragment.eventos eventos) {
+    public EscogerDireccionAdapter(ArrayList<AddressDTO> data, Context context,SeleccionarDireccionActivity.eventos eventos) {
         this.data = data;
         this.context = context;
         this.eventos = eventos;

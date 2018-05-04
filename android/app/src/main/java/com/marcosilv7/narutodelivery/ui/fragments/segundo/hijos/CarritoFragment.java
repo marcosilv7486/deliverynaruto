@@ -2,6 +2,7 @@ package com.marcosilv7.narutodelivery.ui.fragments.segundo.hijos;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.adapters.CarritoItemAdapter;
+import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.dto.OrderDetailDTO;
 import com.marcosilv7.narutodelivery.dto.ProductDTO;
@@ -24,6 +27,7 @@ import com.marcosilv7.narutodelivery.preferencias.PrefenciasUsuario;
 import com.marcosilv7.narutodelivery.realm.models.CarritoItemModel;
 import com.marcosilv7.narutodelivery.realm.querys.QueryCarrito;
 import com.marcosilv7.narutodelivery.ui.PrincipalActivity;
+import com.marcosilv7.narutodelivery.ui.SeleccionarDireccionActivity;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -144,9 +148,9 @@ public class CarritoFragment extends SupportFragment {
                 itemDto.setTotal(new BigDecimal(carritoItem.getSubTotal()+""));
                 data.getItems().add(itemDto);
             }
-            SeleccionarDireccionFragment seleccionarDireccionFragment =
-                    SeleccionarDireccionFragment.newInstance(data);
-            start(seleccionarDireccionFragment);
+            Intent intent = new Intent(getActivity(), SeleccionarDireccionActivity.class);
+            intent.putExtra(Constantes.ORDER_DATA, new Gson().toJson(data));
+            startActivity(intent);
         }else {
             Toast.makeText(getActivity(),"Debe agregar por lo menos un item",Toast.LENGTH_SHORT).show();
         }
