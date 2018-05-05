@@ -138,6 +138,7 @@ public class CarritoFragment extends SupportFragment {
             data.setUserPhone(prefenciasUsuario.obtenerTelefono());
             data.setUserFullName(prefenciasUsuario.obtenerNombre());
             data.setTotal(new BigDecimal(subTotal+""));
+            int complementos = 0;
             for(CarritoItemModel carritoItem : carritoItemModelList){
                 OrderDetailDTO itemDto = new OrderDetailDTO();
                 itemDto.setDescription(carritoItem.getNombreProducto());
@@ -146,7 +147,15 @@ public class CarritoFragment extends SupportFragment {
                 itemDto.setProductId(carritoItem.getIdProducto());
                 itemDto.setUnitPrice(new BigDecimal(carritoItem.getPrecio()+""));
                 itemDto.setTotal(new BigDecimal(carritoItem.getSubTotal()+""));
+                if(carritoItem.getFamiliaProducto().equals("Bebidas")){
+                    complementos ++;
+                }
                 data.getItems().add(itemDto);
+            }
+            if(complementos == carritoItemModelList.size()){
+                Toast.makeText(getActivity(),"Los complementos no se pueden pedir " +
+                        "sin un plato principal",Toast.LENGTH_SHORT).show();
+                return;
             }
             Intent intent = new Intent(getActivity(), SeleccionarDireccionActivity.class);
             intent.putExtra(Constantes.ORDER_DATA, new Gson().toJson(data));

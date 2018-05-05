@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -18,6 +19,7 @@ import com.marcosilv7.narutodelivery.constantes.Constantes;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.ui.base.BaseBackFragment;
 import com.marcosilv7.narutodelivery.util.Util;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,18 +35,30 @@ public class TrakingPedidoFragment extends BaseBackFragment {
 
     @BindView(R.id.txtNombreCompleto)
     TextInputLayout txtNombreCompleto;
+
     @BindView(R.id.txtDireccionEntrega)
     TextInputLayout txtDireccionEntrega;
+
     @BindView(R.id.txtTelefono)
     TextInputLayout txtTelefono;
+
     @BindView(R.id.txtFormaPago)
     TextInputLayout txtFormaPago;
+
     @BindView(R.id.txtTipoFacturacion)
     TextInputLayout txtTipoFacturacion;
+
     @BindView(R.id.lblSubtotal)
     TextInputLayout lblSubtotal;
+
+    @BindView(R.id.textInputLayoutNumeroRuc)
+    TextInputLayout textInputLayoutNumeroRuc;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.mapa)
+    ImageView mapa;
 
 
     DetalleProductoGrillaAdapter adapter;
@@ -78,16 +92,34 @@ public class TrakingPedidoFragment extends BaseBackFragment {
 
     private void initView(View view) {
         txtNombreCompleto.getEditText().setText(orderDTO.getUserFullName());
+        txtNombreCompleto.getEditText().setFocusable(false);
+
         txtDireccionEntrega.getEditText().setText(orderDTO.getUserAddress());
+        txtDireccionEntrega.getEditText().setFocusable(false);
+
         txtTelefono.getEditText().setText(orderDTO.getUserPhone());
+        txtTelefono.getEditText().setFocusable(false);
+
         txtFormaPago.getEditText().setText(orderDTO.getPaymentType());
+        txtFormaPago.getEditText().setFocusable(false);
+
         txtTipoFacturacion.getEditText().setText(orderDTO.getInvoiceType());
+        txtTipoFacturacion.getEditText().setFocusable(false);
+
         lblSubtotal.getEditText().setText(Util.convertirFormatoDinero(orderDTO.getTotal().doubleValue()));
+        lblSubtotal.getEditText().setFocusable(false);
+
+        textInputLayoutNumeroRuc.getEditText().setText(orderDTO.getRucNumber()==null ?   "-"  : orderDTO.getRucNumber());
+        textInputLayoutNumeroRuc.getEditText().setFocusable(false);
+
         layoutManager = new LinearLayoutManager(getActivity());
         adapter = new DetalleProductoGrillaAdapter(getActivity(), orderDTO.getItems());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
+
+        Picasso.get().load(Util.obtenerUrlMapaStatic(orderDTO.getLatUserAddress(),orderDTO.getLonUserAddress()))
+                .fit().into(mapa);
     }
 
 

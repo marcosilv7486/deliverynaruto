@@ -31,6 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:id="@+id/mapa"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />
                 </LinearLayout>
@@ -80,7 +81,7 @@
 
 
 
-                        <View style="@style/DividerBlue" android:layout_gravity="center"
+                        <View style="@style/Divider" android:layout_gravity="center"
                             android:layout_width="0dp"
                             android:layout_weight="1"/>
 
@@ -99,11 +100,11 @@
                                 android:layout_weight="2"
                                 android:text="COCINANDO"
                                 android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/gray"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
-                        <View style="@style/DividerBlue" android:layout_gravity="center"
+                        <View style="@style/Divider" android:layout_gravity="center"
                             android:layout_width="0dp"
                             android:layout_weight="1"/>
 
@@ -122,11 +123,11 @@
                                 android:layout_weight="2"
                                 android:text="ENVIADO"
                                 android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/gray"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
-                        <View style="@style/DividerBlue"  android:layout_gravity="center"
+                        <View style="@style/Divider"  android:layout_gravity="center"
                             android:layout_width="0dp"
                             android:layout_weight="1"/>
                         <LinearLayout
@@ -144,7 +145,7 @@
                                 android:layout_weight="2"
                                 android:text="ENTREGADO"
                                 android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/gray"
                                 android:textSize="10sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -277,6 +278,25 @@
                             android:singleLine="true"
                             android:text="BOLETA"
                            style="@style/textLayout"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textInputLayoutNumeroRuc">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_account_balance_black_24dp"
+                            android:drawablePadding="10dp"
+                            android:drawableStart="@drawable/ic_account_balance_black_24dp"
+                            android:ems="10"
+                            android:enabled="false"
+                            style="@style/textLayout"
+                            android:hint="Ruc"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"

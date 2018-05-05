@@ -56,6 +56,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:15.0.2'
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 }
 
 apply plugin: 'com.google.gms.google-services'

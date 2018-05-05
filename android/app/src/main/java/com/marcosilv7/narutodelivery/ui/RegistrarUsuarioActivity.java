@@ -64,6 +64,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity implements Valid
 
 
     @Length(max = 9,message = "Maximo tener 9 caracteres")
+    @NotEmpty(message = "Debe ingresar el telefono")
     @BindView(R.id.txtTelefonoCrearUsuario) EditText txtTelefonoCrearUsuario;
 
     @BindView(R.id.btnCrearUsuario) Button btnCrearUsuario;

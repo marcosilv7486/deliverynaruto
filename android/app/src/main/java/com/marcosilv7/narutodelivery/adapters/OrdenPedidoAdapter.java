@@ -13,6 +13,8 @@ import com.marcosilv7.narutodelivery.dto.OrderDTO;
 import com.marcosilv7.narutodelivery.ui.fragments.tercero.hijos.DeliveryFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -74,12 +76,13 @@ public class OrdenPedidoAdapter extends RecyclerView.Adapter {
 
         void onBind(int posicion){
             final OrderDTO item = data.get(posicion);
+            PrettyTime p = new PrettyTime();
             txtCodigoOrden.setText(item.getNumber());
             txtLugarEntrega.setText(item.getUserAddress());
             txtTelefono.setText(item.getUserPhone());
             txtFormaPago.setText(item.getPaymentType());
             String fechaEmision = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(item.getShippingDate());
-            txtFechaEmision.setText(fechaEmision);
+            txtFechaEmision.setText(fechaEmision+" , "+p.format(item.getShippingDate()));
             txtImporteEfectivo.setText(Util.convertirFormatoDinero(item.getTotal().doubleValue()));
             txtEstado.setText(item.getStatus());
             cardView.setOnClickListener(new View.OnClickListener() {
