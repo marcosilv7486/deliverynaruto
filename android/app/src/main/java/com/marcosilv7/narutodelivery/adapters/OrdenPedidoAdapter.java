@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.R;
 import com.marcosilv7.narutodelivery.dto.OrderDTO;
+import com.marcosilv7.narutodelivery.ui.fragments.tercero.hijos.DeliveryFragment;
 import com.marcosilv7.narutodelivery.util.Util;
 
 import java.text.SimpleDateFormat;
@@ -19,10 +20,12 @@ public class OrdenPedidoAdapter extends RecyclerView.Adapter {
 
     List<OrderDTO> data;
     Context context;
+    DeliveryFragment.eventos eventos;
 
-    public OrdenPedidoAdapter(List<OrderDTO> data, Context context) {
+    public OrdenPedidoAdapter(List<OrderDTO> data, Context context,DeliveryFragment.eventos eventos) {
         this.data = data;
         this.context = context;
+        this.eventos = eventos;
     }
 
     @Override
@@ -82,7 +85,7 @@ public class OrdenPedidoAdapter extends RecyclerView.Adapter {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //eventos.onClickCardView(item);
+                    eventos.onClickCardView(item);
                 }
             });
         }

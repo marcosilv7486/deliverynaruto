@@ -1,6 +1,9 @@
 package com.marcosilv7.narutodelivery.util;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.widget.TextView;
 
 import com.marcosilv7.narutodelivery.api.ServiceGenerator;
 import com.marcosilv7.narutodelivery.constantes.Constantes;
@@ -56,5 +59,12 @@ public class Util {
         url = url.replace(Constantes.PARAM_LATITUD,latitud+"");
         url = url.replace(Constantes.PARAM_LONGITUD,longitud+"");
         return url + Constantes.API_KEY_GOOGLE;
+    }
+
+    public static void setColorEstadoOrdenDespacho(Context context, TextView txtEstado, String estado){
+        GradientDrawable gd = new GradientDrawable();
+        gd.setCornerRadius(5);
+        gd.setStroke(1, Color.BLACK);
+        txtEstado.setBackground(gd);
     }
 }

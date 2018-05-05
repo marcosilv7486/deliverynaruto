@@ -72,12 +72,21 @@ public class DeliveryFragment extends SupportFragment implements SwipeRefreshLay
         toolbarTitle.setText("Ordenes pendientes de entrega");
         preferencias = new PrefenciasUsuario(getActivity());
         layoutManager = new LinearLayoutManager(getActivity());
-        ordenPedidoAdapter = new OrdenPedidoAdapter(new ArrayList<OrderDTO>(),getActivity());
+        ordenPedidoAdapter = new OrdenPedidoAdapter(new ArrayList<OrderDTO>(), getActivity(), new eventos() {
+            @Override
+            public void onClickCardView(OrderDTO data) {
+                redireccionarFragmentDetalle(data);
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(ordenPedidoAdapter);
         recyclerView.setHasFixedSize(true);
         refreshLayout.setOnRefreshListener(this);
         return view;
+    }
+
+    private void redireccionarFragmentDetalle(OrderDTO data) {
+        start(TrakingPedidoFragment.newInstance(data));
     }
 
     @Override
@@ -122,5 +131,9 @@ public class DeliveryFragment extends SupportFragment implements SwipeRefreshLay
     @Override
     public void onRefresh() {
         cargarData();
+    }
+
+    public interface eventos{
+        void onClickCardView(OrderDTO data);
     }
 }

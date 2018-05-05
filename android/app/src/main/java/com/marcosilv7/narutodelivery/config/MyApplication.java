@@ -19,7 +19,7 @@ public class MyApplication extends Application {
                 .build();
         Realm.setDefaultConfiguration(config);
         Fragmentation.builder()
-                .stackViewMode(Fragmentation.BUBBLE)
+                .stackViewMode(Fragmentation.NONE)
                 .debug(BuildConfig.DEBUG)
                 .install();
     }

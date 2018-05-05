@@ -11,4 +11,11 @@ public interface Constantes {
     String API_KEY_GOOGLE ="AIzaSyBFt0L2H-2lhSU8rw3ieNzAXHbV6_il94c";
 
     String ORDER_DATA="ORDER_DATA";
+
+    String ESTADO_CONFIRMADO="CONFIRMADO";
+    String ESTADO_COCINANDO="COCINANDO";
+    String ESTADO_ENVIADO="ENVIADO";
+    String ESTADO_ENTREGADO="ENTREGADO";
+
 }
+
